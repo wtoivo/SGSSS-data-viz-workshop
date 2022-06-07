@@ -1,0 +1,134 @@
+# Violin-boxplots
+
+The power of the layered system for making figures is further highlighted by the ability to combine different types of plots. For example, rather than using a bar chart with error bars, one can easily create a single plot that includes density of the distribution, confidence intervals, means and standard errors. In the below code we first draw a violin plot, then layer on a boxplot, a point for the mean (note `geom = "point"`) and standard error bars (`geom = "errorbar"`).
+
+-   `fatten = NULL` in the boxplot geom removes the median line, which can make it easier to see the mean and error bars. Including this argument will result in the message `Removed 1 rows containing missing values (geom_segment)` and is not a cause for concern. Removing this argument will reinstate the median line.
+
+```{r viobox1, fig.cap="Violin-boxplot with mean dot and standard error bars.", warning = FALSE}
+ggplot(dat_long, aes(x = condition, y= rt)) +
+  geom_violin() +
+  # remove the median line with fatten = NULL
+  geom_boxplot(width = .2, 
+               fatten = NULL) +
+  stat_summary(fun = "mean", geom = "point") +
+  stat_summary(fun.data = "mean_se", 
+               geom = "errorbar", 
+               width = .1)
+```
+
+It is important to note that the order of the layers matters and it is worth experimenting with the order to see where the order matters. For example, if we call `geom_boxplot()` followed by `geom_violin()`, we get the following mess:
+
+```{r viobox1b, fig.cap="Plot with the geoms in the wrong order.", warning = FALSE}
+ggplot(dat_long, aes(x = condition, y= rt)) +
+  geom_boxplot() +  
+  geom_violin() +
+  stat_summary(fun = "mean",  geom = "point") +
+  stat_summary(fun.data = "mean_se", 
+               geom = "errorbar", 
+               width = .1)
+```
+
+### Grouped violin-boxplots
+
+As with previous plots, another variable can be mapped to `fill` for the violin-boxplot. (Remember to add a colourblind-safe palette.) However, simply adding `fill` to the mapping causes the different components of the plot to become misaligned because they have different default positions:
+
+```{r viobox2, fig.cap="Grouped violin-boxplots without repositioning.", warning = FALSE}
+ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
+  geom_violin() +
+  geom_boxplot(width = .2, 
+               fatten = NULL) +
+  stat_summary(fun = "mean",  geom = "point") +
+  stat_summary(fun.data = "mean_se", 
+               geom = "errorbar", 
+               width = .1) +
+  scale_fill_brewer(palette = "Dark2")
+```
+
+To rectify this we need to adjust the argument `position` for each of the misaligned layers. `position_dodge()` instructs R to move (dodge) the position of the plot component by the specified value; finding what value looks best can sometimes take trial and error. 
+
+```{r viobox3, fig.cap="Grouped violin-boxplots with repositioning.", warning = FALSE}
+
+# set the offset position of the geoms
+pos <- position_dodge(0.9)
+
+ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
+  geom_violin(position = pos) +
+  geom_boxplot(width = .2, 
+               fatten = NULL, 
+               position = pos) +
+  stat_summary(fun = "mean", 
+               geom = "point", 
+               position = pos) +
+  stat_summary(fun.data = "mean_se", 
+               geom = "errorbar", 
+               width = .1,
+               position = pos) +
+  scale_fill_brewer(palette = "Dark2")
+
+```
+
+## Storing plots
+
+Just like with datasets, plots can be saved to objects. The below code saves the histograms we produced for reaction time and accuracy to objects named `p1` and `p2`. These plots can then be viewed by calling the object name in the console.
+
+```{r}
+p1 <- ggplot(dat_long, aes(x = rt)) +
+  geom_histogram(binwidth = 10, color = "black")
+
+p2 <- ggplot(dat_long, aes(x = acc)) +
+  geom_histogram(binwidth = 1, color = "black") 
+```
+
+Importantly, layers can then be added to these saved objects. For example, the below code adds a theme to the plot saved in `p1` and saves it as a new object `p3`. This is important because many of the examples of `ggplot2` code you will find in online help forums use the `p +` format to build up plots but fail to explain what this means, which can be confusing to beginners.
+
+```{r}
+p3 <- p1 + theme_minimal()
+```
+
+## Saving plots as images
+
+In addition to saving plots to objects for further use in R, the function `ggsave()` can be used to save plots as images on your hard drive. The only required argument for `ggsave` is the file name of the image file you will create, complete with file extension (this can be "eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf"). By default, `ggsave()` will save the last plot displayed. However, you can also specify a specific plot object if you have one saved.
+
+```{r eval = FALSE}
+ggsave(filename = "my_plot.png") # save last displayed plot
+ggsave(filename = "my_plot.png", plot = p3) # save plot p3
+```
+
+The width, height and resolution of the image can all be manually adjusted. Fonts will scale with these sizes, and may look different to the preview images you see in the Viewer tab. The help documentation is useful here (type `?ggsave` in the console to access the help).
+
+
+## Customisation part 3
+
+### Axis labels
+
+Previously when we edited the main axis labels we used the `scale_*` functions. These functions are useful to know because they allow you to customise many aspects of the scale, such as the breaks and limits. However, if you only need to change the main axis `name`, there is a quicker way to do so using `labs()`. The below code adds a layer to the plot that changes the axis labels for the histogram saved in `p1` and adds a title and subtitle.
+
+```{r edited-labels, fig.cap = "Plot with edited labels and title"}
+p1 + labs(x = "Mean reaction time (ms)",
+          y = "Number of participants",
+          title = "Distribution of reaction times",
+          subtitle = "for 100 participants")
+```
+
+You can also use `labs()` to remove axis labels, for example, try adjusting the above code to `x = NULL`.
+
+### Redundant aesthetics
+
+So far when we have produced plots with colours, the colours were the only way that different levels of a variable were indicated, but it is sometimes preferable to indicate levels with both colour and other means, such as facets or x-axis categories.
+
+The code below adds `fill = language` to violin-boxplots that are also faceted by language. We adjust `alpha` and use the brewer colour palette to customise the colours. Specifying a `fill` variable means that by default, R produces a legend for that variable. However, the use of colour is redundant with the facet labels, so you can remove this legend with the `guides` function.
+
+```{r warning=FALSE, fig.cap="Violin-boxplot with redundant facets and fill."}
+ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
+  geom_violin(alpha = .4) +
+  geom_boxplot(width = .2, fatten = NULL, alpha = .6) +
+  stat_summary(fun = "mean", geom = "point") +
+  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1) +
+  facet_wrap(~factor(language, 
+                     levels = c("monolingual", "bilingual"),
+                     labels = c("Monolingual participants", 
+                                "Bilingual participants"))) +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Dark2") +
+  guides(fill = "none")
+```

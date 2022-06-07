@@ -1,0 +1,119 @@
+# Introduction
+
+Welcome to the SGSSS Summer School workshop on data visualisation! In today's session, we are going to cover:
+
+- The basic principles of data visualisation;
+
+- A very brief overview of setting up and getting started on RStudio;
+
+- The structure of the ggplot2 data visualisation package with different customisation options;
+
+- Four different types of plots for four different types of data social science researchers are likely to encounter (bar plots for count data, scatterplots for correlational data, violin-boxplots for distributions, and line plots for time series data).
+
+This workshop is based on PsyTeachR materials with some changes and additions specific to this workshop. The materials have been adapted from:
+
+Nordmann, E. & DeBruine, L. (2022). Applied Data Skills (1.0). Zenodo. https://doi.org/10.5281/zenodo.6365078
+
+Nordmann, E., McAleer, P., Toivo, W., Paterson, H. & DeBruine, L. (accepted). Data visualisation using R, for researchers who don't use R. Advances in Methods and Practices in Psychological Science.
+
+A more comprehensive version of this tutorial can be found here: https://psyteachr.github.io/introdataviz/index.html
+
+## Data visualisation principles (JAMES) 
+
+## Why use R for data visualisation?
+
+Creating data visualisations by writing code (as opposed to using point-and-click software) increases the reproducibility of your work. If you write code to produce your plots, you can reuse and adapt that code in the future. Finally, using R to create data visualisations gives you control over basically every element of your plot.
+
+We hope that this workshop will inspire you to start experimenting with R! In today's session we are simply focusing on visualisation and don't really touch on data wrangling (which is the most time-consuming part of any data analysis). The data you will encounter in the wild will be messier than what you see today - it's perfectly acceptable to start by cleaning your data on software that you feel more comfortable with and simply reading the clean data into R for visualisation. However, we do recommend eventually moving onto doing all parts of the analysis in R for the reproducibility benefits outlined above. If you want to dip your toes into data wrangling, the PsyTeachR team have a wealth of materials for different levels of expertise freely available online: https://psyteachr.github.io/ 
+
+## A very short introduction to R
+
+### Installing R
+
+If you don't have R and RStudio installed, please follow the instructions here: https://emilynordmann.github.io/workshop-dataviz/installing-r.html
+
+Alternatively, you can create a free profile for RStudio Cloud: https://rstudio.cloud/
+
+### What are R and RStudio?
+
+R is a programming language that you will write code in and RStudio is an Integrated Development Environment (IDE), which makes working in R easier. You can use R without R Studio but we wouldn't recommend it. RStudio serves as a text editor, file manager, spreadsheet viewer, and more. The key thing to remember is that you are actually using two pieces of software, which means that from time-to-time, both of them may have separate updates.
+
+#### RStudio
+
+By default, RStudio is arranged with four window panes.
+
+```{r img-rstudio, echo=FALSE, fig.cap="The RStudio IDE"}
+knitr::include_graphics("images/intro/rstudio.png")
+``` 
+
+The upper left pane is the **source pane**, where you view, write, and edit code from files and view data in a spreadsheet format. When you first open RStudio, this pane won't display until we open a document or load in some data.
+
+The lower left pane is the **console pane**, where you can type in commands and view output messages. You can write code in the console to test it out, but it won't be saved! You need to write your code into a script in the source pane to save it.
+
+The right panes have several different tabs that show you information about your code. The most used tabs in the upper right pane are the **Environment tab** and the **Help tab**. The environment tab lists some information about the objects that you have defined in your code.
+
+In the lower right pane, the most used tabs are the **Files** tab for directory structure, the **Plots** tab for plots made in a script, the **Packages** tab for managing add-on packages, and the **Viewer** tab to display reports created by your scripts. You can change the location of panes and what tabs are shown under Preferences > Pane Layout.
+
+### Functions
+
+When you install R you will have access to a range of functions including options for data wrangling and statistical analysis. The functions that are included in the default installation are typically referred to as base R, and you can think of them like the default apps that come pre-loaded on your phone. 
+
+If you type a function into the console pane, it will run as soon as you hit enter. If you put the function in a script or R Markdown document, it won't run until you run the code.
+
+For example, the function `sum()` is included in base R. In the console, run the below code:
+
+```{r sum example}
+sum(1,2,3)
+```
+
+### Arguments 
+
+Most functions require you to specify arguments in them. Arguments are basically you telling the function how you want it to run. As an example, look at the help documentation for the function `sample()` which randomly samples items from a list. 
+
+```{r help-doc, eval=FALSE}
+?sample
+```
+
+The help documentation for `sample()` should appear in the bottom right help panel. We see that `sample()` takes the following form:
+
+```{r arguments, eval = FALSE}
+sample(x, size, replace = FALSE, prob = NULL)
+```
+
+In the arguments section, there are explanations for each of the arguments. `x` is the list of items we want to choose from, `size` is the number of items we want to choose, `replace` is whether or not each item may be selected more than once, and `prob` gives the probability that each item is chosen. 
+
+In the details section it notes that if no values are entered for `replace` or `prob` it will use defaults of `FALSE` (each item can only be chosen once) and `NULL` (all items will have equal probability of being chosen). Because there is no default value for `x` or `size`, they must be specified otherwise the code won't run.
+
+Let's try an example and just change the required arguments to `x` and `size` to ask R to choose 5 random letters (`letters` is a built-in vector - a sequence of data - of the 26 lower-case Latin letters). 
+
+```{r sample-n}
+sample(x = letters, size = 5)
+```
+
+### Objects
+
+Objects are things you create in your code, and they can contain different things such as numbers, words, results of analyses, or dataframes. A large part of your coding will involve creating and manipulating objects. You assign content to an object using `<-`.
+
+Run the following code in the console:
+
+```{r object examples}
+test <- "potato"
+
+summed <- 1+2
+
+```
+
+Try to create an object called `name` and enter your name, and an object called `age` and add your age.
+
+### Packages
+
+Packages are add-ons which allow you to access different functions that are not included in base R. This is done using `install.packages()`. This is like installing an app on your phone: you only have to do it once and the app will remain installed until you remove it. Once you launch the app, it will run in the background until you close it or restart your phone. Likewise, when you install a package, the package will be available (but not loaded) every time you open up R.
+
+This tutorial will require you to use the `ggplot2` package, which is a part of the `tidyverse` collection. To install it, copy and paste the below code into the console (the bottom left hand pane) and press enter to execute the code.
+
+```{r packages, eval = FALSE}
+# type this in the console pane, never in a script or an R Markdown (.RMd) file!
+install.packages("tidyverse")
+```
+
+You should always install packages in the console and never in a script - leaving this code in your script can lead you to unintentionally install a package update you didn't want. For this reason, avoid including install code in any script or Markdown document.

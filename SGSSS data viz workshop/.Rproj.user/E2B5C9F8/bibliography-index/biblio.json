@@ -1,0 +1,1327 @@
+{
+    "sources": [
+        {
+            "URL": "http://www.rstudio.com/",
+            "author": [
+                {
+                    "literal": "RStudio Team"
+                }
+            ],
+            "id": "RStudio",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "publisher": "RStudio, PBC",
+            "publisher-place": "Boston, MA",
+            "title": "RStudio: Integrated development environment for r",
+            "title-short": "RStudio",
+            "type": "book"
+        },
+        {
+            "URL": "http://yihui.name/knitr/",
+            "author": [
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                }
+            ],
+            "edition": "2nd",
+            "id": "xie2015",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015
+                    ]
+                ]
+            },
+            "note": "ISBN 978-1498716963",
+            "publisher": "Chapman; Hall/CRC",
+            "publisher-place": "Boca Raton, Florida",
+            "title": "Dynamic documents with R and knitr",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Wilkinson",
+                    "given": "Leland"
+                },
+                {
+                    "family": "Anand",
+                    "given": "Anushka"
+                },
+                {
+                    "family": "Grossman",
+                    "given": "Robert"
+                }
+            ],
+            "container-title": "IEEE symposium on information visualization (InfoVis 05)",
+            "id": "wilkinson2005graph",
+            "issued": {
+                "date-parts": [
+                    [
+                        2005
+                    ]
+                ]
+            },
+            "page": "157-158",
+            "publisher": "IEEE Computer Society",
+            "title": "Graph-theoretic scagnostics",
+            "type": "paper-conference"
+        },
+        {
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                }
+            ],
+            "container-title": "Journal of Computational and Graphical Statistics",
+            "id": "wickham2010layered",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2010
+                    ]
+                ]
+            },
+            "page": "3-28",
+            "publisher": "Taylor & Francis",
+            "title": "A layered grammar of graphics",
+            "type": "article-journal",
+            "volume": "19"
+        },
+        {
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                },
+                {
+                    "literal": "others"
+                }
+            ],
+            "container-title": "Journal of statistical software",
+            "id": "wickham2014tidy",
+            "issue": "10",
+            "issued": {
+                "date-parts": [
+                    [
+                        2014
+                    ]
+                ]
+            },
+            "page": "1-23",
+            "title": "Tidy data",
+            "type": "article-journal",
+            "volume": "59"
+        },
+        {
+            "ISBN": "978-3-319-24277-4",
+            "URL": "https://ggplot2.tidyverse.org",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                }
+            ],
+            "id": "ggplot2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016
+                    ]
+                ]
+            },
+            "publisher": "Springer-Verlag New York",
+            "title": "ggplot2: Elegant graphics for data analysis",
+            "title-short": "ggplot2",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=rmarkdown",
+            "author": [
+                {
+                    "family": "Allaire",
+                    "given": "JJ"
+                },
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                },
+                {
+                    "family": "McPherson",
+                    "given": "Jonathan"
+                },
+                {
+                    "family": "Luraschi",
+                    "given": "Javier"
+                },
+                {
+                    "family": "Ushey",
+                    "given": "Kevin"
+                },
+                {
+                    "family": "Atkins",
+                    "given": "Aron"
+                },
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                },
+                {
+                    "family": "Cheng",
+                    "given": "Joe"
+                },
+                {
+                    "family": "Chang",
+                    "given": "Winston"
+                }
+            ],
+            "id": "rmarkdown",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018
+                    ]
+                ]
+            },
+            "note": "R package version 1.10",
+            "title": "Rmarkdown: Dynamic documents for r",
+            "title-short": "Rmarkdown",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=tidyverse",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                }
+            ],
+            "id": "tidyverse",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017
+                    ]
+                ]
+            },
+            "note": "R package version 1.2.1",
+            "title": "Tidyverse: Easily install and load the ’tidyverse’",
+            "title-short": "Tidyverse",
+            "type": "book"
+        },
+        {
+            "URL": "https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535",
+            "author": [
+                {
+                    "family": "Visual",
+                    "given": "BBC"
+                },
+                {
+                    "family": "Journalism",
+                    "given": "Data"
+                }
+            ],
+            "container-title": "Medium",
+            "id": "BBC-R",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "title": "How the BBC visual and data journalism team works with graphics in r",
+            "type": ""
+        },
+        {
+            "URL": "https://datastori.es/ds-56-amanda-cox-nyt/",
+            "author": [
+                {
+                    "family": "Bertini",
+                    "given": "Enrico"
+                },
+                {
+                    "family": "Stefaner",
+                    "given": "Moritz"
+                }
+            ],
+            "container-title": "Data Stories",
+            "id": "NYT-R",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015
+                    ]
+                ]
+            },
+            "title": "Amanda cox on working with r, NYT projects, favorite data [podcast]",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "family": "Robins",
+                    "given": "Anthony"
+                },
+                {
+                    "family": "Rountree",
+                    "given": "Janet"
+                },
+                {
+                    "family": "Rountree",
+                    "given": "Nathan"
+                }
+            ],
+            "container-title": "Computer science education",
+            "id": "robins2003learning",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2003
+                    ]
+                ]
+            },
+            "page": "137-172",
+            "publisher": "Taylor & Francis",
+            "title": "Learning and teaching programming: A review and discussion",
+            "title-short": "Learning and teaching programming",
+            "type": "article-journal",
+            "volume": "13"
+        },
+        {
+            "author": [
+                {
+                    "family": "Newman",
+                    "given": "George E"
+                },
+                {
+                    "family": "Scholl",
+                    "given": "Brian J"
+                }
+            ],
+            "container-title": "Psychonomic bulletin & review",
+            "id": "newman2012bar",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2012
+                    ]
+                ]
+            },
+            "page": "601-607",
+            "publisher": "Springer",
+            "title": "Bar graphs depicting averages are perceptually misinterpreted: The within-the-bar bias",
+            "title-short": "Bar graphs depicting averages are perceptually misinterpreted",
+            "type": "article-journal",
+            "volume": "19"
+        },
+        {
+            "author": [
+                {
+                    "family": "Munafò",
+                    "given": "Marcus R"
+                },
+                {
+                    "family": "Nosek",
+                    "given": "Brian A"
+                },
+                {
+                    "family": "Bishop",
+                    "given": "Dorothy VM"
+                },
+                {
+                    "family": "Button",
+                    "given": "Katherine S"
+                },
+                {
+                    "family": "Chambers",
+                    "given": "Christopher D"
+                },
+                {
+                    "family": "Du Sert",
+                    "given": "Nathalie Percie"
+                },
+                {
+                    "family": "Simonsohn",
+                    "given": "Uri"
+                },
+                {
+                    "family": "Wagenmakers",
+                    "given": "Eric-Jan"
+                },
+                {
+                    "family": "Ware",
+                    "given": "Jennifer J"
+                },
+                {
+                    "family": "Ioannidis",
+                    "given": "John PA"
+                }
+            ],
+            "container-title": "Nature human behaviour",
+            "id": "munafo2017manifesto",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017
+                    ]
+                ]
+            },
+            "page": "1-9",
+            "publisher": "Nature Publishing Group",
+            "title": "A manifesto for reproducible science",
+            "type": "article-journal",
+            "volume": "1"
+        },
+        {
+            "URL": "https://www.andywills.info/rminr/rminrinpsy.html",
+            "author": [
+                {
+                    "family": "Wills",
+                    "given": "Andy"
+                }
+            ],
+            "container-title": "rminr",
+            "id": "rminr",
+            "title": "Teaching research methods in r",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "family": "Nation",
+                    "given": "Z."
+                }
+            ],
+            "container-title": "GitHub repository",
+            "id": "Nation2017",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017
+                    ]
+                ]
+            },
+            "publisher": "https://github.com/zonination/perceptions  ; GitHub",
+            "title": "Perceptions",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "family": "Barrett",
+                    "given": "Tyson S"
+                }
+            ],
+            "id": "barrett2019six",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "publisher": "PsyArXiv",
+            "title": "Six reasons to consider using r in psychological research",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Allison",
+                    "given": "Carrie"
+                },
+                {
+                    "family": "Auyeung",
+                    "given": "Bonnie"
+                },
+                {
+                    "family": "Baron-Cohen",
+                    "given": "Simon"
+                }
+            ],
+            "container-title": "Journal of the American Academy of Child & Adolescent Psychiatry",
+            "id": "allison2012toward",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2012
+                    ]
+                ]
+            },
+            "page": "202-212",
+            "publisher": "Elsevier",
+            "title": "Toward brief “red flags” for autism screening: The short autism spectrum quotient and the short quantitative checklist in 1,000 cases and 3,000 controls",
+            "title-short": "Toward brief “red flags” for autism screening",
+            "type": "article-journal",
+            "volume": "51"
+        },
+        {
+            "DOI": "10.12688/wellcomeopenres.15191.2",
+            "URL": "https://doi.org/10.12688/wellcomeopenres.15191.2",
+            "author": [
+                {
+                    "family": "Allen",
+                    "given": "Micah"
+                },
+                {
+                    "family": "Poggiali",
+                    "given": "Davide"
+                },
+                {
+                    "family": "Whitaker",
+                    "given": "Kirstie"
+                },
+                {
+                    "family": "Marshall",
+                    "given": "Tom Rhys"
+                },
+                {
+                    "family": "Langen",
+                    "given": "Jordy",
+                    "non-dropping-particle": "van"
+                },
+                {
+                    "family": "Kievit",
+                    "given": "Rogier A."
+                }
+            ],
+            "container-title": "Wellcome Open Research",
+            "id": "raincloudplots",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "title": "Raincloud plots: A multi-platform tool for robust data visualization [version 2; peer review: 2 approved]",
+            "title-short": "Raincloud plots",
+            "type": "article-journal",
+            "volume": "4"
+        },
+        {
+            "URL": "https://www.R-project.org/",
+            "author": [
+                {
+                    "literal": "R Core Team"
+                }
+            ],
+            "id": "R-base",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "publisher": "R Foundation for Statistical Computing",
+            "publisher-place": "Vienna, Austria",
+            "title": "R: A language and environment for statistical computing",
+            "title-short": "R",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=bookdown",
+            "author": [
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                }
+            ],
+            "id": "R-bookdown",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "note": "R package version 0.25",
+            "title": "Bookdown: Authoring books and technical documents with r markdown",
+            "title-short": "Bookdown",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=dplyr",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                },
+                {
+                    "family": "François",
+                    "given": "Romain"
+                },
+                {
+                    "family": "Henry",
+                    "given": "Lionel"
+                },
+                {
+                    "family": "Müller",
+                    "given": "Kirill"
+                }
+            ],
+            "id": "R-dplyr",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "note": "R package version 1.0.8",
+            "title": "Dplyr: A grammar of data manipulation",
+            "title-short": "Dplyr",
+            "type": "book"
+        },
+        {
+            "URL": "https://github.com/debruine/faux",
+            "author": [
+                {
+                    "family": "DeBruine",
+                    "given": "Lisa"
+                }
+            ],
+            "id": "R-faux",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "note": "R package version 1.1.0",
+            "title": "Faux: Simulation for factorial designs",
+            "title-short": "Faux",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=forcats",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                }
+            ],
+            "id": "R-forcats",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "note": "R package version 0.5.1",
+            "title": "Forcats: Tools for working with categorical variables (factors)",
+            "title-short": "Forcats",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=ggplot2",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                },
+                {
+                    "family": "Chang",
+                    "given": "Winston"
+                },
+                {
+                    "family": "Henry",
+                    "given": "Lionel"
+                },
+                {
+                    "family": "Pedersen",
+                    "given": "Thomas Lin"
+                },
+                {
+                    "family": "Takahashi",
+                    "given": "Kohske"
+                },
+                {
+                    "family": "Wilke",
+                    "given": "Claus"
+                },
+                {
+                    "family": "Woo",
+                    "given": "Kara"
+                },
+                {
+                    "family": "Yutani",
+                    "given": "Hiroaki"
+                },
+                {
+                    "family": "Dunnington",
+                    "given": "Dewey"
+                }
+            ],
+            "id": "R-ggplot2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "note": "R package version 3.3.5",
+            "title": "ggplot2: Create elegant data visualisations using the grammar of graphics",
+            "title-short": "ggplot2",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "DeBruine",
+                    "given": "Lisa"
+                }
+            ],
+            "id": "R-glossary",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "note": "R package version 0.0.0.9002",
+            "title": "Glossary: Glossary of statistical and coding terms",
+            "title-short": "Glossary",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Nordmann",
+                    "given": "Emily"
+                },
+                {
+                    "family": "McAleer",
+                    "given": "Phil"
+                },
+                {
+                    "family": "Toivo",
+                    "given": "Wilhelmiina"
+                },
+                {
+                    "family": "Paterson",
+                    "given": "Helena"
+                },
+                {
+                    "family": "DeBruine",
+                    "given": "Lisa"
+                }
+            ],
+            "id": "R-introdataviz",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "note": "R package version 0.0.0.9003",
+            "title": "Introdataviz: Data visualisation using r, for researchers who don’t use r",
+            "title-short": "Introdataviz",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=kableExtra",
+            "author": [
+                {
+                    "family": "Zhu",
+                    "given": "Hao"
+                }
+            ],
+            "id": "R-kableExtra",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "note": "R package version 1.3.4",
+            "title": "kableExtra: Construct complex table with kable and pipe syntax",
+            "title-short": "kableExtra",
+            "type": "book"
+        },
+        {
+            "URL": "https://yihui.org/knitr/",
+            "author": [
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                }
+            ],
+            "id": "R-knitr",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "note": "R package version 1.37",
+            "title": "Knitr: A general-purpose package for dynamic report generation in r",
+            "title-short": "Knitr",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=patchwork",
+            "author": [
+                {
+                    "family": "Pedersen",
+                    "given": "Thomas Lin"
+                }
+            ],
+            "id": "R-patchwork",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "note": "R package version 1.1.1",
+            "title": "Patchwork: The composer of plots",
+            "title-short": "Patchwork",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=purrr",
+            "author": [
+                {
+                    "family": "Henry",
+                    "given": "Lionel"
+                },
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                }
+            ],
+            "id": "R-purrr",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "note": "R package version 0.3.4",
+            "title": "Purrr: Functional programming tools",
+            "title-short": "Purrr",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=readr",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                },
+                {
+                    "family": "Hester",
+                    "given": "Jim"
+                },
+                {
+                    "family": "Bryan",
+                    "given": "Jennifer"
+                }
+            ],
+            "id": "R-readr",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "note": "R package version 2.1.2",
+            "title": "Readr: Read rectangular text data",
+            "title-short": "Readr",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=rvest",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                }
+            ],
+            "id": "R-rvest",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "note": "R package version 1.0.2",
+            "title": "Rvest: Easily harvest (scrape) web pages",
+            "title-short": "Rvest",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=stringr",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                }
+            ],
+            "id": "R-stringr",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "note": "R package version 1.4.0",
+            "title": "Stringr: Simple, consistent wrappers for common string operations",
+            "title-short": "Stringr",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=tibble",
+            "author": [
+                {
+                    "family": "Müller",
+                    "given": "Kirill"
+                },
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                }
+            ],
+            "id": "R-tibble",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "note": "R package version 3.1.6",
+            "title": "Tibble: Simple data frames",
+            "title-short": "Tibble",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=tidyr",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                },
+                {
+                    "family": "Girlich",
+                    "given": "Maximilian"
+                }
+            ],
+            "id": "R-tidyr",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "note": "R package version 1.2.0",
+            "title": "Tidyr: Tidy messy data",
+            "title-short": "Tidyr",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=tidyverse",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                }
+            ],
+            "id": "R-tidyverse",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "note": "R package version 1.3.1",
+            "title": "Tidyverse: Easily install and load the tidyverse",
+            "title-short": "Tidyverse",
+            "type": "book"
+        },
+        {
+            "URL": "https://github.com/psyteachr/webexercises",
+            "author": [
+                {
+                    "family": "Barr",
+                    "given": "Dale"
+                },
+                {
+                    "family": "DeBruine",
+                    "given": "Lisa"
+                }
+            ],
+            "id": "R-webexercises",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "note": "R package version 1.0.0",
+            "title": "Webexercises: Create interactive web exercises in r markdown (formerly webex)",
+            "title-short": "Webexercises",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=xml2",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                },
+                {
+                    "family": "Hester",
+                    "given": "Jim"
+                },
+                {
+                    "family": "Ooms",
+                    "given": "Jeroen"
+                }
+            ],
+            "id": "R-xml2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "note": "R package version 1.3.3",
+            "title": "xml2: Parse XML",
+            "title-short": "xml2",
+            "type": "book"
+        },
+        {
+            "URL": "https://bookdown.org/yihui/bookdown",
+            "author": [
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                }
+            ],
+            "id": "bookdown2016",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016
+                    ]
+                ]
+            },
+            "note": "ISBN 978-1138700109",
+            "publisher": "Chapman; Hall/CRC",
+            "publisher-place": "Boca Raton, Florida",
+            "title": "Bookdown: Authoring books and technical documents with R markdown",
+            "title-short": "Bookdown",
+            "type": "book"
+        },
+        {
+            "ISBN": "978-3-319-24277-4",
+            "URL": "https://ggplot2.tidyverse.org",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                }
+            ],
+            "id": "ggplot22016",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016
+                    ]
+                ]
+            },
+            "publisher": "Springer-Verlag New York",
+            "title": "ggplot2: Elegant graphics for data analysis",
+            "title-short": "ggplot2",
+            "type": "book"
+        },
+        {
+            "URL": "https://psyteachr.github.io/markr/",
+            "author": [
+                {
+                    "family": "DeBruine",
+                    "given": "Lisa"
+                },
+                {
+                    "family": "Barr",
+                    "given": "Dale"
+                },
+                {
+                    "family": "McAleer",
+                    "given": "Philip"
+                },
+                {
+                    "family": "Paterson",
+                    "given": "Helena"
+                }
+            ],
+            "id": "glossary2021",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "title": "glossary: Glossary of statistical and coding terms markr",
+            "title-short": "glossary",
+            "type": "book"
+        },
+        {
+            "URL": "https://psyteachr.github.io/introdataviz",
+            "author": [
+                {
+                    "literal": "Nordmann"
+                },
+                {
+                    "literal": "E."
+                },
+                {
+                    "literal": "McAleer"
+                },
+                {
+                    "literal": "P."
+                },
+                {
+                    "literal": "Toivo"
+                },
+                {
+                    "literal": "W."
+                },
+                {
+                    "literal": "Paterson"
+                },
+                {
+                    "dropping-particle": "&",
+                    "family": "DeBruine",
+                    "given": "H."
+                },
+                {
+                    "literal": "L."
+                }
+            ],
+            "container-title": "Preprint",
+            "id": "introdataviz2021",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "title": "Data visualisation using r, for researchers who don’t use r",
+            "type": "article-journal"
+        },
+        {
+            "URL": "https://yihui.org/knitr/",
+            "author": [
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                }
+            ],
+            "edition": "2nd",
+            "id": "knitr2015",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015
+                    ]
+                ]
+            },
+            "note": "ISBN 978-1498716963",
+            "publisher": "Chapman; Hall/CRC",
+            "publisher-place": "Boca Raton, Florida",
+            "title": "Dynamic documents with R and knitr",
+            "type": "book"
+        },
+        {
+            "URL": "http://www.crcpress.com/product/isbn/9781466561595",
+            "author": [
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                }
+            ],
+            "container-title": "Implementing reproducible computational research",
+            "editor": [
+                {
+                    "family": "Stodden",
+                    "given": "Victoria"
+                },
+                {
+                    "family": "Leisch",
+                    "given": "Friedrich"
+                },
+                {
+                    "family": "Peng",
+                    "given": "Roger D."
+                }
+            ],
+            "id": "knitr2014",
+            "issued": {
+                "date-parts": [
+                    [
+                        2014
+                    ]
+                ]
+            },
+            "note": "ISBN 978-1466561595",
+            "publisher": "Chapman; Hall/CRC",
+            "title": "Knitr: A comprehensive tool for reproducible research in R",
+            "title-short": "Knitr",
+            "type": "chapter"
+        },
+        {
+            "DOI": "10.21105/joss.01686",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                },
+                {
+                    "family": "Averick",
+                    "given": "Mara"
+                },
+                {
+                    "family": "Bryan",
+                    "given": "Jennifer"
+                },
+                {
+                    "family": "Chang",
+                    "given": "Winston"
+                },
+                {
+                    "family": "McGowan",
+                    "given": "Lucy D’Agostino"
+                },
+                {
+                    "family": "François",
+                    "given": "Romain"
+                },
+                {
+                    "family": "Grolemund",
+                    "given": "Garrett"
+                },
+                {
+                    "family": "Hayes",
+                    "given": "Alex"
+                },
+                {
+                    "family": "Henry",
+                    "given": "Lionel"
+                },
+                {
+                    "family": "Hester",
+                    "given": "Jim"
+                },
+                {
+                    "family": "Kuhn",
+                    "given": "Max"
+                },
+                {
+                    "family": "Pedersen",
+                    "given": "Thomas Lin"
+                },
+                {
+                    "family": "Miller",
+                    "given": "Evan"
+                },
+                {
+                    "family": "Bache",
+                    "given": "Stephan Milton"
+                },
+                {
+                    "family": "Müller",
+                    "given": "Kirill"
+                },
+                {
+                    "family": "Ooms",
+                    "given": "Jeroen"
+                },
+                {
+                    "family": "Robinson",
+                    "given": "David"
+                },
+                {
+                    "family": "Seidel",
+                    "given": "Dana Paige"
+                },
+                {
+                    "family": "Spinu",
+                    "given": "Vitalie"
+                },
+                {
+                    "family": "Takahashi",
+                    "given": "Kohske"
+                },
+                {
+                    "family": "Vaughan",
+                    "given": "Davis"
+                },
+                {
+                    "family": "Wilke",
+                    "given": "Claus"
+                },
+                {
+                    "family": "Woo",
+                    "given": "Kara"
+                },
+                {
+                    "family": "Yutani",
+                    "given": "Hiroaki"
+                }
+            ],
+            "container-title": "Journal of Open Source Software",
+            "id": "tidyverse2019",
+            "issue": "43",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "page": "1686",
+            "title": "Welcome to the tidyverse",
+            "type": "article-journal",
+            "volume": "4"
+        }
+    ],
+    "project_biblios": [
+        "book.bib",
+        "packages.bib"
+    ]
+}

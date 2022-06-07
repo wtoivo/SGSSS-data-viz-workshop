@@ -1,0 +1,13 @@
+h1:setting-up Setting up
+h2:projects Projects
+h2:rmd-files .Rmd files
+h2:loading-packages Loading packages
+h2:loading-data Loading data
+h2:simulated-dataset Simulated dataset
+h3:formatting-the-data Formatting the data
+h3:data-overview Data overview
+h2:ggplot2-and-the-layer-system ggplot2 and the layer system
+h2:histogram Histogram
+h2:density-plot Density plot
+fig:density-rt Density plot of age.
+

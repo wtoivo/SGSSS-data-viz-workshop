@@ -1,0 +1,12 @@
+h1:scatterplots Scatterplots
+fig:point-plot Scatterplot of reaction time versus accuracy.
+fig:smooth-plot Line of best fit for reaction time versus accuracy.
+h2:grouped-scatterplots Grouped scatterplots
+fig:scatter-grouped Grouped scatterplot of reaction time versus accuracy by condition.
+h2:facets Facets
+fig:scatterplot-facet Faceted scatterplot
+h2:customisation-2 Customisation 2
+h3:editing-axis-names-and-labels Editing axis names and labels
+fig:scatter-axis Scatterplot with custom axis labels.
+h3:specifying-axis-breaks-with-seq Specifying axis  with 
+

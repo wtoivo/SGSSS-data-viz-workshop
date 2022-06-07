@@ -1,0 +1,9 @@
+h1:violin-boxplots Violin-boxplots
+fig:viobox1 Violin-boxplot with mean dot and standard error bars.
+fig:viobox1b Plot with the geoms in the wrong order.
+h3:grouped-violin-boxplots Grouped violin-boxplots
+fig:viobox2 Grouped violin-boxplots without repositioning.
+fig:viobox3 Grouped violin-boxplots with repositioning.
+h2:storing-plots Storing plots
+h2:saving-plots-as-images Saving plots as images
+

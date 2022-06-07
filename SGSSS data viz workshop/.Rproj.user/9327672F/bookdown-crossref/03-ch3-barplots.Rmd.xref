@@ -1,0 +1,13 @@
+h1:bar-plots Bar plots
+h2:bar-chart-of-counts Bar chart of counts
+fig:bar1 Bar chart of counts.
+h2:customisation-1 Customisation 1
+h3:changing-colours Changing colours
+fig:bar1 Bar chart of counts.
+fig:bar2 Fill set by a variable
+h3:accessible-colour-schemes Accessible colour schemes
+fig:viridis Use the viridis palette accessibility.
+fig:viridis Setting viridis colours manually.
+h3:adding-a-theme Adding a theme
+fig:bar-theme Bar chart with a custom theme.
+

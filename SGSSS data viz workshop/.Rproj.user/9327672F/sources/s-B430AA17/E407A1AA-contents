@@ -1,0 +1,57 @@
+---
+title: "SGSSS"
+author: "WT"
+date: "16/05/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Read in the data
+```{r}
+vacc <- read_csv("vaccinations-by-age-group.csv")
+vacc2 <- read_csv("vaccinations.csv")
+```
+
+Prepare the file for the workshop: vaccinations by age group
+```{r}
+test <- vacc  %>% filter(location=="Denmark") %>% select(location, date, age_group,people_fully_vaccinated_per_hundred) %>% filter(age_group %in% c("15-17", "18-24", "25-49", "50-59", "60-69", "70-79", "80+"))
+
+
+ggplot(test, aes(date, people_fully_vaccinated_per_hundred, colour=age_group, group=age_group))+ geom_point()+geom_line()
+
+write_csv(x = test,file="vaccinations_by_age_group.csv")
+
+```
+
+
+Vaccinations by country
+```{r}
+vacc2 <- vacc2 %>% filter(location %in% c("United Kingdom", "New Zealand", "Israel", "South Africa", "United States")) 
+
+ggplot(vacc2, aes(date, people_fully_vaccinated_per_hundred, colour=location, group=location))+ geom_point()+geom_line()
+
+write_csv(vacc2, "vaccinations_by_country.csv")
+
+```
+
+Count data
+```{r}
+pubs <- read_csv("Licensed_Premises.csv") %>% select(ALCOHOL_SALES, LICENCE_NO, AREANAME) %>% filter(ALCOHOL_SALES=="On")
+
+ggplot(pubs, aes(AREANAME))+geom_bar()
+
+roads <- read_csv("Road_Safety_Accidents.csv") %>% select(ACCIDENT_INDEX, ACCIDENT_SEVERITY, SPEED_LIMIT, DAY_OF_WEEK)
+
+check <- roads %>%  group_by(WEATHER_CONDITIONS) %>% summarise(n=n())
+
+ggplot(roads, aes(DAY_OF_WEEK, fill=ACCIDENT_SEVERITY), position="dodge")+geom_bar()
+
+write_csv(roads, "road_accidents.csv")
+
+```
+
+
+

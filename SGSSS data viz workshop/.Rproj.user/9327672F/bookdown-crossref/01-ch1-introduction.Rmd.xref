@@ -1,0 +1,13 @@
+h1:introduction Introduction
+h2:data-visualisation-principles-james Data visualisation principles (JAMES)
+h2:why-use-r-for-data-visualisation Why use R for data visualisation?
+h2:a-very-short-introduction-to-r A very short introduction to R
+h3:installing-r Installing R
+h3:what-are-r-and-rstudio What are R and RStudio?
+h4:rstudio RStudio
+fig:img-rstudio The RStudio IDE
+h3:functions Functions
+h3:arguments Arguments
+h3:objects Objects
+h3:packages Packages
+
