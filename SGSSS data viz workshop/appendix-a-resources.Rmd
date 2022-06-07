@@ -46,4 +46,5 @@ The [psyTeachR](https://psyteachr.github.io/) team at the University of Glasgow 
 * [plotly](https://plot.ly/ggplot2/) for creating interactive graphs
 * [Drawing Beautiful Maps Programmatically](https://r-spatial.org/r/2018/10/25/ggplot2-sf.html)
 * [gganimate](https://gganimate.com/)
+* [Common R Mistakes in Data Viz](https://nickch-k.github.io/DataCommSlides/Lecture_04_Common_R_Problems.html) documents requests for help and common student mistakes when creating data visualisations in R
 
