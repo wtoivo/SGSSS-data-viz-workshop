@@ -1,0 +1,4 @@
+"0","ggplot(dat, aes(language)) +"
+"0","  geom_bar(fill = ""wheat"", color = ""black"") +"
+"0","  scale_x_discrete(name = ""Number of participants"") +"
+"0","  theme_minimal()"

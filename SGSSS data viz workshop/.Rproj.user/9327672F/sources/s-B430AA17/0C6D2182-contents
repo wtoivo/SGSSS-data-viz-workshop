@@ -170,7 +170,7 @@ Viridis palettes are very good for colourblind-safe and greyscale-safe plots. Th
 
 #### Discrete Viridis Palettes
 
-Set `r glossary("discrete")` viridis colours with `scale_colour_viridis_d()` or `scale_fill_viridis_d()` and set the `option` argument to one of the options below. Set `direction = -1` to reverse the order of colours.
+Set discrete viridis colours with `scale_colour_viridis_d()` or `scale_fill_viridis_d()` and set the `option` argument to one of the options below. Set `direction = -1` to reverse the order of colours.
 
 
 ```{r, fig.width = 8, fig.height = 10, fig.cap="Discrete viridis palettes."}
@@ -194,7 +194,7 @@ If the end colour is too light for your plot or the start colour too dark, you c
 
 #### Continuous Viridis Palettes
 
-Set `r glossary("continuous")` viridis colours with `scale_colour_viridis_c()` or `scale_fill_viridis_c()` and set the `option` argument to one of the options below. Set `direction = -1` to reverse the order of colours.
+Set continuous viridis colours with `scale_colour_viridis_c()` or `scale_fill_viridis_c()` and set the `option` argument to one of the options below. Set `direction = -1` to reverse the order of colours.
 
 ```{r, echo = FALSE, fig.width = 8, fig.height = 8, fig.cap="Continuous viridis palettes."}
 options <- list("magma", "inferno", "plasma", "viridis", "cividis")
@@ -231,7 +231,7 @@ Brewer palettes give you a lot of control over plot colour and fill. You set the
 
 #### Qualitative Brewer Palettes
 
-These palettes are good for `r glossary("categorical")` data with up to 8 categories (some palettes can handle up to 12). The "Paired" palette is useful if your categories are arranged in pairs.
+These palettes are good for categorical data with up to 8 categories (some palettes can handle up to 12). The "Paired" palette is useful if your categories are arranged in pairs.
 
 ```{r, echo = FALSE, fig.width = 8, fig.height = 8, fig.cap="Qualitative brewer palettes."}
 palettes <- list("Accent", "Dark2", "Paired", "Pastel1", "Pastel2", "Set1", "Set2", "Set3")
@@ -243,7 +243,7 @@ wrap_plots(plots, ncol = 2)
 
 #### Sequential Brewer Palettes
 
-These palettes are good for up to 9 `r glossary("ordinal")` categories with a lot of categories.
+These palettes are good for up to 9 ordinal categories with a lot of categories.
 
 ```{r, warning=FALSE, echo = FALSE, fig.width = 8, fig.height = 18, fig.cap="Sequential brewer palettes."}
 palettes <- c("Reds", "RdPu",
@@ -261,7 +261,7 @@ wrap_plots(plots, ncol = 2)
 
 #### Diverging Brewer Palettes
 
-These palettes are good for `r glossary("ordinal")` categories with up to 11 levels where the centre level is a neutral or baseline category and the levels above and below it differ in an important way, such as agree versus disagree options.
+These palettes are good for ordinal categories with up to 11 levels where the centre level is a neutral or baseline category and the levels above and below it differ in an important way, such as agree versus disagree options.
 
 ```{r, fig.width = 8, fig.height = 10, fig.cap="Diverging brewer palettes."}
 palettes <- c("BrBG", "PiYG", "PRGn", "PuOr", "RdBu", "RdGy", "RdYlBu", "RdYlGn", "Spectral")

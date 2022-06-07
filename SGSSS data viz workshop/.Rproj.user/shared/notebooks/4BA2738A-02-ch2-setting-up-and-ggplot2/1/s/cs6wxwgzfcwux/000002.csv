@@ -1,0 +1,12 @@
+"0","dat <- read_csv(file = ""ldt_data.csv"")"
+"1","[1mRows: [22m[34m100[39m [1mColumns: [22m[34m7[39m
+"
+"1","[36m--[39m [1mColumn specification[22m [36m-------------------------------------------------------[39m
+[1mDelimiter:[22m "",""
+[31mchr[39m (1): id
+[32mdbl[39m (6): age, language, rt_word, rt_nonword, acc_word, acc_nonword
+"
+"1","
+[36mi[39mÂ Use [38;5;251m[48;5;235m[38;5;251m[48;5;235m`spec()`[48;5;235m[38;5;251m[49m[39m to retrieve the full column specification for this data.
+[36mi[39mÂ Specify the column types or set [38;5;251m[48;5;235m[38;5;251m[48;5;235m`show_col_types = FALSE`[48;5;235m[38;5;251m[49m[39m to quiet this message.
+"

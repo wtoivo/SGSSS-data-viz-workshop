@@ -6,7 +6,7 @@ Now that we have covered the basic principles of data visualisation and using gg
 
 For our first plot, we will make a simple bar chart of counts that shows the number of participants in each `language` group.
 
-```{r bar1, fig.cap = "Bar chart of counts."}
+```{r bar0, fig.cap = "Bar chart of counts."}
 ggplot(data = dat, aes(x = language)) +
   geom_bar()
 ```

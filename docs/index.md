@@ -1,0 +1,29 @@
+--- 
+title: "Data visualisation using R, for researchers who don’t use R"
+author: "James Bartlett, Wilhelmiina Toivo"
+date: "2022-06-07"
+site: bookdown::bookdown_site
+documentclass: book
+classoption: oneside # for PDFs
+geometry: margin=1in # for PDFs
+bibliography: [book.bib, packages.bib]
+csl: include/apa.csl
+link-citations: yes
+description: "In this tutorial, we provide a practical introduction to data visualisation using R, specifically aimed at researchers who have little to no prior experience of using R."
+url: https://psyteachr.github.io/introdataviz
+github-repo: wtoivo/SGSSS-data-viz-workshop 
+cover-image: images/logos/logo.png
+apple-touch-icon: images/logos/apple-touch-icon.png 
+apple-touch-icon-size: 180
+favicon: images/logos/favicon.ico 
+---
+
+
+
+
+# Overview {-}
+
+In addition to benefiting reproducibility and transparency, one of the advantages of using R is that researchers have a much larger range of fully customisable data visualisations options than are typically available in point-and-click software, due to the open-source nature of R. These visualisation options not only look attractive, but can increase transparency about the distribution of the underlying data rather than relying on commonly used visualisations of aggregations such as bar charts of means. 
+
+In this tutorial, we provide a practical introduction to data visualisation using R, specifically aimed at researchers who have little to no prior experience of using R. First we detail the rationale for using R for data visualisation and introduce the "grammar of graphics" that underlies data visualisation using the ggplot2 package. The tutorial then walks you through four different types of plots: bar charts, scatterplots, violin-boxplots and lineplots for time series data. 
+

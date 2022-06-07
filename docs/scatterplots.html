@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 4 Scatterplots | Data visualisation using R, for researchers who don’t use R</title>
+<meta name="author" content="James Bartlett, Wilhelmiina Toivo">
+<meta name="description" content="Correlation data are typically visualised with a scatterplot. Scatterplots are created by calling geom_point() and require both an x and y variable to be specified in the mapping....">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 4 Scatterplots | Data visualisation using R, for researchers who don’t use R">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://psyteachr.github.io/introdataviz/scatterplots.html">
+<meta property="og:image" content="https://psyteachr.github.io/introdataviz/images/logos/logo.png">
+<meta property="og:description" content="Correlation data are typically visualised with a scatterplot. Scatterplots are created by calling geom_point() and require both an x and y variable to be specified in the mapping....">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 4 Scatterplots | Data visualisation using R, for researchers who don’t use R">
+<meta name="twitter:description" content="Correlation data are typically visualised with a scatterplot. Scatterplots are created by calling geom_point() and require both an x and y variable to be specified in the mapping....">
+<meta name="twitter:image" content="https://psyteachr.github.io/introdataviz/images/logos/logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6NP3MF25W3');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Data visualisation using R, for researchers who don’t use R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li><a class="" href="introduction.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="setting-up.html"><span class="header-section-number">2</span> Setting up</a></li>
+<li><a class="" href="bar-plots.html"><span class="header-section-number">3</span> Bar plots</a></li>
+<li><a class="active" href="scatterplots.html"><span class="header-section-number">4</span> Scatterplots</a></li>
+<li><a class="" href="violin-boxplots.html"><span class="header-section-number">5</span> Violin-boxplots</a></li>
+<li><a class="" href="line-plots.html"><span class="header-section-number">6</span> Line plots</a></li>
+<li><a class="" href="group-task.html"><span class="header-section-number">7</span> Group task</a></li>
+<li><a class="" href="additional-resources.html"><span class="header-section-number">8</span> Additional resources</a></li>
+<li><a class="" href="license.html">License</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/psyteachr/introdataviz">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="scatterplots" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Scatterplots<a class="anchor" aria-label="anchor" href="#scatterplots"><i class="fas fa-link"></i></a>
+</h1>
+<p>Correlation data are typically visualised with a scatterplot. Scatterplots are created by calling <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> and require both an <code>x</code> and <code>y</code> variable to be specified in the mapping.</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat_clean</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">rt</span>, y <span class="op">=</span> <span class="va">acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:point-plot"></span>
+<img src="04-ch4-scatterplots_files/figure-html/point-plot-1.png" alt="Scatterplot of reaction time versus accuracy." width="80%"><p class="caption">
+Figure 4.1: Scatterplot of reaction time versus accuracy.
+</p>
+</div>
+<p>A line of best fit can be added with an additional layer that calls the function <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code>. The default is to draw a LOESS (locally estimated scatterplot smoothing) or curved regression line. However, a linear line of best fit can be specified using <code>method = "lm"</code>. By default, <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code> will also draw a confidence envelope around the regression line; this can be removed by adding <code>se = FALSE</code> to <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code>. A common error is to try and use <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> to draw the line of best fit, which whilst a sensible guess, will not work.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat_clean</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">rt</span>, y <span class="op">=</span> <span class="va">acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:smooth-plot"></span>
+<img src="04-ch4-scatterplots_files/figure-html/smooth-plot-1.png" alt="Line of best fit for reaction time versus accuracy." width="80%"><p class="caption">
+Figure 4.2: Line of best fit for reaction time versus accuracy.
+</p>
+</div>
+<div id="grouped-scatterplots" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Grouped scatterplots<a class="anchor" aria-label="anchor" href="#grouped-scatterplots"><i class="fas fa-link"></i></a>
+</h2>
+<p>R will always follow your instructions, even when your instructions might not be the best option for your data. This is where you as the analyst comes in to make decisions on how best to visualise the data and highlight patterns. You might notice in the scatterplot above the single regression line is negative, but there are roughly two groups of data which look positive. This is an example of something called Simpson's paradox (see, <a href="https://www.frontiersin.org/articles/10.3389/fpsyg.2013.00513/full">Kievit et al., 2013</a>) where associations for a whole population may be reserved for different sub-groups.</p>
+<p>To highlight different groups and potentially uncover these patterns, scatterplots can be easily adjusted to display grouped data. For <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code>, the grouping variable is mapped to <code>colour</code> rather than <code>fill</code> and the relevant <code>scale_*</code> function is added:</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat_clean</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">rt</span>, y <span class="op">=</span> <span class="va">acc</span>, colour <span class="op">=</span> <span class="va">condition</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_discrete.html">scale_colour_discrete</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Condition"</span>,
+                        labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Non-Word"</span>, <span class="st">"Word"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:scatter-grouped"></span>
+<img src="04-ch4-scatterplots_files/figure-html/scatter-grouped-1.png" alt="Grouped scatterplot of reaction time versus accuracy by condition." width="80%"><p class="caption">
+Figure 4.3: Grouped scatterplot of reaction time versus accuracy by condition.
+</p>
+</div>
+</div>
+<div id="facets" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Facets<a class="anchor" aria-label="anchor" href="#facets"><i class="fas fa-link"></i></a>
+</h2>
+<p>So far we have produced single plots that display all the desired variables. However, there are situations in which it may be useful to create separate plots for each level of a variable. This can also help with accessibility when used instead of or in addition to group colours.</p>
+<ul>
+<li><p>Rather than using <code>colour = condition</code> to produce different colours for each level of <code>condition</code>, this variable is instead passed to <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code>.</p></li>
+<li><p>Set the number of rows with <code>nrow</code> or the number of columns with <code>ncol</code>. If you don't specify this, <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code> will make a best guess.</p></li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat_clean</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">rt</span>, y <span class="op">=</span> <span class="va">acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">condition</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:scatterplot-facet"></span>
+<img src="04-ch4-scatterplots_files/figure-html/scatterplot-facet-1.png" alt="Faceted scatterplot" width="80%"><p class="caption">
+Figure 4.4: Faceted scatterplot
+</p>
+</div>
+</div>
+<div id="customisation-2" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Customisation 2<a class="anchor" aria-label="anchor" href="#customisation-2"><i class="fas fa-link"></i></a>
+</h2>
+<div id="editing-axis-names-and-labels" class="section level3" number="4.3.1">
+<h3>
+<span class="header-section-number">4.3.1</span> Editing axis names and labels<a class="anchor" aria-label="anchor" href="#editing-axis-names-and-labels"><i class="fas fa-link"></i></a>
+</h3>
+<p>To edit axis names and labels you can connect <code>scale_*</code> functions to your plot with <code>+</code> to add layers. These functions are part of <code>ggplot2</code> and the one you use depends on which aesthetic you wish to edit (e.g., x-axis, y-axis, fill, colour) as well as the type of data it represents (discrete, continuous).</p>
+<p>For the bar chart of counts, the x-axis is mapped to a discrete (categorical) variable whilst the y-axis is continuous. For each of these there is a relevant scale function with various elements that can be customised. Each axis then has its own function added as a layer to the basic plot.</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat_clean</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">rt</span>, y <span class="op">=</span> <span class="va">acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Reaction time (ms)"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span>,<span class="fl">20</span>,<span class="fl">30</span>,<span class="fl">40</span>,<span class="fl">50</span>,<span class="fl">60</span>,<span class="fl">70</span>,<span class="fl">80</span>,<span class="fl">90</span>,<span class="fl">100</span><span class="op">)</span>, limits<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:scatter-axis"></span>
+<img src="04-ch4-scatterplots_files/figure-html/scatter-axis-1.png" alt="Scatterplot with custom axis labels." width="80%"><p class="caption">
+Figure 4.5: Scatterplot with custom axis labels.
+</p>
+</div>
+<ul>
+<li><p><code>name</code> controls the overall name of the axis (note the use of quotation marks).</p></li>
+<li><p><code>breaks</code> controls the tick marks on the axis. Again, because there are multiple values, they are enclosed within <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>. Because they are numeric and not text, they do not need quotation marks. <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> is a function that you will see in many different contexts and is used to combine multiple values. In this case, the breaks we want to apply are combined within <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>.</p></li>
+<li><p><code>limits</code> controls the start and end of the axis. ggplot2 will try and guess a good range for the data, but sometimes we also need to set the <code><a href="https://ggplot2.tidyverse.org/reference/limits.html">limits()</a></code> of our axis for the <code>breaks</code> to work. If you delete the <code>limits</code> argument above, you will see that despite setting breaks from 0, the axis tick marks will start from 80 as the smallest value is approximately 75.</p></li>
+</ul>
+</div>
+<div id="specifying-axis-breaks-with-seq" class="section level3" number="4.3.2">
+<h3>
+<span class="header-section-number">4.3.2</span> Specifying axis <code>breaks</code> with <code>seq()</code><a class="anchor" aria-label="anchor" href="#specifying-axis-breaks-with-seq"><i class="fas fa-link"></i></a>
+</h3>
+<p>Typing out all the values we want to display on the axis is sometimes inefficient. Instead, we can use the function <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> to specify the first and last value and the increments <code>by</code> which the breaks should display between these two values.</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat_clean</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">rt</span>, y <span class="op">=</span> <span class="va">acc</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Reaction time (ms)"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Accuracy"</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">70</span>, <span class="fl">100</span>, by<span class="op">=</span><span class="fl">5</span><span class="op">)</span>, limits<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">70</span>,<span class="fl">100</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="04-ch4-scatterplots_files/figure-html/breaks2-1.png" width="80%" style="display: block; margin: auto;"></div>
+
+</div>
+</div>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+    
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+  
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+  
+  var cl = this.classList
+  
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+  
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+  
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+  
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var psyteachr = ' <a href="https://psyteachr.github.io/"><img src="images/logos/psyteachr_logo.png" style="height: 31px; color: white;" alt="psyTeachR: Reproducible Research" /></a>';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    psyteachr + license + cite
+  );
+
+  function move_sidebar() {
+    var w = window.innerWidth;
+    if (w < 992) {
+      $("#toc").appendTo($("#main-nav"));
+    } else {
+      $("#toc").appendTo($("div.sidebar-chapter"));
+    }
+  }
+  move_sidebar();
+  window.onresize = move_sidebar;
+});
+</script><div class="chapter-nav">
+<div class="prev"><a href="bar-plots.html"><span class="header-section-number">3</span> Bar plots</a></div>
+<div class="next"><a href="violin-boxplots.html"><span class="header-section-number">5</span> Violin-boxplots</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#scatterplots"><span class="header-section-number">4</span> Scatterplots</a></li>
+<li><a class="nav-link" href="#grouped-scatterplots"><span class="header-section-number">4.1</span> Grouped scatterplots</a></li>
+<li><a class="nav-link" href="#facets"><span class="header-section-number">4.2</span> Facets</a></li>
+<li>
+<a class="nav-link" href="#customisation-2"><span class="header-section-number">4.3</span> Customisation 2</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#editing-axis-names-and-labels"><span class="header-section-number">4.3.1</span> Editing axis names and labels</a></li>
+<li><a class="nav-link" href="#specifying-axis-breaks-with-seq"><span class="header-section-number">4.3.2</span> Specifying axis breaks with seq()</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/psyteachr/introdataviz/blob/master/book/04-ch4-scatterplots.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/psyteachr/introdataviz/edit/master/book/04-ch4-scatterplots.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Data visualisation using R, for researchers who don’t use R</strong>" was written by James Bartlett, Wilhelmiina Toivo. It was last built on 2022-06-07.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

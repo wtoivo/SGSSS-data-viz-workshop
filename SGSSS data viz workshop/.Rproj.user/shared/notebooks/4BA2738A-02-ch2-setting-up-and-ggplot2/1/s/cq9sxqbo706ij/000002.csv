@@ -1,0 +1,6 @@
+"0","ggplot(dat, aes(x = age)) +"
+"0","  geom_histogram()+"
+"0","  scale_x_continuous(""Age"")+"
+"0","  theme_bw()"
+"2","`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+"

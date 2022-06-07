@@ -1,0 +1,5 @@
+"0",""
+"0","ggplot(dat, aes(language, fill=language)) +"
+"0","  geom_bar() +"
+"0","  scale_fill_viridis_d(option=""D"")"
+"0",""

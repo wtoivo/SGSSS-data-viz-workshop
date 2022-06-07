@@ -1,0 +1,4 @@
+"0","ggplot(dat, aes(x = age)) +"
+"0","  geom_density()+"
+"0","  scale_x_continuous(name = ""Age"")+"
+"0","  theme_bw()"

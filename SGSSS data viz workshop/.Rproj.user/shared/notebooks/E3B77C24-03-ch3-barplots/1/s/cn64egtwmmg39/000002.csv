@@ -1,0 +1,2 @@
+"0","ggplot(data = dat, aes(x = language)) +"
+"0","  geom_bar()"

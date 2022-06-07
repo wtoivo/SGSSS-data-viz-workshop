@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Line plots | Data visualisation using R, for researchers who don’t use R</title>
+<meta name="author" content="James Bartlett, Wilhelmiina Toivo">
+<meta name="description" content="In this final data visualisation chapter, we will show one option for visualisation of time series data: line plots. There are many other ways of visualising data like this, such as heatmaps:...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Line plots | Data visualisation using R, for researchers who don’t use R">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://psyteachr.github.io/introdataviz/line-plots.html">
+<meta property="og:image" content="https://psyteachr.github.io/introdataviz/images/logos/logo.png">
+<meta property="og:description" content="In this final data visualisation chapter, we will show one option for visualisation of time series data: line plots. There are many other ways of visualising data like this, such as heatmaps:...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 Line plots | Data visualisation using R, for researchers who don’t use R">
+<meta name="twitter:description" content="In this final data visualisation chapter, we will show one option for visualisation of time series data: line plots. There are many other ways of visualising data like this, such as heatmaps:...">
+<meta name="twitter:image" content="https://psyteachr.github.io/introdataviz/images/logos/logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6NP3MF25W3');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Data visualisation using R, for researchers who don’t use R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li><a class="" href="introduction.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="setting-up.html"><span class="header-section-number">2</span> Setting up</a></li>
+<li><a class="" href="bar-plots.html"><span class="header-section-number">3</span> Bar plots</a></li>
+<li><a class="" href="scatterplots.html"><span class="header-section-number">4</span> Scatterplots</a></li>
+<li><a class="" href="violin-boxplots.html"><span class="header-section-number">5</span> Violin-boxplots</a></li>
+<li><a class="active" href="line-plots.html"><span class="header-section-number">6</span> Line plots</a></li>
+<li><a class="" href="group-task.html"><span class="header-section-number">7</span> Group task</a></li>
+<li><a class="" href="additional-resources.html"><span class="header-section-number">8</span> Additional resources</a></li>
+<li><a class="" href="license.html">License</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/psyteachr/introdataviz">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="line-plots" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Line plots<a class="anchor" aria-label="anchor" href="#line-plots"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this final data visualisation chapter, we will show one option for visualisation of time series data: line plots. There are many other ways of visualising data like this, such as heatmaps: <a href="https://r-graph-gallery.com/283-the-hourly-heatmap.html" class="uri">https://r-graph-gallery.com/283-the-hourly-heatmap.html</a>, or stacked area charts: <a href="https://r-graph-gallery.com/136-stacked-area-chart" class="uri">https://r-graph-gallery.com/136-stacked-area-chart</a>, which you will be able to create with ggplot2 as well.</p>
+<p>For this chapter, instead of the simulated dataset, we will use a real dataset on covid-19 vaccinations in Denmark from Our World in Data (<a href="https://ourworldindata.org/" class="uri">https://ourworldindata.org/</a>). We have cleaned the data for the purposes of this workshop and it can be downloaded from our <a href="https://osf.io/wv7bn/" target="_blank">workshop OSF page</a>.</p>
+<p>Make sure you download the data file and paste it into your project folder before trying to run the code below.</p>
+<div id="read-in-the-data" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Read in the data<a class="anchor" aria-label="anchor" href="#read-in-the-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>The code below will create a new object <code>vaccinations</code> and read in the datafile <code>vaccinations_by_age_group.csv</code>:</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">vaccinations</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"vaccinations_by_age_group.csv"</span><span class="op">)</span></code></pre></div>
+<p>In this data set, we have vaccination data from Denmark for different age groups.</p>
+<ul>
+<li><p><code>date</code> column shows the timestamps. This will be the x axis of your plot.</p></li>
+<li><p><code>people_fully_vaccinated_per_hundred</code> shows the data on how many people per hundred have been vaccinated on a given date (the data are cumulative).</p></li>
+</ul>
+<p>-<code>age_group</code> shows the age data split by age (15-17, 18-24, 25-49, 50-59, 60-69, 70-79, 80+).</p>
+</div>
+<div id="line-plot" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Line plot<a class="anchor" aria-label="anchor" href="#line-plot"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let's start by making a simple line plot. For a line plot, you need to define the <code>x</code> and the <code>y</code> axes in your <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> function.</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">vaccinations</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">people_fully_vaccinated_per_hundred</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="06-ch6-lineplots_files/figure-html/line1-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div id="grouping-the-plot" class="section level3" number="6.2.1">
+<h3>
+<span class="header-section-number">6.2.1</span> Grouping the plot<a class="anchor" aria-label="anchor" href="#grouping-the-plot"><i class="fas fa-link"></i></a>
+</h3>
+<p>Unless you enjoy recreating album covers from the Arctic Monkeys, you can see that this plot doesn't make any sense. That's because there are multiple data points for each of the dates (each of the age groups have their own entry). To make a plot that makes sense, we need to <code>group</code> the plot by age group. This means that the <code>ggplot</code> function will split the data based on the variable you specify in the group argument.</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">vaccinations</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">people_fully_vaccinated_per_hundred</span>, group<span class="op">=</span><span class="va">age_group</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="06-ch6-lineplots_files/figure-html/line2-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>Alternatively, you could facet the plot, but then you won't be able to see the trends in one plot, which is usually important for time series data.</p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">vaccinations</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">people_fully_vaccinated_per_hundred</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">age_group</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="06-ch6-lineplots_files/figure-html/line3-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="customising-the-plot" class="section level3" number="6.2.2">
+<h3>
+<span class="header-section-number">6.2.2</span> Customising the plot<a class="anchor" aria-label="anchor" href="#customising-the-plot"><i class="fas fa-link"></i></a>
+</h3>
+<p>Finally, we'll add colour to the plot to distinguish the age groups, and we'll add another layer with <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> to mark the different time points more clearly, we'll change the theme of the plot and make it colour-blind friendly.</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">vaccinations</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y<span class="op">=</span><span class="va">people_fully_vaccinated_per_hundred</span>, colour<span class="op">=</span><span class="va">age_group</span>, group<span class="op">=</span><span class="va">age_group</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_colour_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"D"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="06-ch6-lineplots_files/figure-html/line4-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="dealing-with-a-date-axis" class="section level3" number="6.2.3">
+<h3>
+<span class="header-section-number">6.2.3</span> Dealing with a date axis<a class="anchor" aria-label="anchor" href="#dealing-with-a-date-axis"><i class="fas fa-link"></i></a>
+</h3>
+<p>One thing to note is that the x-axis here is with dates instead of numbers (if you look at the <code>vaccinations</code> dataframe, the datatype is <code>unknown</code>. Luckily, there are customisation options for this on ggplot! We can use the <code>scale_x_date</code> function as a layer to modify and work with date formats:</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">vaccinations</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y<span class="op">=</span><span class="va">people_fully_vaccinated_per_hundred</span>, colour<span class="op">=</span><span class="va">age_group</span>, group<span class="op">=</span><span class="va">age_group</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_colour_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"D"</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html">scale_x_date</a></span><span class="op">(</span>date_labels <span class="op">=</span> <span class="st">"%b %Y"</span>, <span class="co"># %b = abbreviated month name; %Y = Year with century</span>
+               date_breaks <span class="op">=</span> <span class="st">"3 months"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="06-ch6-lineplots_files/figure-html/line5-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>If you want more information on customising dates in ggplot, this blog post is very useful: <a href="https://www.r-bloggers.com/2018/06/customizing-time-and-date-scales-in-ggplot2/" class="uri">https://www.r-bloggers.com/2018/06/customizing-time-and-date-scales-in-ggplot2/</a></p>
+</div>
+</div>
+<div id="end-of-first-half" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> End of first half!<a class="anchor" aria-label="anchor" href="#end-of-first-half"><i class="fas fa-link"></i></a>
+</h2>
+<p>Well done for completing the first half of the workshop! Now you should have a basic understanding of how ggplot2 works, the different plot types, and customisation options available to you. There are further resources in appendix A if you would like to expand your plotting skills.</p>
+<p>For the second half of the workshop, we will do a small data visualisation group project, which you can find in chapter 7!</p>
+
+</div>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+    
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+  
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+  
+  var cl = this.classList
+  
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+  
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+  
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+  
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var psyteachr = ' <a href="https://psyteachr.github.io/"><img src="images/logos/psyteachr_logo.png" style="height: 31px; color: white;" alt="psyTeachR: Reproducible Research" /></a>';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    psyteachr + license + cite
+  );
+
+  function move_sidebar() {
+    var w = window.innerWidth;
+    if (w < 992) {
+      $("#toc").appendTo($("#main-nav"));
+    } else {
+      $("#toc").appendTo($("div.sidebar-chapter"));
+    }
+  }
+  move_sidebar();
+  window.onresize = move_sidebar;
+});
+</script><div class="chapter-nav">
+<div class="prev"><a href="violin-boxplots.html"><span class="header-section-number">5</span> Violin-boxplots</a></div>
+<div class="next"><a href="group-task.html"><span class="header-section-number">7</span> Group task</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#line-plots"><span class="header-section-number">6</span> Line plots</a></li>
+<li><a class="nav-link" href="#read-in-the-data"><span class="header-section-number">6.1</span> Read in the data</a></li>
+<li>
+<a class="nav-link" href="#line-plot"><span class="header-section-number">6.2</span> Line plot</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#grouping-the-plot"><span class="header-section-number">6.2.1</span> Grouping the plot</a></li>
+<li><a class="nav-link" href="#customising-the-plot"><span class="header-section-number">6.2.2</span> Customising the plot</a></li>
+<li><a class="nav-link" href="#dealing-with-a-date-axis"><span class="header-section-number">6.2.3</span> Dealing with a date axis</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#end-of-first-half"><span class="header-section-number">6.3</span> End of first half!</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/psyteachr/introdataviz/blob/master/book/06-ch6-lineplots.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/psyteachr/introdataviz/edit/master/book/06-ch6-lineplots.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Data visualisation using R, for researchers who don’t use R</strong>" was written by James Bartlett, Wilhelmiina Toivo. It was last built on 2022-06-07.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
