@@ -100,7 +100,7 @@ sample(x = letters, size = 5)
 ```
 
 ```
-## [1] "i" "d" "x" "e" "p"
+## [1] "n" "w" "u" "z" "a"
 ```
 
 ### Objects
