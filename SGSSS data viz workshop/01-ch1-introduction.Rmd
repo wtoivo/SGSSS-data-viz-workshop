@@ -18,7 +18,80 @@ Nordmann, E., McAleer, P., Toivo, W., Paterson, H. & DeBruine, L. (accepted). Da
 
 A more comprehensive version of this tutorial can be found here: https://psyteachr.github.io/introdataviz/index.html
 
-## Data visualisation principles (JAMES) 
+## Data visualisation principles
+
+Before we explore the practical side of R, we want to cover some principles behind effective data visualisation. Graphs are helpful across all research stages, from understanding your data in exploratory data analysis, to communicating your message to your readers. However, while effective data visualisation can help to communicate your findings, it is easy to confuse or potentially mislead your readers through poorly designed graphs. These skills take time to develop and there may not always be a general rule to follow, so it is important to recognise your role as the analyst when visualising data as you will always have decisions to make. 
+
+We could spend the whole workshop covering good and bad plots, so we recommend chapter one - looking at data - from [Data Visualisation](https://socviz.co/index.html#preface) by Healy (2018) and the comprehensive journal article [The Science of Visual Data Communication: What Works](https://doi.org/10.1177/15291006211051956) by Franconeri et al. (2021). For a starting point, we will provide a concise overview of some key principles to keep in mind when creating visualisations. 
+
+### Graphs for you 
+
+Even if you never show a graph to your reader, exploratory data analysis is a crucial step of any research project. As you move from reading to cleaning to modelling your data, quickly making plots can help you to understand any underlying patterns. If you solely rely on statistical summaries such as the mean, you may not notice these patterns. One famous example is called Anscombe's quartet where four variable pairs have the same statistical summary (a correlation of *r* = .82) but come from different underlying patterns. The plot grid below demonstrates a scatterplot of all four pairs where you can see the line of best fit is identical. If you only relied on the correlation, you would not recognise a linear relationship is only appropriate for the first pair. In our demonstration, we will cover different customisation options, but you should be able to create quick plots like these in only two or three lines of code to form a key part of your data analysis toolkit. 
+
+```{r anscombes quartet, echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(cowplot)
+
+p1 <- ggplot(anscombe, aes(x1, y1)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)
+
+p2 <- ggplot(anscombe, aes(x2, y2)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)
+
+p3 <- ggplot(anscombe, aes(x3, y3)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)
+
+p4 <- ggplot(anscombe, aes(x4, y4)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)
+
+plot_grid(plotlist = list(p1, p2, p3, p4))
+
+```
+
+### Graphs for your reader
+
+When it is time to create visualisations for the benefit of your reader, they are capable of quickly and effectively communicating your message. It is important to balance efficiency with transparency about the underlying data. As we saw with Anscombe's quartet, simple summaries can mask more complicated problems. We will spend more time on this in chapter 5, but you will often see bar plots in journal articles to show the difference between groups or conditions. Bar plots are designed to show frequencies, so when they are used to represent continuous data they can hide important details about the underlying data (see [Weissgerber et al., 2015](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002128)). For example, the example below shows a regular bar plot and then with the data superimposed. In the left plot, the two patterns of data look almost identical, but in the right plot, you can see they come from very different underlying distributions. 
+
+Hopefully, this shows you must find a compromise between a plot that your readers can quickly understand, while not hiding important details. Your role as the data analyst is key here as what might be important in one type of plot and one audience might be different in another plot or audience. 
+
+```{r barbarplots, echo = FALse, warning=FALSE, message=FALSE}
+set.seed(68493)
+
+A <- data.frame(
+  Group = "A",
+  DV = rnorm(1000, 0.17, 0.04))
+
+B <- data.frame(
+  Group = "B",
+  DV = rbeta(1000, 2, 10))
+
+data <- rbind(A, B)
+
+p1 <- ggplot(data, aes(x = Group, y = DV)) + 
+  geom_bar(stat = "summary", fun.y = "mean")
+
+p2 <- ggplot(data, aes(x = Group, y = DV)) + 
+  geom_bar(stat = "summary", fun.y = "mean") + 
+  geom_jitter(width = 0.2, alpha = 0.5)
+
+plot_grid(plotlist = list(p1, p2), nrow = 1, ncol = 2)
+  
+```
+
+
+### Common visual illusions 
+
+### Highlight comparisons of interest
+
+### Integrate relevant text
+
+### Use formats familiar to your audience
+
+### Guide views to your conceptual message
 
 ## Why use R for data visualisation?
 
