@@ -90,7 +90,72 @@ In the following sections, we provide a brief overview of different kinds of pri
 
 ### Common visual illusions 
 
+Your visual system is pretty powerful and allows you to rapidly search for patterns in visual information. But for the same reasons that make graphs effective at communicating information, design features can also play tricks on the visual system and create illusions. 
 
+#### Y-axis truncation
+
+One of the most powerful and most common illusions that can mislead people is truncated or non-zero axes, where (typically) the y-axis is shortened to zoom in on a smaller range of values. Franconeri et al. (2021) discuss studies that show people overestimate differences between two groups when you tell them the truncation is present and even if you get people to manually enter the average values from each group. For example, the bar plot below shows the same difference across the full 0 to 100 scale, then truncated between 45 and 60 to highlight the difference. 
+
+```{r y axis trunc}
+set.seed(68493)
+
+A <- data.frame(
+  Group = "A",
+  DV = rnorm(1000, 50, 20))
+
+B <- data.frame(
+  Group = "B",
+  DV = rnorm(1000, 55, 20))
+
+data <- rbind(A, B)
+
+p1 <- ggplot(data, aes(x = Group, y = DV)) + 
+  geom_bar(stat = "summary", fun.y = "mean") + 
+  scale_y_continuous(limits = c(0, 100), breaks = seq(0, 100, 25))
+
+p2 <- ggplot(data, aes(x = Group, y = DV)) + 
+  geom_bar(stat = "summary", fun.y = "mean") + 
+  coord_cartesian(ylim = c(45, 60))
+
+plot_grid(plotlist = list(p1, p2), nrow = 1, ncol = 2)
+```
+
+This is another area where it takes time and experience to recognise where y-axis trunctation is misleading or not. Although we are not trying to turn this into a bar plot witch hunt, as a general rule of thumb, its usually not a good idea to truncate the y-axis of a bar plot as they are meant to display frequencies with a logical zero point. On the other hand, its acceptable to truncate line plots (chapter 6) as they are designed to show changes across time. For further information on the nuances, see [Correll et al. (2020)](http://arxiv.org/abs/1907.02035) who discuss when y-axis truncation is honest or deceptive. 
+
+#### Colour-vision impairments
+
+One important design feature is how you will distinguish between different elements of your graph. Colour can be used to effectively code different groups or conditions, but many analysts do not think carefully about colour combinations. Colour-vision impairments affect a significant number of people, so it is important to consider whether someone who is colour blind could distinguish between groups/conditions and understand the message you are trying to communicate. In the plot below, on the top is a scatterplot using green and purple, which can look identical for some types of colourblind. On the bottom is the same scatterplot using a colour blind friendly palette of greens. 
+
+Fortunately, it is easy to choose colour blind friendly combinations as the package we will be using comes with different palette options designed to be easier to read with colourblindness and that you can print it in greyscale. We will demonstrate how you can do this in chapter three. 
+
+```{r different colour schemes, echo=FALSE, message=FALSE, warning=FALSE}
+
+dat <- read_csv(file = "ldt_data.csv")
+
+dat_clean <- pivot_longer(data = dat, 
+                         cols = rt_word:acc_nonword, 
+                         names_sep = "_", 
+                         names_to = c("dv_type", "condition"),
+                         values_to = "dv") %>%
+  pivot_wider(names_from = "dv_type", 
+              values_from = "dv") %>% 
+  mutate(condition=as.factor(condition), language=as.factor(language))
+
+p1 <- ggplot(dat_clean, aes(x = rt, y = acc, colour = condition)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_colour_discrete(name = "Condition",
+                        labels = c("Non-Word", "Word"), type = c("purple", "limegreen"))
+
+p2 <- ggplot(dat_clean, aes(x = rt, y = acc, colour = condition)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_colour_viridis_d(option="D", begin = 0.4, end = 0.8, name = "Condition",
+                        labels = c("Non-Word", "Word"))
+
+plot_grid(plotlist = list(p1, p2), nrow = 2, ncol = 1)
+
+```
 
 ### Highlight comparisons of interest
 
