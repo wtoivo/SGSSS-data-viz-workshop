@@ -183,8 +183,51 @@ plot_grid(plotlist = list(p1, p2), nrow = 2, ncol = 1, labels = c("A", "B"))
 
 ```
 
-
 ### Integrate relevant text
+
+Although we just demonstrated the use of a legend to help label grouping variables, these can also take up working memory when there are several labels to remember. If you only have a colour or shape to link different bars or lines, then your reader might forget what each colour represents. They might need to keep cross-referencing the legend with the plot, adding to the working memory load of the comparisons you want them to make. 
+
+For example, we will demonstrate how to create the plots below in chapter 6. We use a legend to plot the age group for the rate of people fully vaccinated over time, but we could also directly label the lines. In plot A, the lines are clearly labelled by colour in the legend, but we must keep cross-referencing which colour relates to each age group. Particularly as the 80+ group is the top line but the bottom entry in the legend. Alternatively, in plot B we removed the legend and directly labelled the age groups instead. For added connectivity, the colour of the labels are also the same as the lines as well as the information being proximal. 
+
+```{r label line graph}
+
+# Ignore this to tidy things up 
+ignore <- c("15-17", "18-24", "25-40")
+
+vaccinations <- read_csv("vaccinations_by_age_group.csv") %>% 
+  filter(!age_group %in% ignore)
+
+# Select the last date so we can use the y value to set the heights
+age_labels <- vaccinations %>% 
+  filter(date == as.Date("2022-05-06"))
+
+ggplot(vaccinations, aes(x=date, y=people_fully_vaccinated_per_hundred, colour=age_group, group=age_group))+ 
+  geom_point()+
+  geom_line()+
+  theme_minimal()+
+  scale_colour_viridis_d(option="D")+ 
+  scale_x_date(date_labels = "%b %Y", # %b = abbreviated month name; %Y = Year with century
+               date_breaks = "3 months") + 
+  labs(y = "People Fully Vaccinated Per 100", x = "Date", title = "A")
+
+ggplot(vaccinations, aes(x=date, y=people_fully_vaccinated_per_hundred, colour=age_group, group=age_group))+ 
+  geom_point()+
+  geom_line()+
+  theme_minimal()+
+  theme(legend.position = "none") + 
+  scale_colour_viridis_d(option="D")+ 
+  scale_x_date(date_labels = "%b %Y", # %b = abbreviated month name; %Y = Year with century
+               date_breaks = "3 months") + 
+  geom_text(data = age_labels, 
+            aes(x = as.Date("2022-05-25"), 
+                y = age_labels$people_fully_vaccinated_per_hundred, 
+                label = age_labels$age_group), 
+            check_overlap = TRUE) + 
+  labs(y = "People Fully Vaccinated Per 100", x = "Date", title = "B")
+
+
+```
+
 
 ### Use formats familiar to your audience
 
