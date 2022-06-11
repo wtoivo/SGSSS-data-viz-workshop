@@ -185,9 +185,9 @@ plot_grid(plotlist = list(p1, p2), nrow = 2, ncol = 1, labels = c("A", "B"))
 
 ### Integrate relevant text
 
-Although we just demonstrated the use of a legend to help label grouping variables, these can also take up working memory when there are several labels to remember. If you only have a colour or shape to link different bars or lines, then your reader might forget what each colour represents. They might need to keep cross-referencing the legend with the plot, adding to the working memory load of the comparisons you want them to make. 
+Although we just demonstrated the use of a legend to help label grouping variables, these can also take up working memory when there are many labels to remember. If you only have a colour or shape to identify different bars or lines, then your reader might forget what they represent. The reader must keep cross-referencing the legend with the plot, adding to the working memory load of the comparisons you want them to make. 
 
-For example, we will demonstrate how to create the plots below in chapter 6. We use a legend to plot the age group for the rate of people fully vaccinated over time, but we could also directly label the lines. In plot A, the lines are clearly labelled by colour in the legend, but we must keep cross-referencing which colour relates to each age group. Particularly as the 80+ group is the top line but the bottom entry in the legend. Alternatively, in plot B we removed the legend and directly labelled the age groups instead. For added connectivity, the colour of the labels are also the same as the lines as well as the information being proximal. 
+Below, we use a legend to plot the age group for the rate of Danish people fully vaccinated to COVID-19 over time, but we could also directly label the lines. We will demonstrate how to create the plot in chapter 6. In plot A, the lines are labelled by colour in the legend, but we must keep cross-referencing which colour relates to each age group. Particularly as the 80+ group is the top line but the bottom entry in the legend, you must keep cross-referencing the legend with the lines. Alternatively, in plot B we removed the legend and directly labelled the age groups instead for proximity of information. For added connectivity, the colour of the labels are also the same as the lines. 
 
 ```{r label line graph}
 
@@ -225,11 +225,17 @@ ggplot(vaccinations, aes(x=date, y=people_fully_vaccinated_per_hundred, colour=a
             check_overlap = TRUE) + 
   labs(y = "People Fully Vaccinated Per 100", x = "Date", title = "B")
 
-
 ```
 
+Keep in mind integrating text is not always possible and it will be your decision to judge whether it is more informative to use a legend or directly add labels. If there are many overlapping lines or points, adding annotations may make your plot more crowded and less easy to read than including a legend. As you will see in chapter 6, for this demonstration we removed some of the younger age groups as they overlapped at the end date, making it difficult to add informative annotations. This means annotations were informative for the restricted data but a legend might have been better for the full data. 
 
 ### Use formats familiar to your audience
+
+Some plot types are ubiquitous like bar and line plots. Regardless of your discipline, everyone knows how to read and interpret these plots. Data visualisations require the reader to have existing knowledge or schemas for how they expect data to be presented. When the reader knows how to interpret the plot type, they can focus on the message you are trying to communicate. 
+
+On the other hand, if your reader is unfamiliar to the data visualisation format, they must first learn how to interpret your plot before they can appreciate the message you are trying to communicate. On the workshop slides, there are two unusual plots reproduced from Franconeri et al. (2021). For example, in time series data, many people would expect your outcome to be on the y-axis and the change in time across the x-axis. When there are two outcomes, you can include two y-axes to show how the outcomes change across time which is relatively easy for people to understand. Alternatively, a more specialised version of the plot is including the two outcomes on the x- and y-axis, and each point represents the measurement date. This means you can follow the intersection between the two outcomes as a line that wiggles across the plot. The specialised plot shows the same information but the format might not be familiar to your reader, meaning they must work out how to interpret the plot before they can appreciate the message. 
+
+As you might have expected given our repeated warnings, your choice of plot type is a compromise between what you think best communicates your message and what will be accessible to your reader. Sometimes plots are common but ill-advised like bar plots. They should not be used for continuous outcomes as we will demonstrate in chapter 5, but they are so ubiquitous that some audiences might still want them. This means it will be your judgment call on whether you use a less familiar visualisation format but feel it best communicates your data and message.
 
 ### Guide views to your conceptual message
 
