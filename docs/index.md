@@ -1,7 +1,7 @@
 --- 
 title: "SGSSS Summer School 2022: Data visualisation using R, for researchers who don’t use R"
 author: "James Bartlett, Wilhelmiina Toivo"
-date: "2022-06-08"
+date: "2022-06-13"
 site: bookdown::bookdown_site
 documentclass: book
 classoption: oneside # for PDFs

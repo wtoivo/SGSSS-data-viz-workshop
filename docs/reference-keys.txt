@@ -15,7 +15,16 @@ fig:viobox1b
 fig:viobox2
 fig:viobox3
 introduction
-data-visualisation-principles-james
+data-visualisation-principles
+graphs-for-you
+graphs-for-your-reader
+common-visual-illusions
+y-axis-truncation
+colour-vision-impairments
+highlight-comparisons-of-interest
+integrate-relevant-text
+use-formats-familiar-to-your-audience
+guide-viewers-to-your-conceptual-message
 why-use-r-for-data-visualisation
 a-very-short-introduction-to-r
 installing-r

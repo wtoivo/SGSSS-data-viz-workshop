@@ -8,9 +8,9 @@ We have collated four data sets - some from academic articles and others from st
 
 You can find a direct link to each data set below:
 
-1. [Farias et al. (2019)](https://osf.io/f85ux/){target="_blank"} – Athetist’s and Christian’s motivations to hike a pilgrimage trail 
+1. [Farias et al. (2019)](https://osf.io/f85ux/){target="_blank"} – Athetist’s and Christian’s motivations to hike a pilgrimage trail. Since we have not covered data wrangling, we have included two versions of this data set for if you want to plot all the motivation sub-scales side by side (`Farias_2019_long.csv`) or just choose one or two sub-scales (`Farias_2019.csv`).
 
-2. [Dawtry et al. (2015)](https://osf.io/73jzf/){target="_blank"} – Perceptions of income inequality
+2. [Dawtry et al. (2015)](https://osf.io/73jzf/){target="_blank"} – Perceptions of income inequality based on people's household income, their estimated average income, how fair they perceive the current system to be, and how much they support wealth redistribution. 
 
 3. [Road accidents](https://osf.io/3yb4s/){target="_blank"} 
 

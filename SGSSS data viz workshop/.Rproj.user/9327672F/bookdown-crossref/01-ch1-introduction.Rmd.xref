@@ -1,5 +1,14 @@
 h1:introduction Introduction
-h2:data-visualisation-principles-james Data visualisation principles (JAMES)
+h2:data-visualisation-principles Data visualisation principles
+h3:graphs-for-you Graphs for you
+h3:graphs-for-your-reader Graphs for your reader
+h3:common-visual-illusions Common visual illusions
+h4:y-axis-truncation Y-axis truncation
+h4:colour-vision-impairments Colour-vision impairments
+h3:highlight-comparisons-of-interest Highlight comparisons of interest
+h3:integrate-relevant-text Integrate relevant text
+h3:use-formats-familiar-to-your-audience Use formats familiar to your audience
+h3:guide-viewers-to-your-conceptual-message Guide viewers to your conceptual message
 h2:why-use-r-for-data-visualisation Why use R for data visualisation?
 h2:a-very-short-introduction-to-r A very short introduction to R
 h3:installing-r Installing R
