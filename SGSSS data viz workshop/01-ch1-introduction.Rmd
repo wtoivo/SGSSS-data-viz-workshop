@@ -33,7 +33,6 @@ In our demonstrations, we will cover different customisation options, but you ca
 ```{r anscombes quartet, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(cowplot)
-library(ERP)
 
 p1 <- ggplot(anscombe, aes(x1, y1)) + 
   geom_point() + 
@@ -264,7 +263,7 @@ This is another area where subject knowledge is important as some disciplines ha
 
 ```{r EEG time series, echo = FALSE, warning=FALSE, message=FALSE}
 
-data("impulsivity")
+impulsivity <- read_csv("impulsivity.csv")
 
 impulsivity_long <- impulsivity %>% 
   pivot_longer(cols = T_0:T_1000, names_to = "Time", values_to = "mV") %>% 
