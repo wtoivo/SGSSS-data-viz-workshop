@@ -146,8 +146,9 @@ Figure 3.4: Use the viridis palette accessibility.
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"B"</span>, begin<span class="op">=</span><span class="fl">0.65</span>, end<span class="op">=</span><span class="fl">0.85</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="03-ch3-barplots_files/figure-html/viridis%202-1.png" alt="Setting viridis colours manually." width="80%"><p class="caption">
-(#fig:viridis 2)Setting viridis colours manually.
+<span style="display:block;" id="fig:viridis2"></span>
+<img src="03-ch3-barplots_files/figure-html/viridis2-1.png" alt="Setting viridis colours manually." width="80%"><p class="caption">
+Figure 3.5: Setting viridis colours manually.
 </p>
 </div>
 </div>
@@ -155,7 +156,7 @@ Figure 3.4: Use the viridis palette accessibility.
 <h3>
 <span class="header-section-number">3.2.3</span> Adding a theme<a class="anchor" aria-label="anchor" href="#adding-a-theme"><i class="fas fa-link"></i></a>
 </h3>
-<p><code>ggplot2</code> has a number of built-in visual themes that you can apply as an extra layer. The below code updates the x-axis and y-axis labels to the histogram, but also applies <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal()</a></code>. Each part of a theme can be independently customised, which may be necessary, for example, if you have journal guidelines on fonts for publication. There are further instructions for how to do this in the online appendices.</p>
+<p><code>ggplot2</code> has a number of built-in visual themes that you can apply as an extra layer. The below code updates the x-axis and y-axis labels to the histogram, but also applies <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal()</a></code>. Each part of a theme can be independently customised, which may be necessary, for example, if you have journal guidelines on fonts for publication (you can find more information <a href="https://psyteachr.github.io/introdataviz/additional-customisation-options.html">HERE</a></p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">language</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"wheat"</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
@@ -164,7 +165,7 @@ Figure 3.4: Use the viridis palette accessibility.
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:bar-theme"></span>
 <img src="03-ch3-barplots_files/figure-html/bar-theme-1.png" alt="Bar chart with a custom theme." width="80%"><p class="caption">
-Figure 3.5: Bar chart with a custom theme.
+Figure 3.6: Bar chart with a custom theme.
 </p>
 </div>
 
@@ -394,7 +395,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>SGSSS Summer School 2022: Data visualisation using R, for researchers who don’t use R</strong>" was written by James Bartlett, Wilhelmiina Toivo. It was last built on 2022-06-13.</p>
+    <p>"<strong>SGSSS Summer School 2022: Data visualisation using R, for researchers who don’t use R</strong>" was written by James Bartlett, Wilhelmiina Toivo. It was last built on 2022-06-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

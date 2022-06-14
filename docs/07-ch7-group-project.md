@@ -12,9 +12,9 @@ You can find a direct link to each data set below:
 
 2. [Dawtry et al. (2015)](https://osf.io/73jzf/){target="_blank"} – Perceptions of income inequality based on people's household income, their estimated average income, how fair they perceive the current system to be, and how much they support wealth redistribution. 
 
-3. [Road accidents](https://osf.io/3yb4s/){target="_blank"} 
+3. [Road accidents](https://osf.io/3yb4s/){target="_blank"} - data from Glasgow City Council on the number of road accidents. You have also information on the day of the week each accident happened, the speed limit in the area it happened and accident severity.
 
-4. [Vaccination rate by country](https://osf.io/js69f/){target="_blank"}
+4. [Vaccination rate by country](https://osf.io/js69f/){target="_blank"} - these data are also from Our World in Data. It's very similar to the data you saw in chapter 6, with the addition of including data from multiple countries.
 
 Once you decide on a data set, we would like you to create two versions of a plot:
 

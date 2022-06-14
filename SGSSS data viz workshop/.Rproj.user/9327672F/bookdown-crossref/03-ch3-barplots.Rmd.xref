@@ -7,7 +7,7 @@ fig:bar1 Bar chart of counts.
 fig:bar2 Fill set by a variable
 h3:accessible-colour-schemes Accessible colour schemes
 fig:viridis Use the viridis palette accessibility.
-fig:viridis Setting viridis colours manually.
+fig:viridis2 Setting viridis colours manually.
 h3:adding-a-theme Adding a theme
 fig:bar-theme Bar chart with a custom theme.
 

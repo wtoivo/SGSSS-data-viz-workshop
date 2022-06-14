@@ -86,13 +86,13 @@ ggplot(dat, aes(language, fill=language)) +
 ```
 
 <div class="figure" style="text-align: center">
-<img src="03-ch3-barplots_files/figure-html/viridis 2-1.png" alt="Setting viridis colours manually." width="80%" />
-<p class="caption">(\#fig:viridis 2)Setting viridis colours manually.</p>
+<img src="03-ch3-barplots_files/figure-html/viridis2-1.png" alt="Setting viridis colours manually." width="80%" />
+<p class="caption">(\#fig:viridis2)Setting viridis colours manually.</p>
 </div>
 
 ### Adding a theme
 
-`ggplot2` has a number of built-in visual themes that you can apply as an extra layer. The below code updates the x-axis and y-axis labels to the histogram, but also applies `theme_minimal()`. Each part of a theme can be independently customised, which may be necessary, for example, if you have journal guidelines on fonts for publication. There are further instructions for how to do this in the online appendices.
+`ggplot2` has a number of built-in visual themes that you can apply as an extra layer. The below code updates the x-axis and y-axis labels to the histogram, but also applies `theme_minimal()`. Each part of a theme can be independently customised, which may be necessary, for example, if you have journal guidelines on fonts for publication (you can find more information [HERE](https://psyteachr.github.io/introdataviz/additional-customisation-options.html)
 
 
 ```r

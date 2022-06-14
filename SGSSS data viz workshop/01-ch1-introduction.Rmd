@@ -378,7 +378,7 @@ summed <- 1+2
 
 ```
 
-Try to create an object called `name` and enter your name, and an object called `age` and add your age.
+Try to create an object called `name` and enter your name, and an object called `age` and add your age. You need quotation marks for objects made of letters (this is called `characters` in R), but you won't need them for numbers.
 
 ### Packages
 

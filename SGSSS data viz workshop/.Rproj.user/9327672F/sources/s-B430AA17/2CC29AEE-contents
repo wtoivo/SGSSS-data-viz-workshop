@@ -2,15 +2,17 @@
 
 ## Projects
 
-Projects are a useful way of keeping all your code, data, and output in one place. To create a new project, open RStudio and click `File - New Project - New Directory - New Project`. You will be prompted to give the project a name and select a location for where to store the project on your computer. Once you have done this, click `Create Project`. Download the simulated dataset `ldt_data.csv` from [this OSF project](https://osf.io/fxtyn/){target="_blank"} we created for the workshop and then move it to this folder (ignore the .Rmd file). 
+Projects are a useful way of keeping all your code, data, and output in one place. To create a new project, open RStudio and click `File - New Project - New Directory - New Project`. You will be prompted to give the project a name and select a location for where to store the project on your computer. Once you have done this, click `Create Project`. Download the simulated dataset `ldt_data.csv`, vaccinations data `vaccinations_by_age_group.csv`, and the workbook `SGSSS summer school data viz workbook.Rmd` from [this OSF project](https://osf.io/fxtyn/){target="_blank"} and then move them all to this folder. 
 
 The files pane on the bottom right of RStudio should now display this folder and the files it contains - this is known as your *working directory*.
 
 ## .Rmd files
 
-Then open a new .Rmd file: `File - New File - R Markdown`. Name it `SGSSS data viz workshop` and save it. This is where you will write all your code. Delete everything below line 12. 
+We have provided you with a pre-formatted Rmd file to use as a workbook for this workshop. You should see this in your `Files` pane. Click on the workbook and it will open up in your `Source` pane.
 
 In R Markdown, anything written in a grey code chunk is assumed to be code, and anything written in the white space (between the code chunks) is regarded as normal text. You can insert a new code chunk with `Ctrl + Alt + I` ( or on OS X: `Cmd + Option + I`). 
+
+How to create a new Rmd file for group project and/or post workshop: `File - New File - R Markdown`. Name it, delete everything below line 12, and save it. 
 
 ## Loading packages
 
@@ -22,7 +24,7 @@ library(tidyverse)
 
 ## Loading data
 
-To load the [simulated data](https://osf.io/bj83f/files/){target="_blank"} we use the function `read_csv()`. Make a new code chunk, paste the following code in it and run the code:
+To load the [simulated data](https://osf.io/fxtyn/){target="_blank"} we use the function `read_csv()`. Make a new code chunk, paste the following code in it and run the code:
 
 ```{r load3, message=FALSE}
 dat <- read_csv(file = "ldt_data.csv")

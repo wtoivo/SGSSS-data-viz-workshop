@@ -97,13 +97,11 @@ Figure 4.2: Line of best fit for reaction time versus accuracy.
 <span class="header-section-number">4.1</span> Grouped scatterplots<a class="anchor" aria-label="anchor" href="#grouped-scatterplots"><i class="fas fa-link"></i></a>
 </h2>
 <p>R will always follow your instructions, even when your instructions might not be the best option for your data. This is where you as the analyst comes in to make decisions on how best to visualise the data and highlight patterns. You might notice in the scatterplot above the single regression line is negative, but there are roughly two groups of data which look positive. This is an example of something called Simpson's paradox (see, <a href="https://www.frontiersin.org/articles/10.3389/fpsyg.2013.00513/full">Kievit et al., 2013</a>) where associations for a whole population may be reserved for different sub-groups.</p>
-<p>To highlight different groups and potentially uncover these patterns, scatterplots can be easily adjusted to display grouped data. For <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code>, the grouping variable is mapped to <code>colour</code> rather than <code>fill</code> and the relevant <code>scale_*</code> function is added:</p>
+<p>To highlight different groups and potentially uncover these patterns, scatterplots can be easily adjusted to display grouped data. For <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code>, the grouping variable is mapped to <code>colour</code> rather than <code>fill</code>:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat_clean</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">rt</span>, y <span class="op">=</span> <span class="va">acc</span>, colour <span class="op">=</span> <span class="va">condition</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_discrete.html">scale_colour_discrete</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Condition"</span>,
-                        labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Non-Word"</span>, <span class="st">"Word"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:scatter-grouped"></span>
 <img src="04-ch4-scatterplots_files/figure-html/scatter-grouped-1.png" alt="Grouped scatterplot of reaction time versus accuracy by condition." width="80%"><p class="caption">
@@ -399,7 +397,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>SGSSS Summer School 2022: Data visualisation using R, for researchers who don’t use R</strong>" was written by James Bartlett, Wilhelmiina Toivo. It was last built on 2022-06-13.</p>
+    <p>"<strong>SGSSS Summer School 2022: Data visualisation using R, for researchers who don’t use R</strong>" was written by James Bartlett, Wilhelmiina Toivo. It was last built on 2022-06-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

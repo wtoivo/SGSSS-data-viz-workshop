@@ -31,15 +31,13 @@ ggplot(dat_clean, aes(x = rt, y = acc)) +
 
 R will always follow your instructions, even when your instructions might not be the best option for your data. This is where you as the analyst comes in to make decisions on how best to visualise the data and highlight patterns. You might notice in the scatterplot above the single regression line is negative, but there are roughly two groups of data which look positive. This is an example of something called Simpson's paradox (see, [Kievit et al., 2013](https://www.frontiersin.org/articles/10.3389/fpsyg.2013.00513/full)) where associations for a whole population may be reserved for different sub-groups. 
 
-To highlight different groups and potentially uncover these patterns, scatterplots can be easily adjusted to display grouped data. For `geom_point()`, the grouping variable is mapped to `colour` rather than `fill` and the relevant `scale_*` function is added:
+To highlight different groups and potentially uncover these patterns, scatterplots can be easily adjusted to display grouped data. For `geom_point()`, the grouping variable is mapped to `colour` rather than `fill`:
 
 
 ```r
 ggplot(dat_clean, aes(x = rt, y = acc, colour = condition)) +
   geom_point() +
-  geom_smooth(method = "lm") +
-  scale_colour_discrete(name = "Condition",
-                        labels = c("Non-Word", "Word"))
+  geom_smooth(method = "lm")
 ```
 
 <div class="figure" style="text-align: center">

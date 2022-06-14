@@ -4,6 +4,7 @@ fig:bar0
 fig:bar1
 fig:bar2
 fig:viridis
+fig:viridis2
 fig:bar-theme
 fig:point-plot
 fig:smooth-plot
