@@ -1,5 +1,15 @@
 # Code for data visualisation principles
 
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE)
+
+library(tidyverse)
+
+```
+
 In chapter 1, we introduced you to data visualisation principles. At the time, we hid the code behind creating the plots we used to demonstrate our points as you may not have used R before. For the group task in chapter 7, we want you to create a "good" and "bad" version of a plot, so we thought it would be a good idea to demonstrate the code we used in case you want to use it for your group task. 
 
 ## Y-axis truncation
@@ -7,8 +17,6 @@ In chapter 1, we introduced you to data visualisation principles. At the time, w
 If you want to shorten the y-axis, it is not the most intuitive of functions in ggplot. First, if we recreate the more honest version of the plot: 
 
 ```{r yaxis data, echo=FALSE}
-
-library(tidyverse)
 
 set.seed(68493)
 
@@ -24,7 +32,7 @@ data <- rbind(A, B)
 
 ```
 
-```{r honest plot, echo=TRUE, message=FALSE, warning=FALSE}
+```{r honest plot}
 # Behind the scenes, we simulated some values for group A and group B and saved them in data
 ggplot(data, aes(x = Group, y = DV)) + 
   geom_bar(stat = "summary", fun.y = "mean") + #Normally not a good idea to calculate the mean for a bar plot, but for demonstration purposes
@@ -36,7 +44,7 @@ ggplot(data, aes(x = Group, y = DV)) +
 
 We know its normally not a good idea to summarise continuous data with the mean per bar, but see this as a demonstration perfect for the "bad" plot. If you want to shorten the y-axis, intuitively, you might think you could just shorten the limits:
 
-```{r honest plot, echo=TRUE, message=FALSE, warning=FALSE}
+```{r honest plot}
 # Behind the scenes, we simulated some values for group A and group B and saved them in data
 ggplot(data, aes(x = Group, y = DV)) + 
   geom_bar(stat = "summary", fun.y = "mean") + #Normally not a good idea to calculate the mean for a bar plot, but for demonstration purposes
@@ -50,22 +58,18 @@ Your intuition would be wrong. Here, setting the limits will remove data outside
 
 To shorten the y-axis, we need an extra function called `coord_cartesian` (see the [help page online](https://ggplot2.tidyverse.org/reference/coord_cartesian.html) for further details). In essence, this function allows you to zoom in on a part of the graph and it will no longer remove data points: 
 
-```{r sneaky plot, echo=TRUE, message=FALSE, warning=FALSE}
+```{r sneaky plot}
 ggplot(data, aes(x = Group, y = DV)) + 
   geom_bar(stat = "summary", fun.y = "mean") + 
   coord_cartesian(ylim = c(45, 60))+
   theme_minimal()
 ```
 
+## Colour-vision impairments
 
-#### Colour-vision impairments
+We already demonstrated how to change colours in chapter 3, but you might want to know how to manually select colours. There are different ways of selection colours which you could use to create a nice colourblind friendly plot for the "good" submission, or you could select the most garish colours imaginable for the "bad" submission.  
 
-One important design feature is how you will distinguish between different elements of your graph. Colour can be used to effectively code different groups or conditions, but many analysts do not think carefully about colour combinations. Colour-vision impairments affect a significant number of people, so it is important to consider whether someone who is colour blind could distinguish between groups/conditions and understand the message you are trying to communicate. In the plot below, on the top (A) is a scatterplot using green and purple, which can look identical for some types of colourblindness. On the bottom (B) is the same scatterplot using a colour blind friendly palette of greens. 
-
-Fortunately, it is easy to choose colour blind friendly combinations as the R package we will be using comes with different palette options designed to be easier to read with colourblindness and that you can print in greyscale. We will demonstrate how you can do this in chapter three. 
-
-```{r different colour schemes, echo=FALSE, message=FALSE, warning=FALSE}
-
+```{r language data, echo=FALSE}
 dat <- read_csv(file = "ldt_data.csv")
 
 dat_clean <- pivot_longer(data = dat, 
@@ -78,52 +82,118 @@ dat_clean <- pivot_longer(data = dat,
   mutate(condition=as.factor(condition), language=as.factor(language))
 
 dat_clean$language <- factor(dat_clean$language, levels = c(1, 2), labels = c("Monolingual", "Bilingual"))
+```
 
-p1 <- ggplot(dat_clean, aes(x = rt, y = acc, colour = condition)) +
+Let's start with sensible colours to create a colourblind friendly plot without any input: 
+
+```{r base colour}
+#scatterplot using dat_clean for response time by accuracy, and label by condition
+ggplot(dat_clean, aes(x = rt, y = acc, colour = condition)) +
   geom_point() +
   geom_smooth(method = "lm") +
-  scale_colour_discrete(name = "Condition",
-                        labels = c("Non-Word", "Word"), type = c("purple", "limegreen"))+
+  scale_colour_viridis_d(option="D", # Which option from A to E? 
+                         name = "Condition", # Name for the legend title
+                         labels = c("Non-Word", "Word"))+ # Names for the legend conditions 
   theme_minimal()
 
-p2 <- ggplot(dat_clean, aes(x = rt, y = acc, colour = condition)) +
+```
+
+Using the viridis colour scale, you have the option between palettes A to E. For all the options, you can look at the documentation by running `?scale_colour_viridis_d` in the console, or looking at [this vignette online](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html). 
+
+To play around with colours, you can choose one of the other options: 
+
+```{r option A}
+#scatterplot using dat_clean for response time by accuracy, and label by condition
+ggplot(dat_clean, aes(x = rt, y = acc, colour = condition)) +
   geom_point() +
   geom_smooth(method = "lm") +
-  scale_colour_viridis_d(option="D", begin = 0.4, end = 0.8, name = "Condition",
-                        labels = c("Non-Word", "Word"))+
+  scale_colour_viridis_d(option="A", # Which option from A to E? 
+                         name = "Condition", # Name for the legend title
+                         labels = c("Non-Word", "Word"))+ # Names for the legend conditions 
+  theme_minimal()
+```
+
+As a discrete scale, the function will add colours across the palette for the number of conditions. Alternatively, you can manually set where you have the colour map to begin and end. This provides a little more control over your colour combinations while still coming from a colourblind friendly palette: 
+
+```{r set begin and end}
+
+#scatterplot using dat_clean for response time by accuracy, and label by condition
+ggplot(dat_clean, aes(x = rt, y = acc, colour = condition)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_colour_viridis_d(option="D", # Which option from A to E? 
+                         begin = 0.2, # Where do you want the colour map to start? 
+                         end = 0.8, # Where do you want the colour map to end? 
+                         name = "Condition", # Name for the legend title
+                         labels = c("Non-Word", "Word"))+ # Names for the legend conditions 
   theme_minimal()
 
-plot_grid(plotlist = list(p1, p2), nrow = 2, ncol = 1, labels = c("A", "B"))
+```
+
+If you want full control over your colour choices (including bad choices), then you can manually select colours using HTML/CSS names or hex codes (see this [online guide for names and a colour selector](https://www.rapidtables.com/web/color/RGB_Color.html)). For example, we can select from garish colours using names: 
+
+```{r manual colour select}
+ggplot(dat_clean, aes(x = rt, y = acc, colour = condition)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_colour_discrete(name = "Condition", # Name of the legend
+                        labels = c("Non-Word", "Word"), #Name of the conditions
+                        type = c("red", "cyan"))+ # here you can manually select colours for the number of conditions you have
+  theme_minimal()
 
 ```
 
 ### Highlight comparisons of interest
 
-When we move to creating graphs with multiple variables in chapters 4 and 5, you will have control over which variable you place on the x-axis and which you place on the legend. It is important to think about which comparison you want your readers to make. Comparing features is a serial process which takes time and working memory, so your readers eyes must move between the different components and consider which are higher or lower as they move around the graph. This means you should make it easier for your readers to make the key comparisons by using connectivity and proximity. 
+When it comes to changing the order of comparisons, it is simple to swap the variables as we just change which variable is set to x and which is set to fill:    
+```{r flipping comparisons}
 
-In the graph below, there are two ways of presenting the same data. In plot A, condition is on the x-axis while language is a grouping variable. In plot B, these are flipped with language on the x-axis and condition as a grouping variable. When creating this plot, you would need to consider whether you want to draw people's attention to the comparison between language groups or between the word/non-word conditions. 
-
-If you wanted to emphasise the difference between conditions, then plot A forces people to shift their attention back and forth between non-word and word conditions across the whole plot. Compare this to plot B where the two conditions are placed side by side. In this version, it is much easier to compare the two conditions as they are proximal to each other. If you wanted to emphasise language, then the opposite would apply with plot A having language proximal to each other.   
-
-```{r flipping comparisons, echo=FALSE}
-
-p1 <- ggplot(dat_clean, aes(x = condition, y= rt, fill = language)) +
+# Condition on x, language as separate colours for the legend
+ggplot(dat_clean, aes(x = condition, y= rt, fill = language)) +
   geom_boxplot() + 
   labs(x = "Condition", y = "Response Time (ms)") + 
-  scale_fill_viridis_d(option="B", begin=0.65, end=0.85, name = "Language") + 
+  scale_fill_viridis_d(option="B", 
+                       begin=0.65, 
+                       end=0.85, 
+                       name = "Language") + 
   scale_x_discrete(labels = c("Non-Word", "Word"))+
   theme_minimal()
 
-p2 <- ggplot(dat_clean, aes(x = language, y= rt, fill = condition)) +
+# language on x, condition as separate colours for the legend
+ggplot(dat_clean, aes(x = language, y= rt, fill = condition)) +
   geom_boxplot() + 
   labs(x = "Language", y = "Response Time (ms)") + 
-  scale_fill_viridis_d(option="B", begin=0.65, end=0.85, name = "Condition",
-                        labels = c("Non-Word", "Word"))+
+  scale_fill_viridis_d(option="B",
+                       begin=0.65, end=0.85, 
+                       name = "Condition",
+                       labels = c("Non-Word", "Word"))+
   theme_minimal()
 
-plot_grid(plotlist = list(p1, p2), nrow = 2, ncol = 1, labels = c("A", "B"))
-
 ```
+
+However, it can be a little tricky to switch the order of groups/conditions within a variable. For example, if you wanted bilingual or Word presenting first, or to order the conditions from largest to smallest. We have not covered data wrangling in this workshop, so we do not expect you to know how factors work behind the scenes in R. In short, factors tell R the names are discrete groups/condition and you can provide them with an order. So, we can edit the variable we already have to switch the order. Previously, we had non-word then word since R will order things alphabetically by default. 
+
+In the code below, we first change the order of the factor, then run the same code to create the plot. We then switch the labels around to match our new variable order. Switching the variable order might be useful in future for highlighting comparisons of interest if you wanted to sort the groups by ascending or descending order, so people can see the pattern clearly, instead of scanning across the plot to compare distant bars etc.  
+
+```{r switch condition order}
+# Here, we are editing a preexisting variable, so we start with the data frame and variable to save it as the same object
+# On the right, we use the factor function to edit the same variable since we are editing it, not creating a new variable
+# In level, this is where we set the order. By default, it was nonword and word since it will use alphabetical order
+# The labels must be exactly the same as they are listed in the data or it will throw an error
+
+dat_clean$condition <- factor(dat_clean$condition, 
+                              levels = c("word", "nonword")) 
+
+ggplot(dat_clean, aes(x = language, y= rt, fill = condition)) +
+  geom_boxplot() + 
+  labs(x = "Language", y = "Response Time (ms)") + 
+  scale_fill_viridis_d(option="B",
+                       begin=0.65, end=0.85, 
+                       name = "Condition",
+                       labels = c("Word", "Non-word"))+ #switched around from the previous attempt
+  theme_minimal()
+```
+
 
 ### Integrate relevant text
 
