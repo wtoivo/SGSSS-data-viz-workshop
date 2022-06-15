@@ -1,0 +1,322 @@
+# Code for data visualisation principles
+
+In chapter 1, we introduced you to data visualisation principles. At the time, we hid the code behind creating the plots we used to demonstrate our points as you may not have used R before. For the group task in chapter 7, we want you to create a "good" and "bad" version of a plot, so we thought it would be a good idea to demonstrate the code we used in case you want to use it for your group task. 
+
+## Y-axis truncation
+
+If you want to shorten the y-axis, it is not the most intuitive of functions in ggplot. First, if we recreate the more honest version of the plot: 
+
+```{r yaxis data, echo=FALSE}
+
+library(tidyverse)
+
+set.seed(68493)
+
+A <- data.frame(
+  Group = "A",
+  DV = rnorm(1000, 50, 20))
+
+B <- data.frame(
+  Group = "B",
+  DV = rnorm(1000, 55, 20))
+
+data <- rbind(A, B)
+
+```
+
+```{r honest plot, echo=TRUE, message=FALSE, warning=FALSE}
+# Behind the scenes, we simulated some values for group A and group B and saved them in data
+ggplot(data, aes(x = Group, y = DV)) + 
+  geom_bar(stat = "summary", fun.y = "mean") + #Normally not a good idea to calculate the mean for a bar plot, but for demonstration purposes
+  scale_y_continuous(limits = c(0, 100), # Manually set the limits
+                     breaks = seq(0, 100, 25))+ # from 0 to 100 in steps of 25
+  theme_minimal()
+
+```
+
+We know its normally not a good idea to summarise continuous data with the mean per bar, but see this as a demonstration perfect for the "bad" plot. If you want to shorten the y-axis, intuitively, you might think you could just shorten the limits:
+
+```{r honest plot, echo=TRUE, message=FALSE, warning=FALSE}
+# Behind the scenes, we simulated some values for group A and group B and saved them in data
+ggplot(data, aes(x = Group, y = DV)) + 
+  geom_bar(stat = "summary", fun.y = "mean") + #Normally not a good idea to calculate the mean for a bar plot, but for demonstration purposes
+  scale_y_continuous(limits = c(45, 60), # Manually set the limits
+                     breaks = seq(45, 60, 5))+ # from 0 to 100 in steps of 25
+  theme_minimal()
+
+```
+
+Your intuition would be wrong. Here, setting the limits will remove data outside of these limits, so you might find yourself with an empty plot as you removed so many data points. 
+
+To shorten the y-axis, we need an extra function called `coord_cartesian` (see the [help page online](https://ggplot2.tidyverse.org/reference/coord_cartesian.html) for further details). In essence, this function allows you to zoom in on a part of the graph and it will no longer remove data points: 
+
+```{r sneaky plot, echo=TRUE, message=FALSE, warning=FALSE}
+ggplot(data, aes(x = Group, y = DV)) + 
+  geom_bar(stat = "summary", fun.y = "mean") + 
+  coord_cartesian(ylim = c(45, 60))+
+  theme_minimal()
+```
+
+
+#### Colour-vision impairments
+
+One important design feature is how you will distinguish between different elements of your graph. Colour can be used to effectively code different groups or conditions, but many analysts do not think carefully about colour combinations. Colour-vision impairments affect a significant number of people, so it is important to consider whether someone who is colour blind could distinguish between groups/conditions and understand the message you are trying to communicate. In the plot below, on the top (A) is a scatterplot using green and purple, which can look identical for some types of colourblindness. On the bottom (B) is the same scatterplot using a colour blind friendly palette of greens. 
+
+Fortunately, it is easy to choose colour blind friendly combinations as the R package we will be using comes with different palette options designed to be easier to read with colourblindness and that you can print in greyscale. We will demonstrate how you can do this in chapter three. 
+
+```{r different colour schemes, echo=FALSE, message=FALSE, warning=FALSE}
+
+dat <- read_csv(file = "ldt_data.csv")
+
+dat_clean <- pivot_longer(data = dat, 
+                         cols = rt_word:acc_nonword, 
+                         names_sep = "_", 
+                         names_to = c("dv_type", "condition"),
+                         values_to = "dv") %>%
+  pivot_wider(names_from = "dv_type", 
+              values_from = "dv") %>% 
+  mutate(condition=as.factor(condition), language=as.factor(language))
+
+dat_clean$language <- factor(dat_clean$language, levels = c(1, 2), labels = c("Monolingual", "Bilingual"))
+
+p1 <- ggplot(dat_clean, aes(x = rt, y = acc, colour = condition)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_colour_discrete(name = "Condition",
+                        labels = c("Non-Word", "Word"), type = c("purple", "limegreen"))+
+  theme_minimal()
+
+p2 <- ggplot(dat_clean, aes(x = rt, y = acc, colour = condition)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_colour_viridis_d(option="D", begin = 0.4, end = 0.8, name = "Condition",
+                        labels = c("Non-Word", "Word"))+
+  theme_minimal()
+
+plot_grid(plotlist = list(p1, p2), nrow = 2, ncol = 1, labels = c("A", "B"))
+
+```
+
+### Highlight comparisons of interest
+
+When we move to creating graphs with multiple variables in chapters 4 and 5, you will have control over which variable you place on the x-axis and which you place on the legend. It is important to think about which comparison you want your readers to make. Comparing features is a serial process which takes time and working memory, so your readers eyes must move between the different components and consider which are higher or lower as they move around the graph. This means you should make it easier for your readers to make the key comparisons by using connectivity and proximity. 
+
+In the graph below, there are two ways of presenting the same data. In plot A, condition is on the x-axis while language is a grouping variable. In plot B, these are flipped with language on the x-axis and condition as a grouping variable. When creating this plot, you would need to consider whether you want to draw people's attention to the comparison between language groups or between the word/non-word conditions. 
+
+If you wanted to emphasise the difference between conditions, then plot A forces people to shift their attention back and forth between non-word and word conditions across the whole plot. Compare this to plot B where the two conditions are placed side by side. In this version, it is much easier to compare the two conditions as they are proximal to each other. If you wanted to emphasise language, then the opposite would apply with plot A having language proximal to each other.   
+
+```{r flipping comparisons, echo=FALSE}
+
+p1 <- ggplot(dat_clean, aes(x = condition, y= rt, fill = language)) +
+  geom_boxplot() + 
+  labs(x = "Condition", y = "Response Time (ms)") + 
+  scale_fill_viridis_d(option="B", begin=0.65, end=0.85, name = "Language") + 
+  scale_x_discrete(labels = c("Non-Word", "Word"))+
+  theme_minimal()
+
+p2 <- ggplot(dat_clean, aes(x = language, y= rt, fill = condition)) +
+  geom_boxplot() + 
+  labs(x = "Language", y = "Response Time (ms)") + 
+  scale_fill_viridis_d(option="B", begin=0.65, end=0.85, name = "Condition",
+                        labels = c("Non-Word", "Word"))+
+  theme_minimal()
+
+plot_grid(plotlist = list(p1, p2), nrow = 2, ncol = 1, labels = c("A", "B"))
+
+```
+
+### Integrate relevant text
+
+Although we just demonstrated the use of a legend to help label grouping variables, these can also take up working memory when there are many labels to remember. If you only have a colour or shape to identify different bars or lines, then your reader might forget what they represent. The reader must keep cross-referencing the legend with the plot, adding to the working memory load of the comparisons you want them to make. 
+
+Below, we use a legend to plot the age group for the rate of Danish people fully vaccinated for COVID-19 over time, but we could also directly label the lines. We will demonstrate how to create the plot in chapter 6. In plot A, the lines are labelled by colour in the legend, but we must keep cross-referencing which colour relates to each age group. Particularly as the 80+ group is the top line but the bottom entry in the legend, you must keep cross-referencing the legend with the lines. Alternatively, in plot B we removed the legend and directly labelled the age groups instead for proximity of information. For added connectivity, the colour of the labels are also the same as the lines. 
+
+```{r label line graph, echo = FALSE, warning=FALSE, message=FALSE}
+
+# Ignore this to tidy things up 
+ignore <- c("15-17", "18-24", "25-40")
+
+vaccinations <- read_csv("vaccinations_by_age_group.csv") %>% 
+  filter(!age_group %in% ignore)
+
+# Select the last date so we can use the y value to set the heights
+age_labels <- vaccinations %>% 
+  filter(date == as.Date("2022-05-06"))
+
+ggplot(vaccinations, aes(x=date, y=people_fully_vaccinated_per_hundred, colour=age_group, group=age_group))+ 
+  geom_point()+
+  geom_line()+
+  theme_minimal()+
+  scale_colour_viridis_d(option="D")+ 
+  scale_x_date(date_labels = "%b %Y", # %b = abbreviated month name; %Y = Year with century
+               date_breaks = "3 months") + 
+  labs(y = "People Fully Vaccinated Per 100", x = "Date", title = "A")
+
+ggplot(vaccinations, aes(x=date, y=people_fully_vaccinated_per_hundred, colour=age_group, group=age_group))+ 
+  geom_point()+
+  geom_line()+
+  theme_minimal()+
+  theme(legend.position = "none") + 
+  scale_colour_viridis_d(option="D")+ 
+  scale_x_date(date_labels = "%b %Y", # %b = abbreviated month name; %Y = Year with century
+               date_breaks = "3 months") + 
+  geom_text(data = age_labels, 
+            aes(x = as.Date("2022-05-25"), 
+                y = age_labels$people_fully_vaccinated_per_hundred, 
+                label = age_labels$age_group), 
+            check_overlap = TRUE) + 
+  labs(y = "People Fully Vaccinated Per 100", x = "Date", title = "B")
+
+```
+
+Keep in mind integrating text is not always possible and it will be your decision to judge whether it is more informative to use a legend or directly add labels. If there are many overlapping lines or points, adding annotations may make your plot more crowded and harder to read than including a legend. As you will see in chapter 6, for this demonstration we removed some of the younger age groups as they overlapped at the end date, making it difficult to add informative annotations. This means annotations were informative for the restricted data but a legend might have been better for the full data. This is all part of the process of deciding what works best for your project.  
+
+### Use formats familiar to your audience
+
+Some plot types are ubiquitous like bar and line plots. Regardless of your discipline, everyone knows how to read and interpret these plots. Data visualisations require the reader to have existing knowledge or schemas for how they expect data to be presented. When the reader knows how to interpret the plot type, they can focus on the message you are trying to communicate. 
+
+On the other hand, if your reader is unfamiliar to the data visualisation format, they must first learn how to interpret your plot before they can appreciate the message you are trying to communicate. On the workshop slides, there are two unusual plots reproduced from Franconeri et al. (2021). For example, in time series data, many people would expect your outcome to be on the y-axis and the change in time across the x-axis. When there are two outcomes, you can include two y-axes to show how the outcomes change across time which is relatively easy for people to understand. 
+
+Alternatively, a more specialised version of the plot is including the two outcomes on the x- and y-axis, and each point represents the measurement date. This means you can follow the intersection between the two outcomes as a line that wiggles across the plot. The specialised plot shows the same information but the format might not be familiar to your reader, meaning they must work out how to interpret the plot before they can appreciate the message. 
+
+As you might have expected given our repeated warnings, your choice of plot type is a compromise between what you think best communicates your message and what will be accessible to your readers. Sometimes plots are common but ill-advised like bar plots. They should not be used for continuous outcomes as we will demonstrate in chapter 5, but they are so ubiquitous that some audiences might still want them. This means it will be your judgment call on whether you use a less familiar visualisation format but feel it best communicates your data and message.
+
+### Guide viewers to your conceptual message
+
+For our final point, like choosing visualisation formats familiar to your reader, it is also important to respect associations between visualisation designs and data types. When interpreting plots, people rely on schemas to interpret the information they are presented. These associations are relatively universal like top vs bottom for the position (closer to the top means a greater value) and light vs dark for luminescence (darker colours on a light background means a greater value). Similarly, plot types are designed to work with certain combinations of data, like a bar plot uses categorical variables for bars and the bar height shows frequencies or your outcome. When you go against these schemas, it can be deeply confusing for your reader. 
+
+On the workshop slides, we included a famous example that was meant to be a clever design trick, showing the number of gun deaths in Florida around the "Stand Your Ground" law enactment, but it plotted more deaths towards the bottom of the graph. This flips the general understanding that the bottom of the a graph means smaller, so on first glance it looks like there were fewer deaths after enacting the law rather than more. 
+
+This is another area where subject knowledge is important as some disciplines have their own conventions which can change over time. For example, in EEG research (Electroencephalography - where brain activity is measured with electrodes stuck to the scalp) it was conventional to plot amplitude with negative values at the top and positives values at the bottom (plot A below). This can look a little odd to those unfamiliar with EEG data and breaks conventional understanding that top means higher numbers. Over time though, this convention has changed and more studies report amplitude with positive values at the top (plot B below). This shows how conventions change over time and it is important to keep your audience in mind to make your data visualisation as accessible and intuitive as possible. 
+
+```{r EEG time series, echo = FALSE, warning=FALSE, message=FALSE}
+
+impulsivity <- read_csv("impulsivity.csv")
+
+impulsivity_long <- impulsivity %>% 
+  pivot_longer(cols = T_0:T_1000, names_to = "Time", values_to = "mV") %>% 
+  separate(Time, into = c("T", "Time_point"), sep = "_") %>% 
+  mutate(Time_point = as.numeric(Time_point)) %>% 
+  filter(Channel == "CZ") %>% 
+  group_by(Condition, Time_point) %>% 
+  summarise(mean_mV = mean(mV)) %>% 
+  ungroup()
+
+p1 <- ggplot(impulsivity_long, aes(x=Time_point, y=mean_mV, colour=Condition, group=Condition))+ 
+  geom_point()+
+  geom_line()+
+  theme_minimal()+
+  scale_colour_viridis_d(option="D", begin = 0.5, end = 0.8)+ 
+  scale_x_continuous(breaks = seq(0, 1000, 200))+
+  labs(y = "Amplitude (\u00B5V)", x = "Time (ms)") + 
+  scale_y_reverse()
+
+p2 <- ggplot(impulsivity_long, aes(x=Time_point, y=mean_mV, colour=Condition, group=Condition))+ 
+  geom_point()+
+  geom_line()+
+  theme_minimal()+
+  scale_colour_viridis_d(option="D", begin = 0.5, end = 0.8)+ 
+  scale_x_continuous(breaks = seq(0, 1000, 200))+
+  labs(y = "Amplitude (\u00B5V)", x = "Time (ms)")
+
+plot_grid(plotlist = list(p1, p2), nrow = 2, ncol = 1, labels = c("A", "B"))
+  
+```
+
+## Why use R for data visualisation?
+
+Now we have covered some principles of data visualisation, it is also important to understand why we want you to use R. Creating data visualisations by writing code (as opposed to using point-and-click software) increases the reproducibility of your work. If you write code to produce your plots, you can reuse and adapt that code in the future. Finally, using R to create data visualisations gives you control over basically every element of your plot.
+
+We hope that this workshop will inspire you to start experimenting with R! In today's session we are simply focusing on visualisation and don't really touch on data wrangling (which is the most time-consuming part of any data analysis). The data you will encounter in the wild will be messier than what you see today - it's perfectly acceptable to start by cleaning your data on software that you feel more comfortable with and simply reading the clean data into R for visualisation. However, we do recommend eventually moving onto doing all parts of the analysis in R for the reproducibility benefits outlined above. If you want to dip your toes into data wrangling, the PsyTeachR team have a wealth of materials for different levels of expertise freely available online: https://psyteachr.github.io/ 
+
+## A very short introduction to R
+
+### Installing R
+
+If you don't have R and RStudio installed, please follow the instructions here: https://emilynordmann.github.io/workshop-dataviz/installing-r.html
+
+Alternatively, you can create a free profile for RStudio Cloud: https://rstudio.cloud/
+
+### What are R and RStudio?
+
+R is a programming language that you will write code in and RStudio is an Integrated Development Environment (IDE), which makes working in R easier. You can use R without R Studio but we wouldn't recommend it. RStudio serves as a text editor, file manager, spreadsheet viewer, and more. The key thing to remember is that you are actually using two pieces of software, which means that from time-to-time, both of them may have separate updates.
+
+#### RStudio
+
+By default, RStudio is arranged with four window panes.
+
+```{r img-rstudio, echo=FALSE, fig.cap="The RStudio IDE"}
+knitr::include_graphics("images/intro/rstudio.png")
+``` 
+
+The upper left pane is the **source pane**, where you view, write, and edit code from files and view data in a spreadsheet format. When you first open RStudio, this pane won't display until we open a document or load in some data.
+
+The lower left pane is the **console pane**, where you can type in commands and view output messages. You can write code in the console to test it out, but it won't be saved! You need to write your code into a script in the source pane to save it.
+
+The right panes have several different tabs that show you information about your code. The most used tabs in the upper right pane are the **Environment tab** and the **Help tab**. The environment tab lists some information about the objects that you have defined in your code.
+
+In the lower right pane, the most used tabs are the **Files** tab for directory structure, the **Plots** tab for plots made in a script, the **Packages** tab for managing add-on packages, and the **Viewer** tab to display reports created by your scripts. You can change the location of panes and what tabs are shown under Preferences > Pane Layout.
+
+### Functions
+
+When you install R you will have access to a range of functions including options for data wrangling and statistical analysis. The functions that are included in the default installation are typically referred to as base R, and you can think of them like the default apps that come pre-loaded on your phone. 
+
+If you type a function into the console pane, it will run as soon as you hit enter. If you put the function in a script or R Markdown document, it won't run until you run the code.
+
+For example, the function `sum()` is included in base R. In the console, run the below code:
+
+```{r sum example}
+sum(1,2,3)
+```
+
+### Arguments 
+
+Most functions require you to specify arguments in them. Arguments are basically you telling the function how you want it to run. As an example, look at the help documentation for the function `sample()` which randomly samples items from a list. 
+
+```{r help-doc, eval=FALSE}
+?sample
+```
+
+The help documentation for `sample()` should appear in the bottom right help panel. We see that `sample()` takes the following form:
+
+```{r arguments, eval = FALSE}
+sample(x, size, replace = FALSE, prob = NULL)
+```
+
+In the arguments section, there are explanations for each of the arguments. `x` is the list of items we want to choose from, `size` is the number of items we want to choose, `replace` is whether or not each item may be selected more than once, and `prob` gives the probability that each item is chosen. 
+
+In the details section it notes that if no values are entered for `replace` or `prob` it will use defaults of `FALSE` (each item can only be chosen once) and `NULL` (all items will have equal probability of being chosen). Because there is no default value for `x` or `size`, they must be specified otherwise the code won't run.
+
+Let's try an example and just change the required arguments to `x` and `size` to ask R to choose 5 random letters (`letters` is a built-in vector - a sequence of data - of the 26 lower-case Latin letters). 
+
+```{r sample-n}
+sample(x = letters, size = 5)
+```
+
+### Objects
+
+Objects are things you create in your code, and they can contain different things such as numbers, words, results of analyses, or dataframes. A large part of your coding will involve creating and manipulating objects. You assign content to an object using `<-`.
+
+Run the following code in the console:
+
+```{r object examples}
+test <- "potato"
+
+summed <- 1+2
+
+```
+
+Try to create an object called `name` and enter your name, and an object called `age` and add your age. You need quotation marks for objects made of letters (this is called `characters` in R), but you won't need them for numbers.
+
+### Packages
+
+Packages are add-ons which allow you to access different functions that are not included in base R. This is done using `install.packages()`. This is like installing an app on your phone: you only have to do it once and the app will remain installed until you remove it. Once you launch the app, it will run in the background until you close it or restart your phone. Likewise, when you install a package, the package will be available (but not loaded) every time you open up R.
+
+This tutorial will require you to use the `ggplot2` package, which is a part of the `tidyverse` collection. To install it, copy and paste the below code into the console (the bottom left hand pane) and press enter to execute the code.
+
+```{r packages, eval = FALSE}
+# type this in the console pane, never in a script or an R Markdown (.RMd) file!
+install.packages("tidyverse")
+```
+
+You should always install packages in the console and never in a script - leaving this code in your script can lead you to unintentionally install a package update you didn't want. For this reason, avoid including install code in any script or Markdown document.
