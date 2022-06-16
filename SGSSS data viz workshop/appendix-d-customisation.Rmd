@@ -44,7 +44,7 @@ ggplot(data, aes(x = Group, y = DV)) +
 
 We know its normally not a good idea to summarise continuous data with the mean per bar, but see this as a demonstration perfect for the "bad" plot. If you want to shorten the y-axis, intuitively, you might think you could just shorten the limits:
 
-```{r honest plot}
+```{r empty plot}
 # Behind the scenes, we simulated some values for group A and group B and saved them in data
 ggplot(data, aes(x = Group, y = DV)) + 
   geom_bar(stat = "summary", fun.y = "mean") + #Normally not a good idea to calculate the mean for a bar plot, but for demonstration purposes
@@ -130,7 +130,7 @@ ggplot(dat_clean, aes(x = rt, y = acc, colour = condition)) +
 
 ```
 
-If you want full control over your colour choices (including bad choices), then you can manually select colours using HTML/CSS names or hex codes (see this [online guide for names and a colour selector](https://www.rapidtables.com/web/color/RGB_Color.html)). For example, we can select from garish colours using names: 
+If you want full control over your colour choices (including bad choices), then you can manually select colours using HTML/CSS names or hex codes (see this [online guide for names and a colour selector](https://www.rapidtables.com/web/color/RGB_Color.html)). For example, we can select some garish colours using specific names: 
 
 ```{r manual colour select}
 ggplot(dat_clean, aes(x = rt, y = acc, colour = condition)) +
@@ -143,9 +143,10 @@ ggplot(dat_clean, aes(x = rt, y = acc, colour = condition)) +
 
 ```
 
-### Highlight comparisons of interest
+## Highlight comparisons of interest
 
 When it comes to changing the order of comparisons, it is simple to swap the variables as we just change which variable is set to x and which is set to fill:    
+
 ```{r flipping comparisons}
 
 # Condition on x, language as separate colours for the legend
@@ -171,9 +172,9 @@ ggplot(dat_clean, aes(x = language, y= rt, fill = condition)) +
 
 ```
 
-However, it can be a little tricky to switch the order of groups/conditions within a variable. For example, if you wanted bilingual or Word presenting first, or to order the conditions from largest to smallest. We have not covered data wrangling in this workshop, so we do not expect you to know how factors work behind the scenes in R. In short, factors tell R the names are discrete groups/condition and you can provide them with an order. So, we can edit the variable we already have to switch the order. Previously, we had non-word then word since R will order things alphabetically by default. 
+However, it can be a little tricky to switch the order of groups/conditions within a variable. For example, if you wanted bilingual or Word presenting first, or to order the conditions from largest to smallest. We have not covered data wrangling in this workshop, so we do not expect you to know how factors work behind the scenes in R. In short, factors tell R the names are predefined discrete groups/conditions and you can provide them with an order. So, we can edit the variable we already have to switch the order. Previously, we had non-word then word since R will order things alphabetically by default. 
 
-In the code below, we first change the order of the factor, then run the same code to create the plot. We then switch the labels around to match our new variable order. Switching the variable order might be useful in future for highlighting comparisons of interest if you wanted to sort the groups by ascending or descending order, so people can see the pattern clearly, instead of scanning across the plot to compare distant bars etc.  
+In the code below, we first change the order of the factor, then run the same code as above to create the plot. We then switch the edited labels around in `scale_fill_viridis_d` to match our new variable order. Switching the variable order might be useful in future for highlighting comparisons of interest if you wanted to sort the groups by ascending or descending order, so people can see the pattern clearly, instead of scanning across the plot to compare distant bars etc.  
 
 ```{r switch condition order}
 # Here, we are editing a preexisting variable, so we start with the data frame and variable to save it as the same object
@@ -194,14 +195,13 @@ ggplot(dat_clean, aes(x = language, y= rt, fill = condition)) +
   theme_minimal()
 ```
 
+## Integrate relevant text
 
-### Integrate relevant text
+If you want to annotate your plots, there are a few ways of doing it. Many people will create the base plot in R and then add annotations or extra design elements in additional software such as Photoshop. However, adding annotations in R with the rest of the plot means all the process is reproducible, so it is worth learning how to add even basic additions. 
 
-Although we just demonstrated the use of a legend to help label grouping variables, these can also take up working memory when there are many labels to remember. If you only have a colour or shape to identify different bars or lines, then your reader might forget what they represent. The reader must keep cross-referencing the legend with the plot, adding to the working memory load of the comparisons you want them to make. 
+The first useful ggplot function is called `annotate()`. This is a flexible layer where you can select from different elements such as text, arrows, or shapes. See [the online documentation](https://ggplot2.tidyverse.org/reference/annotate.html) for further examples and guidance. 
 
-Below, we use a legend to plot the age group for the rate of Danish people fully vaccinated for COVID-19 over time, but we could also directly label the lines. We will demonstrate how to create the plot in chapter 6. In plot A, the lines are labelled by colour in the legend, but we must keep cross-referencing which colour relates to each age group. Particularly as the 80+ group is the top line but the bottom entry in the legend, you must keep cross-referencing the legend with the lines. Alternatively, in plot B we removed the legend and directly labelled the age groups instead for proximity of information. For added connectivity, the colour of the labels are also the same as the lines. 
-
-```{r label line graph, echo = FALSE, warning=FALSE, message=FALSE}
+```{r line data, echo=FALSE}
 
 # Ignore this to tidy things up 
 ignore <- c("15-17", "18-24", "25-40")
@@ -209,9 +209,11 @@ ignore <- c("15-17", "18-24", "25-40")
 vaccinations <- read_csv("vaccinations_by_age_group.csv") %>% 
   filter(!age_group %in% ignore)
 
-# Select the last date so we can use the y value to set the heights
-age_labels <- vaccinations %>% 
-  filter(date == as.Date("2022-05-06"))
+```
+
+We will work with the smaller version of the vaccination data we used in chapter 1, excluding the youngest age groups. In the code below, we use the same code as the line plots in chapter 6, but we have added an additional annotate layer to the end. For this first example, imagine we wanted to highlight a specific time period to draw people's attention to: 
+
+```{r rectangle geom}
 
 ggplot(vaccinations, aes(x=date, y=people_fully_vaccinated_per_hundred, colour=age_group, group=age_group))+ 
   geom_point()+
@@ -220,8 +222,54 @@ ggplot(vaccinations, aes(x=date, y=people_fully_vaccinated_per_hundred, colour=a
   scale_colour_viridis_d(option="D")+ 
   scale_x_date(date_labels = "%b %Y", # %b = abbreviated month name; %Y = Year with century
                date_breaks = "3 months") + 
-  labs(y = "People Fully Vaccinated Per 100", x = "Date", title = "A")
+  labs(y = "People Fully Vaccinated Per 100", x = "Date") + 
+  annotate(geom = "rect", # What geom do we want? Text, arrow, rect? 
+           xmin = as.Date("2021-06-01"), # Start of region on X - awkward as we're working with dates
+           xmax = as.Date("2021-09-01"), # End of region on X - awkward as we're working with dates
+           ymin = 0, # Start of region on y
+           ymax = 100, # End of region on y
+           alpha = 0.5) # Make it more transparent
 
+```
+
+In this code, we created a semi-transparent rectangle to highlight the time period between June and September 2021. In the annotate function, you select which geom you want to create, then define its properties like the size across the x- and y-axis. Note: the x-axis is slightly awkward to work with in this example as we are working with dates, so we have to specify the x width using dates. 
+
+We can also add another layer to add text: 
+
+```{r simple text}
+
+ggplot(vaccinations, aes(x=date, y=people_fully_vaccinated_per_hundred, colour=age_group, group=age_group))+ 
+  geom_point()+
+  geom_line()+
+  theme_minimal()+
+  scale_colour_viridis_d(option="D")+ 
+  scale_x_date(date_labels = "%b %Y", # %b = abbreviated month name; %Y = Year with century
+               date_breaks = "3 months") + 
+  labs(y = "People Fully Vaccinated Per 100", x = "Date") + 
+  annotate(geom = "rect", # What geom do we want? Text, arrow, rect? 
+           xmin = as.Date("2021-06-01"), # Start of region on X - awkward as we're working with dates
+           xmax = as.Date("2021-09-01"), # End of region on X - awkward as we're working with dates
+           ymin = 0, # Start of region on y
+           ymax = 100, # End of region on y
+           alpha = 0.5)+ # Make it more transparent
+  annotate(geom = "text",
+           x = as.Date("2021-12-01"),
+           y = 50,
+           label = "Something happened \nduring this time window...") # add \n to break to a new line
+
+```
+
+In the additional code, we added another `annotate()` layer but we needed slightly fewer arguments when creating text. We selected the x-axis location using a date again, then how high we wanted it on the y-axis. Do not worry if the annotations first appear in the wrong location, it can take a little trial and error to see where looks best. Since we defined a text option, we specify what we want to say with the label argument. If you want to create a line break for longer text, you can add `\n` to your label. 
+For the plot we created in chapter 1, we used a slightly different way of creating text as it was easier to plot multiple labels and avoid overlapping. Instead of `annotate()`, we used `geom_text()` instead. The process here was more complicated and required some data wrangling, so do not worry if this makes less sense as we did not cover it in the workshop. We have added more comments than usual, so hopefully you can see what is happening when you have time to read over the materials. 
+
+```{r label line graph}
+# Wrangling time first - we want to create a separate little dataset so we do not have to define each element later
+# 1. Create a new object from our original vaccinations dataset
+# 2. Filter the dataset down to the last date, so we just have one set of age groups and final measurements
+age_labels <- vaccinations %>% 
+  filter(date == as.Date("2022-05-06"))
+
+# Create the exact same plot as the previous line plots
 ggplot(vaccinations, aes(x=date, y=people_fully_vaccinated_per_hundred, colour=age_group, group=age_group))+ 
   geom_point()+
   geom_line()+
@@ -230,36 +278,39 @@ ggplot(vaccinations, aes(x=date, y=people_fully_vaccinated_per_hundred, colour=a
   scale_colour_viridis_d(option="D")+ 
   scale_x_date(date_labels = "%b %Y", # %b = abbreviated month name; %Y = Year with century
                date_breaks = "3 months") + 
-  geom_text(data = age_labels, 
-            aes(x = as.Date("2022-05-25"), 
-                y = age_labels$people_fully_vaccinated_per_hundred, 
-                label = age_labels$age_group), 
-            check_overlap = TRUE) + 
-  labs(y = "People Fully Vaccinated Per 100", x = "Date", title = "B")
+  labs(y = "People Fully Vaccinated Per 100", x = "Date") + 
+  geom_text(data = age_labels, # Take our new smaller dataset
+            aes(x = as.Date("2022-05-25"), #Slightly later date, so it does not overlap with the line
+                y = people_fully_vaccinated_per_hundred, # Unique value of y for each age group
+                label = age_group), # Unique label for each age group 
+            check_overlap = TRUE) # Argument that prevents text overlapping 
 
 ```
 
-Keep in mind integrating text is not always possible and it will be your decision to judge whether it is more informative to use a legend or directly add labels. If there are many overlapping lines or points, adding annotations may make your plot more crowded and harder to read than including a legend. As you will see in chapter 6, for this demonstration we removed some of the younger age groups as they overlapped at the end date, making it difficult to add informative annotations. This means annotations were informative for the restricted data but a legend might have been better for the full data. This is all part of the process of deciding what works best for your project.  
+To provide a little more explanation to the new `geom_text()` layer, we can use it like previous geom layers like `geom_line`. We can use a different data source as the main plot by defining a data frame to use. We can then use aesthetic elements to control how we plot the data. To be more efficient, the wrangling at the start took the original data frame and limited it to the final date. This meant we could take the labels and y-axis heights to help us plot the labels without individually defining each age group. We selected a date slightly later than the final measurement so the text did not overlap with the lines. We used the vaccination rate to create unique values for y level with each line. Finally, we used the age group column to add the label to each line. This geom takes previous customisation options, so we have the added bonus here of matching the colour scheme. If you wanted to override the previous colour scheme, you would define the colour outside the aes argument: 
 
-### Use formats familiar to your audience
+```{r change text colour}
+# Create the exact same plot as the previous line plots
+ggplot(vaccinations, aes(x=date, y=people_fully_vaccinated_per_hundred, colour=age_group, group=age_group))+ 
+  geom_point()+
+  geom_line()+
+  theme_minimal()+
+  theme(legend.position = "none") + 
+  scale_colour_viridis_d(option="D")+ 
+  scale_x_date(date_labels = "%b %Y", # %b = abbreviated month name; %Y = Year with century
+               date_breaks = "3 months") + 
+  labs(y = "People Fully Vaccinated Per 100", x = "Date") + 
+  geom_text(data = age_labels, # Take our new smaller dataset
+            aes(x = as.Date("2022-05-25"), #Slightly later date, so it does not overlap with the line
+                y = people_fully_vaccinated_per_hundred, # Unique value of y for each age group
+                label = age_group), # Unique label for each age group 
+            check_overlap = TRUE, # Argument that prevents text overlapping 
+            colour = "black") # Manually set the colour outside aes
+```
 
-Some plot types are ubiquitous like bar and line plots. Regardless of your discipline, everyone knows how to read and interpret these plots. Data visualisations require the reader to have existing knowledge or schemas for how they expect data to be presented. When the reader knows how to interpret the plot type, they can focus on the message you are trying to communicate. 
+## Guide viewers to your conceptual message
 
-On the other hand, if your reader is unfamiliar to the data visualisation format, they must first learn how to interpret your plot before they can appreciate the message you are trying to communicate. On the workshop slides, there are two unusual plots reproduced from Franconeri et al. (2021). For example, in time series data, many people would expect your outcome to be on the y-axis and the change in time across the x-axis. When there are two outcomes, you can include two y-axes to show how the outcomes change across time which is relatively easy for people to understand. 
-
-Alternatively, a more specialised version of the plot is including the two outcomes on the x- and y-axis, and each point represents the measurement date. This means you can follow the intersection between the two outcomes as a line that wiggles across the plot. The specialised plot shows the same information but the format might not be familiar to your reader, meaning they must work out how to interpret the plot before they can appreciate the message. 
-
-As you might have expected given our repeated warnings, your choice of plot type is a compromise between what you think best communicates your message and what will be accessible to your readers. Sometimes plots are common but ill-advised like bar plots. They should not be used for continuous outcomes as we will demonstrate in chapter 5, but they are so ubiquitous that some audiences might still want them. This means it will be your judgment call on whether you use a less familiar visualisation format but feel it best communicates your data and message.
-
-### Guide viewers to your conceptual message
-
-For our final point, like choosing visualisation formats familiar to your reader, it is also important to respect associations between visualisation designs and data types. When interpreting plots, people rely on schemas to interpret the information they are presented. These associations are relatively universal like top vs bottom for the position (closer to the top means a greater value) and light vs dark for luminescence (darker colours on a light background means a greater value). Similarly, plot types are designed to work with certain combinations of data, like a bar plot uses categorical variables for bars and the bar height shows frequencies or your outcome. When you go against these schemas, it can be deeply confusing for your reader. 
-
-On the workshop slides, we included a famous example that was meant to be a clever design trick, showing the number of gun deaths in Florida around the "Stand Your Ground" law enactment, but it plotted more deaths towards the bottom of the graph. This flips the general understanding that the bottom of the a graph means smaller, so on first glance it looks like there were fewer deaths after enacting the law rather than more. 
-
-This is another area where subject knowledge is important as some disciplines have their own conventions which can change over time. For example, in EEG research (Electroencephalography - where brain activity is measured with electrodes stuck to the scalp) it was conventional to plot amplitude with negative values at the top and positives values at the bottom (plot A below). This can look a little odd to those unfamiliar with EEG data and breaks conventional understanding that top means higher numbers. Over time though, this convention has changed and more studies report amplitude with positive values at the top (plot B below). This shows how conventions change over time and it is important to keep your audience in mind to make your data visualisation as accessible and intuitive as possible. 
-
-```{r EEG time series, echo = FALSE, warning=FALSE, message=FALSE}
+```{r eeg data, echo=FALSE}
 
 impulsivity <- read_csv("impulsivity.csv")
 
@@ -272,121 +323,59 @@ impulsivity_long <- impulsivity %>%
   summarise(mean_mV = mean(mV)) %>% 
   ungroup()
 
-p1 <- ggplot(impulsivity_long, aes(x=Time_point, y=mean_mV, colour=Condition, group=Condition))+ 
+```
+
+For this section in chapter 1, our main message was to respect common associations such as more positive means higher values. It can be deeply confusing to people - particularly those with less subject experience - to go against these associations. The example we used was from example EEG data where historically amplitude measured in micro Volts was plotted with negative at the top and positive at the bottom. In ggplot, we would have to intervene to flip the y-axis. For a starting point, lets see what the plot looks like normally (and we would argue most logically):
+
+```{r erp plot positive}
+
+# Create a line plot for time series, grouping by condition to join the lines
+ggplot(impulsivity_long, aes(x=Time_point, y=mean_mV, colour=Condition, group=Condition))+ 
+  geom_point()+
+  geom_line()+
+  theme_minimal()+
+  scale_colour_viridis_d(option="D", begin = 0.5, end = 0.8)+ 
+  scale_x_continuous(breaks = seq(0, 1000, 200))+ 
+  labs(y = "Amplitude (\u00B5V)", x = "Time (ms)") # UTC code \u00B5 creates the mu symbol for micro Volts
+
+```
+
+So far so good and it is pretty clear where there are waves moving in a negative or positive direction. If we wanted to flip the y-axis to make it look closer to old school EEG plots, then we only need one additional layer: 
+
+```{r erp plot negative}
+
+ggplot(impulsivity_long, aes(x=Time_point, y=mean_mV, colour=Condition, group=Condition))+ 
   geom_point()+
   geom_line()+
   theme_minimal()+
   scale_colour_viridis_d(option="D", begin = 0.5, end = 0.8)+ 
   scale_x_continuous(breaks = seq(0, 1000, 200))+
-  labs(y = "Amplitude (\u00B5V)", x = "Time (ms)") + 
+  labs(y = "Amplitude (\u00B5V)", x = "Time (ms)") + # UTC code \u00B5 creates the mu symbol for micro Volts
   scale_y_reverse()
 
-p2 <- ggplot(impulsivity_long, aes(x=Time_point, y=mean_mV, colour=Condition, group=Condition))+ 
+```
+
+Sometimes ggplot can be a little cryptic, but this additional layer is pretty self-explanatory. The geom is called `scale_y_reverse()` and does what it says on the tin. 
+
+## Adding titles and subtitles
+
+As a final bonus section, you can add titles, subtitles, captions, and tags within ggplot. If you are inserting the plot into a report, its normally easier to add figure captions in the software you are using. However, if you create a standalone plot, you might want to add a title for context or add your name as the creator for the caption. 
+
+We have used it in previous plots to change the x and y axis names, but there is a layer called `labs()` where you can define any label on the plot. Here are some additional options you can add if you ever need them: 
+
+```{r titles}
+
+ggplot(impulsivity_long, aes(x=Time_point, y=mean_mV, colour=Condition, group=Condition))+ 
   geom_point()+
   geom_line()+
   theme_minimal()+
   scale_colour_viridis_d(option="D", begin = 0.5, end = 0.8)+ 
   scale_x_continuous(breaks = seq(0, 1000, 200))+
-  labs(y = "Amplitude (\u00B5V)", x = "Time (ms)")
-
-plot_grid(plotlist = list(p1, p2), nrow = 2, ncol = 1, labels = c("A", "B"))
-  
-```
-
-## Why use R for data visualisation?
-
-Now we have covered some principles of data visualisation, it is also important to understand why we want you to use R. Creating data visualisations by writing code (as opposed to using point-and-click software) increases the reproducibility of your work. If you write code to produce your plots, you can reuse and adapt that code in the future. Finally, using R to create data visualisations gives you control over basically every element of your plot.
-
-We hope that this workshop will inspire you to start experimenting with R! In today's session we are simply focusing on visualisation and don't really touch on data wrangling (which is the most time-consuming part of any data analysis). The data you will encounter in the wild will be messier than what you see today - it's perfectly acceptable to start by cleaning your data on software that you feel more comfortable with and simply reading the clean data into R for visualisation. However, we do recommend eventually moving onto doing all parts of the analysis in R for the reproducibility benefits outlined above. If you want to dip your toes into data wrangling, the PsyTeachR team have a wealth of materials for different levels of expertise freely available online: https://psyteachr.github.io/ 
-
-## A very short introduction to R
-
-### Installing R
-
-If you don't have R and RStudio installed, please follow the instructions here: https://emilynordmann.github.io/workshop-dataviz/installing-r.html
-
-Alternatively, you can create a free profile for RStudio Cloud: https://rstudio.cloud/
-
-### What are R and RStudio?
-
-R is a programming language that you will write code in and RStudio is an Integrated Development Environment (IDE), which makes working in R easier. You can use R without R Studio but we wouldn't recommend it. RStudio serves as a text editor, file manager, spreadsheet viewer, and more. The key thing to remember is that you are actually using two pieces of software, which means that from time-to-time, both of them may have separate updates.
-
-#### RStudio
-
-By default, RStudio is arranged with four window panes.
-
-```{r img-rstudio, echo=FALSE, fig.cap="The RStudio IDE"}
-knitr::include_graphics("images/intro/rstudio.png")
-``` 
-
-The upper left pane is the **source pane**, where you view, write, and edit code from files and view data in a spreadsheet format. When you first open RStudio, this pane won't display until we open a document or load in some data.
-
-The lower left pane is the **console pane**, where you can type in commands and view output messages. You can write code in the console to test it out, but it won't be saved! You need to write your code into a script in the source pane to save it.
-
-The right panes have several different tabs that show you information about your code. The most used tabs in the upper right pane are the **Environment tab** and the **Help tab**. The environment tab lists some information about the objects that you have defined in your code.
-
-In the lower right pane, the most used tabs are the **Files** tab for directory structure, the **Plots** tab for plots made in a script, the **Packages** tab for managing add-on packages, and the **Viewer** tab to display reports created by your scripts. You can change the location of panes and what tabs are shown under Preferences > Pane Layout.
-
-### Functions
-
-When you install R you will have access to a range of functions including options for data wrangling and statistical analysis. The functions that are included in the default installation are typically referred to as base R, and you can think of them like the default apps that come pre-loaded on your phone. 
-
-If you type a function into the console pane, it will run as soon as you hit enter. If you put the function in a script or R Markdown document, it won't run until you run the code.
-
-For example, the function `sum()` is included in base R. In the console, run the below code:
-
-```{r sum example}
-sum(1,2,3)
-```
-
-### Arguments 
-
-Most functions require you to specify arguments in them. Arguments are basically you telling the function how you want it to run. As an example, look at the help documentation for the function `sample()` which randomly samples items from a list. 
-
-```{r help-doc, eval=FALSE}
-?sample
-```
-
-The help documentation for `sample()` should appear in the bottom right help panel. We see that `sample()` takes the following form:
-
-```{r arguments, eval = FALSE}
-sample(x, size, replace = FALSE, prob = NULL)
-```
-
-In the arguments section, there are explanations for each of the arguments. `x` is the list of items we want to choose from, `size` is the number of items we want to choose, `replace` is whether or not each item may be selected more than once, and `prob` gives the probability that each item is chosen. 
-
-In the details section it notes that if no values are entered for `replace` or `prob` it will use defaults of `FALSE` (each item can only be chosen once) and `NULL` (all items will have equal probability of being chosen). Because there is no default value for `x` or `size`, they must be specified otherwise the code won't run.
-
-Let's try an example and just change the required arguments to `x` and `size` to ask R to choose 5 random letters (`letters` is a built-in vector - a sequence of data - of the 26 lower-case Latin letters). 
-
-```{r sample-n}
-sample(x = letters, size = 5)
-```
-
-### Objects
-
-Objects are things you create in your code, and they can contain different things such as numbers, words, results of analyses, or dataframes. A large part of your coding will involve creating and manipulating objects. You assign content to an object using `<-`.
-
-Run the following code in the console:
-
-```{r object examples}
-test <- "potato"
-
-summed <- 1+2
+  labs(y = "Amplitude (\u00B5V)", x = "Time (ms)") + # UTC code \u00B5 creates the mu symbol for micro Volts
+  labs(title = "Event-Related Potential differences for \nfailure and success conditions", # Big title at the top
+       subtitle = "N2 waves are stronger for failure, but P3 waves are stronger for success", # Little subtitle at the top
+       caption = "Made with love by James", # Smaller caption bottom right
+       tag = "SGSSS Summer \nSchool 2022") # Large tag top left
 
 ```
 
-Try to create an object called `name` and enter your name, and an object called `age` and add your age. You need quotation marks for objects made of letters (this is called `characters` in R), but you won't need them for numbers.
-
-### Packages
-
-Packages are add-ons which allow you to access different functions that are not included in base R. This is done using `install.packages()`. This is like installing an app on your phone: you only have to do it once and the app will remain installed until you remove it. Once you launch the app, it will run in the background until you close it or restart your phone. Likewise, when you install a package, the package will be available (but not loaded) every time you open up R.
-
-This tutorial will require you to use the `ggplot2` package, which is a part of the `tidyverse` collection. To install it, copy and paste the below code into the console (the bottom left hand pane) and press enter to execute the code.
-
-```{r packages, eval = FALSE}
-# type this in the console pane, never in a script or an R Markdown (.RMd) file!
-install.packages("tidyverse")
-```
-
-You should always install packages in the console and never in a script - leaving this code in your script can lead you to unintentionally install a package update you didn't want. For this reason, avoid including install code in any script or Markdown document.
