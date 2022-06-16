@@ -325,7 +325,7 @@ impulsivity_long <- impulsivity %>%
 
 ```
 
-For this section in chapter 1, our main message was to respect common associations such as more positive means higher values. It can be deeply confusing to people - particularly those with less subject experience - to go against these associations. The example we used was from example EEG data where historically amplitude measured in micro Volts was plotted with negative at the top and positive at the bottom. In ggplot, we would have to intervene to flip the y-axis. For a starting point, lets see what the plot looks like normally (and we would argue most logically):
+For this section in chapter 1, our main message was to respect common associations such as more positive means higher values. It can be deeply confusing to people - particularly those with less subject experience - to go against these associations. The example we used was from example EEG data where, historically, amplitude measured in micro Volts was plotted with negative at the top and positive at the bottom. In ggplot, we would have to intervene to flip the y-axis. For a starting point, lets see what the plot looks like normally (and we would argue most logically):
 
 ```{r erp plot positive}
 
@@ -373,9 +373,9 @@ ggplot(impulsivity_long, aes(x=Time_point, y=mean_mV, colour=Condition, group=Co
   scale_x_continuous(breaks = seq(0, 1000, 200))+
   labs(y = "Amplitude (\u00B5V)", x = "Time (ms)") + # UTC code \u00B5 creates the mu symbol for micro Volts
   labs(title = "Event-Related Potential differences for \nfailure and success conditions", # Big title at the top
-       subtitle = "N2 waves are stronger for failure, but P3 waves are stronger for success", # Little subtitle at the top
+       subtitle = "N2 waves are stronger for failure, \nbut P3 waves are stronger for success", # Little subtitle at the top
        caption = "Made with love by James", # Smaller caption bottom right
-       tag = "SGSSS Summer \nSchool 2022") # Large tag top left
+       tag = "SGSSS \nSummer School 2022") # Large tag top left
 
 ```
 
