@@ -67,7 +67,7 @@ ggplot(data, aes(x = Group, y = DV)) +
 
 ## Colour-vision impairments
 
-We already demonstrated how to change colours in chapter 3, but you might want to know how to manually select colours. There are different ways of selection colours which you could use to create a nice colourblind friendly plot for the "good" submission, or you could select the most garish colours imaginable for the "bad" submission.  
+We already demonstrated how to change colours in chapter 3, but you might want to know how to manually select colours. There are different ways of selecting colours which you could use to create a nice colour-blind friendly plot for the "good" submission, or you could select the most garish colours imaginable for the "bad" submission.  
 
 ```{r language data, echo=FALSE}
 dat <- read_csv(file = "ldt_data.csv")
@@ -84,7 +84,7 @@ dat_clean <- pivot_longer(data = dat,
 dat_clean$language <- factor(dat_clean$language, levels = c(1, 2), labels = c("Monolingual", "Bilingual"))
 ```
 
-Let's start with sensible colours to create a colourblind friendly plot without any input: 
+Let's start with sensible colours to create a colour-blind friendly plot without any input: 
 
 ```{r base colour}
 #scatterplot using dat_clean for response time by accuracy, and label by condition
@@ -113,7 +113,7 @@ ggplot(dat_clean, aes(x = rt, y = acc, colour = condition)) +
   theme_minimal()
 ```
 
-As a discrete scale, the function will add colours across the palette for the number of conditions. Alternatively, you can manually set where you have the colour map to begin and end. This provides a little more control over your colour combinations while still coming from a colourblind friendly palette: 
+As a discrete scale, the function will add colours across the palette for the number of conditions. Alternatively, you can manually set where you have the colour map to begin and end. This provides a little more control over your colour combinations while still coming from a colour-blind friendly palette: 
 
 ```{r set begin and end}
 
@@ -172,7 +172,11 @@ ggplot(dat_clean, aes(x = language, y= rt, fill = condition)) +
 
 ```
 
-However, it can be a little tricky to switch the order of groups/conditions within a variable. For example, if you wanted bilingual or Word presenting first, or to order the conditions from largest to smallest. We have not covered data wrangling in this workshop, so we do not expect you to know how factors work behind the scenes in R. In short, factors tell R the names are predefined discrete groups/conditions and you can provide them with an order. So, we can edit the variable we already have to switch the order. Previously, we had non-word then word since R will order things alphabetically by default. 
+However, it can be a little tricky to switch the order of groups/conditions within a variable. For example, if you wanted Bilingual or Word presenting first, or to order the conditions from largest to smallest. We have not covered data wrangling in this workshop, so we do not expect you to know how factors work behind the scenes in R. In short, factors tell R the names are predefined discrete groups/conditions and you can provide them with an order. So, we can edit the variable we already have to switch the order. Previously, we had non-word then word since R will order things alphabetically by default. 
+
+::: {.dangerous data-latex=""}
+It is really important you change the variable order first or you might mislabel the plot. If you simply switched the labels above to `labels = c("Word", "Non-Word")`, it would have changed the labels but not the underlying data. 
+:::
 
 In the code below, we first change the order of the factor, then run the same code as above to create the plot. We then switch the edited labels around in `scale_fill_viridis_d` to match our new variable order. Switching the variable order might be useful in future for highlighting comparisons of interest if you wanted to sort the groups by ascending or descending order, so people can see the pattern clearly, instead of scanning across the plot to compare distant bars etc.  
 
@@ -211,7 +215,7 @@ vaccinations <- read_csv("vaccinations_by_age_group.csv") %>%
 
 ```
 
-We will work with the smaller version of the vaccination data we used in chapter 1, excluding the youngest age groups. In the code below, we use the same code as the line plots in chapter 6, but we have added an additional annotate layer to the end. For this first example, imagine we wanted to highlight a specific time period to draw people's attention to: 
+We will work with the smaller version of the vaccination data we used in Chapter 1, excluding the youngest age groups. In the code below, we use the same code as the line plots in Chapter 6, but we have added an additional annotate layer to the end. For this first example, imagine we wanted to highlight a specific time period to draw people's attention to: 
 
 ```{r rectangle geom}
 
@@ -260,7 +264,8 @@ ggplot(vaccinations, aes(x=date, y=people_fully_vaccinated_per_hundred, colour=a
 ```
 
 In the additional code, we added another `annotate()` layer but we needed slightly fewer arguments when creating text. We selected the x-axis location using a date again, then how high we wanted it on the y-axis. Do not worry if the annotations first appear in the wrong location, it can take a little trial and error to see where looks best. Since we defined a text option, we specify what we want to say with the label argument. If you want to create a line break for longer text, you can add `\n` to your label. 
-For the plot we created in chapter 1, we used a slightly different way of creating text as it was easier to plot multiple labels and avoid overlapping. Instead of `annotate()`, we used `geom_text()` instead. The process here was more complicated and required some data wrangling, so do not worry if this makes less sense as we did not cover it in the workshop. We have added more comments than usual, so hopefully you can see what is happening when you have time to read over the materials. 
+
+For the plot we created in Chapter 1, we used a slightly different way of creating text as it was easier to plot multiple labels and avoid overlapping. Instead of `annotate()`, we used `geom_text()` instead. The process here was more complicated and required some data wrangling, so do not worry if this makes less sense as we did not cover it in the workshop. We have added more comments than usual, so hopefully you can see what is happening when you have time to read over the materials. 
 
 ```{r label line graph}
 # Wrangling time first - we want to create a separate little dataset so we do not have to define each element later
@@ -287,7 +292,9 @@ ggplot(vaccinations, aes(x=date, y=people_fully_vaccinated_per_hundred, colour=a
 
 ```
 
-To provide a little more explanation to the new `geom_text()` layer, we can use it like previous geom layers like `geom_line`. We can use a different data source as the main plot by defining a data frame to use. We can then use aesthetic elements to control how we plot the data. To be more efficient, the wrangling at the start took the original data frame and limited it to the final date. This meant we could take the labels and y-axis heights to help us plot the labels without individually defining each age group. We selected a date slightly later than the final measurement so the text did not overlap with the lines. We used the vaccination rate to create unique values for y level with each line. Finally, we used the age group column to add the label to each line. This geom takes previous customisation options, so we have the added bonus here of matching the colour scheme. If you wanted to override the previous colour scheme, you would define the colour outside the aes argument: 
+To provide a little more explanation to the new `geom_text()` layer, we can use it like previous geom layers like `geom_line`. We can use a different data source as the main plot by defining a data frame to use. We can then use aesthetic elements to control how we plot the data. 
+
+To be more efficient, the wrangling at the start took the original data frame and limited it to the final date. This meant we could take the labels and y-axis heights to help us plot the labels without individually defining each age group. We selected a date slightly later than the final measurement so the text did not overlap with the lines. We used the vaccination rate to create unique values for y level with each line. Finally, we used the age group column to add the label to each line. This geom takes previous customisation options, so we have the added bonus here of matching the colour scheme. If you wanted to override the previous colour scheme, you would define the colour outside the aes argument: 
 
 ```{r change text colour}
 # Create the exact same plot as the previous line plots
@@ -325,7 +332,7 @@ impulsivity_long <- impulsivity %>%
 
 ```
 
-For this section in chapter 1, our main message was to respect common associations such as more positive means higher values. It can be deeply confusing to people - particularly those with less subject experience - to go against these associations. The example we used was from example EEG data where, historically, amplitude measured in micro Volts was plotted with negative at the top and positive at the bottom. In ggplot, we would have to intervene to flip the y-axis. For a starting point, lets see what the plot looks like normally (and we would argue most logically):
+For this section in Chapter 1, our main message was to respect common associations such as more positive means higher values. It can be deeply confusing to people - particularly those with less subject experience - to go against these associations. The example we used was from example EEG data where, historically, amplitude measured in micro Volts was plotted with negative at the top and positive at the bottom. In ggplot, we would have to intervene to flip the y-axis. For a starting point, lets see what the plot looks like normally (and we would argue most logically):
 
 ```{r erp plot positive}
 
@@ -375,7 +382,7 @@ ggplot(impulsivity_long, aes(x=Time_point, y=mean_mV, colour=Condition, group=Co
   labs(title = "Event-Related Potential differences for \nfailure and success conditions", # Big title at the top
        subtitle = "N2 waves are stronger for failure, \nbut P3 waves are stronger for success", # Little subtitle at the top
        caption = "Made with love by James", # Smaller caption bottom right
-       tag = "SGSSS \nSummer School 2022") # Large tag top left
+       tag = "SGSSS \nSummer School 2023") # Large tag top left
 
 ```
 
