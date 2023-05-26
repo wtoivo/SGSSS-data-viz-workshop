@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 8 Code for data visualisation principles | SGSSS Summer School 2022: Data visualisation using R, for researchers who don’t use R</title>
+<meta name="author" content="James Bartlett, Wilhelmiina Toivo">
+<meta name="description" content="In chapter 1, we introduced you to data visualisation principles. At the time, we hid the code behind creating the plots we used to demonstrate our points as you may not have used R before. For...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 8 Code for data visualisation principles | SGSSS Summer School 2022: Data visualisation using R, for researchers who don’t use R">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://wtoivo.github.io/SGSSS-data-viz-workshop/index.html/code-for-data-visualisation-principles.html">
+<meta property="og:image" content="https://wtoivo.github.io/SGSSS-data-viz-workshop/index.html/images/logos/logo.png">
+<meta property="og:description" content="In chapter 1, we introduced you to data visualisation principles. At the time, we hid the code behind creating the plots we used to demonstrate our points as you may not have used R before. For...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 8 Code for data visualisation principles | SGSSS Summer School 2022: Data visualisation using R, for researchers who don’t use R">
+<meta name="twitter:description" content="In chapter 1, we introduced you to data visualisation principles. At the time, we hid the code behind creating the plots we used to demonstrate our points as you may not have used R before. For...">
+<meta name="twitter:image" content="https://wtoivo.github.io/SGSSS-data-viz-workshop/index.html/images/logos/logo.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6NP3MF25W3');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">SGSSS Summer School 2022: Data visualisation using R, for researchers who don’t use R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li><a class="" href="introduction.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="setting-up.html"><span class="header-section-number">2</span> Setting up</a></li>
+<li><a class="" href="bar-plots.html"><span class="header-section-number">3</span> Bar plots</a></li>
+<li><a class="" href="scatterplots.html"><span class="header-section-number">4</span> Scatterplots</a></li>
+<li><a class="" href="violin-boxplots.html"><span class="header-section-number">5</span> Violin-boxplots</a></li>
+<li><a class="" href="line-plots.html"><span class="header-section-number">6</span> Line plots</a></li>
+<li><a class="" href="group-task.html"><span class="header-section-number">7</span> Group task</a></li>
+<li><a class="active" href="code-for-data-visualisation-principles.html"><span class="header-section-number">8</span> Code for data visualisation principles</a></li>
+<li><a class="" href="additional-resources.html"><span class="header-section-number">9</span> Additional resources</a></li>
+<li><a class="" href="license.html">License</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/psyteachr/introdataviz">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="code-for-data-visualisation-principles" class="section level1" number="8">
+<h1>
+<span class="header-section-number">8</span> Code for data visualisation principles<a class="anchor" aria-label="anchor" href="#code-for-data-visualisation-principles"><i class="fas fa-link"></i></a>
+</h1>
+<p>In chapter 1, we introduced you to data visualisation principles. At the time, we hid the code behind creating the plots we used to demonstrate our points as you may not have used R before. For the group task in chapter 7, we want you to create a "good" and "bad" version of a plot, so we thought it would be a good idea to demonstrate the code we used in case you want to use it for your group task.</p>
+<div id="y-axis-truncation-1" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Y-axis truncation<a class="anchor" aria-label="anchor" href="#y-axis-truncation-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>If you want to shorten the y-axis, it is not the most intuitive of functions in ggplot. First, if we recreate the more honest version of the plot:</p>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Behind the scenes, we simulated some values for group A and group B and saved them in data</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Group</span>, y <span class="op">=</span> <span class="va">DV</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"summary"</span>, fun.y <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span> <span class="op">+</span> <span class="co">#Normally not a good idea to calculate the mean for a bar plot, but for demonstration purposes</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span><span class="op">)</span>, <span class="co"># Manually set the limits</span>
+                     breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, <span class="fl">25</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> <span class="co"># from 0 to 100 in steps of 25</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/honest%20plot-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>We know its normally not a good idea to summarise continuous data with the mean per bar, but see this as a demonstration perfect for the "bad" plot. If you want to shorten the y-axis, intuitively, you might think you could just shorten the limits:</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Behind the scenes, we simulated some values for group A and group B and saved them in data</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Group</span>, y <span class="op">=</span> <span class="va">DV</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"summary"</span>, fun.y <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span> <span class="op">+</span> <span class="co">#Normally not a good idea to calculate the mean for a bar plot, but for demonstration purposes</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">45</span>, <span class="fl">60</span><span class="op">)</span>, <span class="co"># Manually set the limits</span>
+                     breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">45</span>, <span class="fl">60</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> <span class="co"># from 0 to 100 in steps of 25</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/empty%20plot-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>Your intuition would be wrong. Here, setting the limits will remove data outside of these limits, so you might find yourself with an empty plot as you removed so many data points.</p>
+<p>To shorten the y-axis, we need an extra function called <code>coord_cartesian</code> (see the <a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">help page online</a> for further details). In essence, this function allows you to zoom in on a part of the graph and it will no longer remove data points:</p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Group</span>, y <span class="op">=</span> <span class="va">DV</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"summary"</span>, fun.y <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">coord_cartesian</a></span><span class="op">(</span>ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">45</span>, <span class="fl">60</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/sneaky%20plot-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="colour-vision-impairments-1" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> Colour-vision impairments<a class="anchor" aria-label="anchor" href="#colour-vision-impairments-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>We already demonstrated how to change colours in chapter 3, but you might want to know how to manually select colours. There are different ways of selecting colours which you could use to create a nice colour-blind friendly plot for the "good" submission, or you could select the most garish colours imaginable for the "bad" submission.</p>
+<p>Let's start with sensible colours to create a colour-blind friendly plot without any input:</p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#scatterplot using dat_clean for response time by accuracy, and label by condition</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat_clean</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">rt</span>, y <span class="op">=</span> <span class="va">acc</span>, colour <span class="op">=</span> <span class="va">condition</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_colour_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"D"</span>, <span class="co"># Which option from A to E? </span>
+                         name <span class="op">=</span> <span class="st">"Condition"</span>, <span class="co"># Name for the legend title</span>
+                         labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Non-Word"</span>, <span class="st">"Word"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> <span class="co"># Names for the legend conditions </span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/base%20colour-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>Using the viridis colour scale, you have the option between palettes A to E. For all the options, you can look at the documentation by running <code><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">?scale_colour_viridis_d</a></code> in the console, or looking at <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html">this vignette online</a>.</p>
+<p>To play around with colours, you can choose one of the other options:</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#scatterplot using dat_clean for response time by accuracy, and label by condition</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat_clean</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">rt</span>, y <span class="op">=</span> <span class="va">acc</span>, colour <span class="op">=</span> <span class="va">condition</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_colour_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"A"</span>, <span class="co"># Which option from A to E? </span>
+                         name <span class="op">=</span> <span class="st">"Condition"</span>, <span class="co"># Name for the legend title</span>
+                         labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Non-Word"</span>, <span class="st">"Word"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> <span class="co"># Names for the legend conditions </span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/option%20A-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>As a discrete scale, the function will add colours across the palette for the number of conditions. Alternatively, you can manually set where you have the colour map to begin and end. This provides a little more control over your colour combinations while still coming from a colour-blind friendly palette:</p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#scatterplot using dat_clean for response time by accuracy, and label by condition</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat_clean</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">rt</span>, y <span class="op">=</span> <span class="va">acc</span>, colour <span class="op">=</span> <span class="va">condition</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_colour_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"D"</span>, <span class="co"># Which option from A to E? </span>
+                         begin <span class="op">=</span> <span class="fl">0.2</span>, <span class="co"># Where do you want the colour map to start? </span>
+                         end <span class="op">=</span> <span class="fl">0.8</span>, <span class="co"># Where do you want the colour map to end? </span>
+                         name <span class="op">=</span> <span class="st">"Condition"</span>, <span class="co"># Name for the legend title</span>
+                         labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Non-Word"</span>, <span class="st">"Word"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> <span class="co"># Names for the legend conditions </span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/set%20begin%20and%20end-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>If you want full control over your colour choices (including bad choices), then you can manually select colours using HTML/CSS names or hex codes (see this <a href="https://www.rapidtables.com/web/color/RGB_Color.html">online guide for names and a colour selector</a>). For example, we can select some garish colours using specific names:</p>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat_clean</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">rt</span>, y <span class="op">=</span> <span class="va">acc</span>, colour <span class="op">=</span> <span class="va">condition</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_discrete.html">scale_colour_discrete</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Condition"</span>, <span class="co"># Name of the legend</span>
+                        labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Non-Word"</span>, <span class="st">"Word"</span><span class="op">)</span>, <span class="co">#Name of the conditions</span>
+                        type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"cyan"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> <span class="co"># here you can manually select colours for the number of conditions you have</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/manual%20colour%20select-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="highlight-comparisons-of-interest-1" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> Highlight comparisons of interest<a class="anchor" aria-label="anchor" href="#highlight-comparisons-of-interest-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>When it comes to changing the order of comparisons, it is simple to swap the variables as we just change which variable is set to x and which is set to fill:</p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Condition on x, language as separate colours for the legend</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat_clean</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y<span class="op">=</span> <span class="va">rt</span>, fill <span class="op">=</span> <span class="va">language</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Condition"</span>, y <span class="op">=</span> <span class="st">"Response Time (ms)"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"B"</span>, 
+                       begin<span class="op">=</span><span class="fl">0.65</span>, 
+                       end<span class="op">=</span><span class="fl">0.85</span>, 
+                       name <span class="op">=</span> <span class="st">"Language"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Non-Word"</span>, <span class="st">"Word"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/flipping%20comparisons-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># language on x, condition as separate colours for the legend</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat_clean</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">language</span>, y<span class="op">=</span> <span class="va">rt</span>, fill <span class="op">=</span> <span class="va">condition</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Language"</span>, y <span class="op">=</span> <span class="st">"Response Time (ms)"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"B"</span>,
+                       begin<span class="op">=</span><span class="fl">0.65</span>, end<span class="op">=</span><span class="fl">0.85</span>, 
+                       name <span class="op">=</span> <span class="st">"Condition"</span>,
+                       labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Non-Word"</span>, <span class="st">"Word"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/flipping%20comparisons-2.png" width="80%" style="display: block; margin: auto;"></div>
+<p>However, it can be a little tricky to switch the order of groups/conditions within a variable. For example, if you wanted Bilingual or Word presenting first, or to order the conditions from largest to smallest. We have not covered data wrangling in this workshop, so we do not expect you to know how factors work behind the scenes in R. In short, factors tell R the names are predefined discrete groups/conditions and you can provide them with an order. So, we can edit the variable we already have to switch the order. Previously, we had non-word then word since R will order things alphabetically by default.</p>
+<div class="dangerous">
+<p>It is really important you change the variable order first or you might mislabel the plot. If you simply switched the labels above to <code>labels = c("Word", "Non-Word")</code>, it would have changed the labels but not the underlying data.</p>
+</div>
+<p>In the code below, we first change the order of the factor, then run the same code as above to create the plot. We then switch the edited labels around in <code>scale_fill_viridis_d</code> to match our new variable order. Switching the variable order might be useful in future for highlighting comparisons of interest if you wanted to sort the groups by ascending or descending order, so people can see the pattern clearly, instead of scanning across the plot to compare distant bars etc.</p>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Here, we are editing a preexisting variable, so we start with the data frame and variable to save it as the same object</span>
+<span class="co"># On the right, we use the factor function to edit the same variable since we are editing it, not creating a new variable</span>
+<span class="co"># In level, this is where we set the order. By default, it was nonword and word since it will use alphabetical order</span>
+<span class="co"># The labels must be exactly the same as they are listed in the data or it will throw an error</span>
+
+<span class="va">dat_clean</span><span class="op">$</span><span class="va">condition</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">dat_clean</span><span class="op">$</span><span class="va">condition</span>, 
+                              levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"word"</span>, <span class="st">"nonword"</span><span class="op">)</span><span class="op">)</span> 
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dat_clean</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">language</span>, y<span class="op">=</span> <span class="va">rt</span>, fill <span class="op">=</span> <span class="va">condition</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Language"</span>, y <span class="op">=</span> <span class="st">"Response Time (ms)"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"B"</span>,
+                       begin<span class="op">=</span><span class="fl">0.65</span>, end<span class="op">=</span><span class="fl">0.85</span>, 
+                       name <span class="op">=</span> <span class="st">"Condition"</span>,
+                       labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Word"</span>, <span class="st">"Non-word"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> <span class="co">#switched around from the previous attempt</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/switch%20condition%20order-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="integrate-relevant-text-1" class="section level2" number="8.4">
+<h2>
+<span class="header-section-number">8.4</span> Integrate relevant text<a class="anchor" aria-label="anchor" href="#integrate-relevant-text-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>If you want to annotate your plots, there are a few ways of doing it. Many people will create the base plot in R and then add annotations or extra design elements in additional software such as Photoshop. However, adding annotations in R with the rest of the plot means all the process is reproducible, so it is worth learning how to add even basic additions.</p>
+<p>The first useful ggplot function is called <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate()</a></code>. This is a flexible layer where you can select from different elements such as text, arrows, or shapes. See <a href="https://ggplot2.tidyverse.org/reference/annotate.html">the online documentation</a> for further examples and guidance.</p>
+<p>We will work with the smaller version of the vaccination data we used in Chapter 1, excluding the youngest age groups. In the code below, we use the same code as the line plots in Chapter 6, but we have added an additional annotate layer to the end. For this first example, imagine we wanted to highlight a specific time period to draw people's attention to:</p>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">vaccinations</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y<span class="op">=</span><span class="va">people_fully_vaccinated_per_hundred</span>, colour<span class="op">=</span><span class="va">age_group</span>, group<span class="op">=</span><span class="va">age_group</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_colour_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"D"</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html">scale_x_date</a></span><span class="op">(</span>date_labels <span class="op">=</span> <span class="st">"%b %Y"</span>, <span class="co"># %b = abbreviated month name; %Y = Year with century</span>
+               date_breaks <span class="op">=</span> <span class="st">"3 months"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"People Fully Vaccinated Per 100"</span>, x <span class="op">=</span> <span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"rect"</span>, <span class="co"># What geom do we want? Text, arrow, rect? </span>
+           xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2021-06-01"</span><span class="op">)</span>, <span class="co"># Start of region on X - awkward as we're working with dates</span>
+           xmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2021-09-01"</span><span class="op">)</span>, <span class="co"># End of region on X - awkward as we're working with dates</span>
+           ymin <span class="op">=</span> <span class="fl">0</span>, <span class="co"># Start of region on y</span>
+           ymax <span class="op">=</span> <span class="fl">100</span>, <span class="co"># End of region on y</span>
+           alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="co"># Make it more transparent</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/rectangle%20geom-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>In this code, we created a semi-transparent rectangle to highlight the time period between June and September 2021. In the annotate function, you select which geom you want to create, then define its properties like the size across the x- and y-axis. Note: the x-axis is slightly awkward to work with in this example as we are working with dates, so we have to specify the x width using dates.</p>
+<p>We can also add another layer to add text:</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">vaccinations</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y<span class="op">=</span><span class="va">people_fully_vaccinated_per_hundred</span>, colour<span class="op">=</span><span class="va">age_group</span>, group<span class="op">=</span><span class="va">age_group</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_colour_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"D"</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html">scale_x_date</a></span><span class="op">(</span>date_labels <span class="op">=</span> <span class="st">"%b %Y"</span>, <span class="co"># %b = abbreviated month name; %Y = Year with century</span>
+               date_breaks <span class="op">=</span> <span class="st">"3 months"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"People Fully Vaccinated Per 100"</span>, x <span class="op">=</span> <span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"rect"</span>, <span class="co"># What geom do we want? Text, arrow, rect? </span>
+           xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2021-06-01"</span><span class="op">)</span>, <span class="co"># Start of region on X - awkward as we're working with dates</span>
+           xmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2021-09-01"</span><span class="op">)</span>, <span class="co"># End of region on X - awkward as we're working with dates</span>
+           ymin <span class="op">=</span> <span class="fl">0</span>, <span class="co"># Start of region on y</span>
+           ymax <span class="op">=</span> <span class="fl">100</span>, <span class="co"># End of region on y</span>
+           alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">+</span> <span class="co"># Make it more transparent</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"text"</span>,
+           x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2021-12-01"</span><span class="op">)</span>,
+           y <span class="op">=</span> <span class="fl">50</span>,
+           label <span class="op">=</span> <span class="st">"Something happened \nduring this time window..."</span><span class="op">)</span> <span class="co"># add \n to break to a new line</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/simple%20text-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>In the additional code, we added another <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate()</a></code> layer but we needed slightly fewer arguments when creating text. We selected the x-axis location using a date again, then how high we wanted it on the y-axis. Do not worry if the annotations first appear in the wrong location, it can take a little trial and error to see where looks best. Since we defined a text option, we specify what we want to say with the label argument. If you want to create a line break for longer text, you can add <code>\n</code> to your label.</p>
+<p>For the plot we created in Chapter 1, we used a slightly different way of creating text as it was easier to plot multiple labels and avoid overlapping. Instead of <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate()</a></code>, we used <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text()</a></code> instead. The process here was more complicated and required some data wrangling, so do not worry if this makes less sense as we did not cover it in the workshop. We have added more comments than usual, so hopefully you can see what is happening when you have time to read over the materials.</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Wrangling time first - we want to create a separate little dataset so we do not have to define each element later</span>
+<span class="co"># 1. Create a new object from our original vaccinations dataset</span>
+<span class="co"># 2. Filter the dataset down to the last date, so we just have one set of age groups and final measurements</span>
+<span class="va">age_labels</span> <span class="op">&lt;-</span> <span class="va">vaccinations</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">date</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2022-05-06"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># Create the exact same plot as the previous line plots</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">vaccinations</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y<span class="op">=</span><span class="va">people_fully_vaccinated_per_hundred</span>, colour<span class="op">=</span><span class="va">age_group</span>, group<span class="op">=</span><span class="va">age_group</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_colour_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"D"</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html">scale_x_date</a></span><span class="op">(</span>date_labels <span class="op">=</span> <span class="st">"%b %Y"</span>, <span class="co"># %b = abbreviated month name; %Y = Year with century</span>
+               date_breaks <span class="op">=</span> <span class="st">"3 months"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"People Fully Vaccinated Per 100"</span>, x <span class="op">=</span> <span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">age_labels</span>, <span class="co"># Take our new smaller dataset</span>
+            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2022-05-25"</span><span class="op">)</span>, <span class="co">#Slightly later date, so it does not overlap with the line</span>
+                y <span class="op">=</span> <span class="va">people_fully_vaccinated_per_hundred</span>, <span class="co"># Unique value of y for each age group</span>
+                label <span class="op">=</span> <span class="va">age_group</span><span class="op">)</span>, <span class="co"># Unique label for each age group </span>
+            check_overlap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># Argument that prevents text overlapping </span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/label%20line%20graph-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>To provide a little more explanation to the new <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text()</a></code> layer, we can use it like previous geom layers like <code>geom_line</code>. We can use a different data source as the main plot by defining a data frame to use. We can then use aesthetic elements to control how we plot the data.</p>
+<p>To be more efficient, the wrangling at the start took the original data frame and limited it to the final date. This meant we could take the labels and y-axis heights to help us plot the labels without individually defining each age group. We selected a date slightly later than the final measurement so the text did not overlap with the lines. We used the vaccination rate to create unique values for y level with each line. Finally, we used the age group column to add the label to each line. This geom takes previous customisation options, so we have the added bonus here of matching the colour scheme. If you wanted to override the previous colour scheme, you would define the colour outside the aes argument:</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Create the exact same plot as the previous line plots</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">vaccinations</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y<span class="op">=</span><span class="va">people_fully_vaccinated_per_hundred</span>, colour<span class="op">=</span><span class="va">age_group</span>, group<span class="op">=</span><span class="va">age_group</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_colour_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"D"</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html">scale_x_date</a></span><span class="op">(</span>date_labels <span class="op">=</span> <span class="st">"%b %Y"</span>, <span class="co"># %b = abbreviated month name; %Y = Year with century</span>
+               date_breaks <span class="op">=</span> <span class="st">"3 months"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"People Fully Vaccinated Per 100"</span>, x <span class="op">=</span> <span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">age_labels</span>, <span class="co"># Take our new smaller dataset</span>
+            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2022-05-25"</span><span class="op">)</span>, <span class="co">#Slightly later date, so it does not overlap with the line</span>
+                y <span class="op">=</span> <span class="va">people_fully_vaccinated_per_hundred</span>, <span class="co"># Unique value of y for each age group</span>
+                label <span class="op">=</span> <span class="va">age_group</span><span class="op">)</span>, <span class="co"># Unique label for each age group </span>
+            check_overlap <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># Argument that prevents text overlapping </span>
+            colour <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="co"># Manually set the colour outside aes</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/change%20text%20colour-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="guide-viewers-to-your-conceptual-message-1" class="section level2" number="8.5">
+<h2>
+<span class="header-section-number">8.5</span> Guide viewers to your conceptual message<a class="anchor" aria-label="anchor" href="#guide-viewers-to-your-conceptual-message-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>For this section in Chapter 1, our main message was to respect common associations such as more positive means higher values. It can be deeply confusing to people - particularly those with less subject experience - to go against these associations. The example we used was from example EEG data where, historically, amplitude measured in micro Volts was plotted with negative at the top and positive at the bottom. In ggplot, we would have to intervene to flip the y-axis. For a starting point, lets see what the plot looks like normally (and we would argue most logically):</p>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Create a line plot for time series, grouping by condition to join the lines</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">impulsivity_long</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Time_point</span>, y<span class="op">=</span><span class="va">mean_mV</span>, colour<span class="op">=</span><span class="va">Condition</span>, group<span class="op">=</span><span class="va">Condition</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_colour_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"D"</span>, begin <span class="op">=</span> <span class="fl">0.5</span>, end <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1000</span>, <span class="fl">200</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Amplitude (\u00B5V)"</span>, x <span class="op">=</span> <span class="st">"Time (ms)"</span><span class="op">)</span> <span class="co"># UTC code \u00B5 creates the mu symbol for micro Volts</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/erp%20plot%20positive-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>So far so good and it is pretty clear where there are waves moving in a negative or positive direction. If we wanted to flip the y-axis to make it look closer to old school EEG plots, then we only need one additional layer:</p>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">impulsivity_long</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Time_point</span>, y<span class="op">=</span><span class="va">mean_mV</span>, colour<span class="op">=</span><span class="va">Condition</span>, group<span class="op">=</span><span class="va">Condition</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_colour_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"D"</span>, begin <span class="op">=</span> <span class="fl">0.5</span>, end <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1000</span>, <span class="fl">200</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Amplitude (\u00B5V)"</span>, x <span class="op">=</span> <span class="st">"Time (ms)"</span><span class="op">)</span> <span class="op">+</span> <span class="co"># UTC code \u00B5 creates the mu symbol for micro Volts</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_reverse</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/erp%20plot%20negative-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>Sometimes ggplot can be a little cryptic, but this additional layer is pretty self-explanatory. The geom is called <code><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_reverse()</a></code> and does what it says on the tin.</p>
+</div>
+<div id="adding-titles-and-subtitles" class="section level2" number="8.6">
+<h2>
+<span class="header-section-number">8.6</span> Adding titles and subtitles<a class="anchor" aria-label="anchor" href="#adding-titles-and-subtitles"><i class="fas fa-link"></i></a>
+</h2>
+<p>As a final bonus section, you can add titles, subtitles, captions, and tags within ggplot. If you are inserting the plot into a report, its normally easier to add figure captions in the software you are using. However, if you create a standalone plot, you might want to add a title for context or add your name as the creator for the caption.</p>
+<p>We have used it in previous plots to change the x and y axis names, but there is a layer called <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs()</a></code> where you can define any label on the plot. Here are some additional options you can add if you ever need them:</p>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">impulsivity_long</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Time_point</span>, y<span class="op">=</span><span class="va">mean_mV</span>, colour<span class="op">=</span><span class="va">Condition</span>, group<span class="op">=</span><span class="va">Condition</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_colour_viridis_d</a></span><span class="op">(</span>option<span class="op">=</span><span class="st">"D"</span>, begin <span class="op">=</span> <span class="fl">0.5</span>, end <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1000</span>, <span class="fl">200</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Amplitude (\u00B5V)"</span>, x <span class="op">=</span> <span class="st">"Time (ms)"</span><span class="op">)</span> <span class="op">+</span> <span class="co"># UTC code \u00B5 creates the mu symbol for micro Volts</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Event-Related Potential differences for \nfailure and success conditions"</span>, <span class="co"># Big title at the top</span>
+       subtitle <span class="op">=</span> <span class="st">"N2 waves are stronger for failure, \nbut P3 waves are stronger for success"</span>, <span class="co"># Little subtitle at the top</span>
+       caption <span class="op">=</span> <span class="st">"Made with love by James"</span>, <span class="co"># Smaller caption bottom right</span>
+       tag <span class="op">=</span> <span class="st">"SGSSS \nSummer School 2023"</span><span class="op">)</span> <span class="co"># Large tag top left</span></code></pre></div>
+<div class="inline-figure"><img src="08-ch8-customisation_files/figure-html/titles-1.png" width="80%" style="display: block; margin: auto;"></div>
+
+</div>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+    
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+  
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+  
+  var cl = this.classList
+  
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+  
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+  
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+  
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var psyteachr = ' <a href="https://psyteachr.github.io/"><img src="images/logos/psyteachr_logo.png" style="height: 31px; color: white;" alt="psyTeachR: Reproducible Research" /></a>';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    psyteachr + license + cite
+  );
+
+  function move_sidebar() {
+    var w = window.innerWidth;
+    if (w < 992) {
+      $("#toc").appendTo($("#main-nav"));
+    } else {
+      $("#toc").appendTo($("div.sidebar-chapter"));
+    }
+  }
+  move_sidebar();
+  window.onresize = move_sidebar;
+});
+</script><div class="chapter-nav">
+<div class="prev"><a href="group-task.html"><span class="header-section-number">7</span> Group task</a></div>
+<div class="next"><a href="additional-resources.html"><span class="header-section-number">9</span> Additional resources</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#code-for-data-visualisation-principles"><span class="header-section-number">8</span> Code for data visualisation principles</a></li>
+<li><a class="nav-link" href="#y-axis-truncation-1"><span class="header-section-number">8.1</span> Y-axis truncation</a></li>
+<li><a class="nav-link" href="#colour-vision-impairments-1"><span class="header-section-number">8.2</span> Colour-vision impairments</a></li>
+<li><a class="nav-link" href="#highlight-comparisons-of-interest-1"><span class="header-section-number">8.3</span> Highlight comparisons of interest</a></li>
+<li><a class="nav-link" href="#integrate-relevant-text-1"><span class="header-section-number">8.4</span> Integrate relevant text</a></li>
+<li><a class="nav-link" href="#guide-viewers-to-your-conceptual-message-1"><span class="header-section-number">8.5</span> Guide viewers to your conceptual message</a></li>
+<li><a class="nav-link" href="#adding-titles-and-subtitles"><span class="header-section-number">8.6</span> Adding titles and subtitles</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/psyteachr/introdataviz/blob/master/book/08-ch8-customisation.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/psyteachr/introdataviz/edit/master/book/08-ch8-customisation.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>SGSSS Summer School 2022: Data visualisation using R, for researchers who don’t use R</strong>" was written by James Bartlett, Wilhelmiina Toivo. It was last built on 2023-05-26.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

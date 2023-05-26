@@ -70,4 +70,11 @@ customising-the-plot
 dealing-with-a-date-axis
 end-of-first-half
 group-task
+code-for-data-visualisation-principles
+y-axis-truncation-1
+colour-vision-impairments-1
+highlight-comparisons-of-interest-1
+integrate-relevant-text-1
+guide-viewers-to-your-conceptual-message-1
+adding-titles-and-subtitles
 additional-resources
