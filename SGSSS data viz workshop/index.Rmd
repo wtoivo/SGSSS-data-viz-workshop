@@ -1,5 +1,5 @@
 --- 
-title: "SGSSS Summer School 2022: Data visualisation using R, for researchers who don’t use R"
+title: "SGSSS Summer School 2023: Data visualisation using R, for researchers who don’t use R"
 author: "James Bartlett, Wilhelmiina Toivo"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
