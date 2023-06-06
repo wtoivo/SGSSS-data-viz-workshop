@@ -23,6 +23,6 @@ Once you decide on a data set, we would like you to create two versions of a plo
 
 The idea here is you will demonstrate what you have learnt about plotting using ggplot and the principles of visual data communication from the start of the workshop. A key part of knowing how to create effective data visualisation is understanding how it could also be presented ineffectively. For example, truncating the y-axis or using counter intuitive design elements, compared to transparently displaying the underlying distribution of continuous data and selecting colour blind friendly colour palettes. 
 
-When you have finished, save your plots and have one of your group upload your good and bad examples to [this padlet board](https://padlet.com/jebartlett94/f92uhrqftfdti352){target="_blank"}. 
+When you have finished, save your plots and have one of your group upload your good and bad examples to [this padlet board](https://padlet.com/jebartlett94/sgsss-data-visualisation-2023-n60gg532j31fgdk2){target="_blank"}. 
 
 Everyone then has one good vote and one bad vote, so heart your favourite from each category. The good plot and the bad plot with the most votes will get a super special prize for each group! If we have plots with tie votes, Wil and James will vote as tiebreakers. 
