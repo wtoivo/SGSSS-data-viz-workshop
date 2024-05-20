@@ -301,13 +301,25 @@ Now we have covered some principles of data visualisation, it is also important 
 
 We hope that this workshop will inspire you to start experimenting with R! In today's session we are simply focusing on visualisation and don't really touch on data wrangling (which is the most time-consuming part of any data analysis). The data you will encounter in the wild will be messier than what you see today - it's perfectly acceptable to start by cleaning your data on software that you feel more comfortable with and simply reading the clean data into R for visualisation. However, we do recommend eventually moving onto doing all parts of the analysis in R for the reproducibility benefits outlined above. If you want to dip your toes into data wrangling, the PsyTeachR team have a wealth of materials for different levels of expertise freely available online: https://psyteachr.github.io/ 
 
-## A very short introduction to R
+## Preparing for the workshop: A very short introduction to R
 
-### Installing R
+We will work through key features of working with R/RStudio in the workshop, but to ensure we can make the most of the time we have together, please read through this section to install R and RStudio, and make sure you have all the files you need. 
 
-If you don't have R and RStudio installed, please follow the instructions here: https://emilynordmann.github.io/workshop-dataviz/installing-r.html
+### Installing R and RStudio
+
+If you don't have R and RStudio installed, please follow the detailed instructions here: https://emilynordmann.github.io/workshop-dataviz/installing-r.html
 
 Alternatively, you can create a free profile for RStudio Cloud: https://rstudio.cloud/
+
+### Download the workshop materials and data
+
+We have an Open Science Framework (OSF) page where you can download all the materials for the workshop separately, so please visit [this page: SGSSS Data Visualisation Workshop](https://osf.io/9hy5s/). 
+
+Alternatively, you can download all the files [here by downloading the .zip file](SGSSS_dataviz_materials.zip). 
+
+We will explain file structure and working directories in the workshop, but please create a new folder somewhere on your computer for the workshop materials. The .zip file already contains the file structure you need, but make sure you extract the files first and do not try to work with the files from within the .zip file. 
+
+You should have the two workbook .Rmd files in the main folder. This will be your working directory. You should then have the four data files within a subfolder called **Data**. 
 
 ### What are R and RStudio?
 
@@ -392,3 +404,5 @@ install.packages("tidyverse")
 ```
 
 You should always install packages in the console and never in a script - leaving this code in your script can lead you to unintentionally install a package update you didn't want. For this reason, avoid including install code in any script or Markdown document.
+
+If you have R/R Studio downloaded to your computer, you have installed the `tidyverse` package, and you have downloaded the workshop materials, you are all set and we look forward to seeing you on the day! 
