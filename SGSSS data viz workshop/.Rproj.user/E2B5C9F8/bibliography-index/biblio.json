@@ -523,7 +523,7 @@
             "issued": {
                 "date-parts": [
                     [
-                        2022
+                        2018
                     ]
                 ]
             },
@@ -545,11 +545,11 @@
             "issued": {
                 "date-parts": [
                     [
-                        2022
+                        2021
                     ]
                 ]
             },
-            "note": "R package version 0.25",
+            "note": "R package version 0.24",
             "title": "Bookdown: Authoring books and technical documents with r markdown",
             "title-short": "Bookdown",
             "type": "book"
@@ -578,34 +578,13 @@
             "issued": {
                 "date-parts": [
                     [
-                        2022
-                    ]
-                ]
-            },
-            "note": "R package version 1.0.8",
-            "title": "Dplyr: A grammar of data manipulation",
-            "title-short": "Dplyr",
-            "type": "book"
-        },
-        {
-            "URL": "https://github.com/debruine/faux",
-            "author": [
-                {
-                    "family": "DeBruine",
-                    "given": "Lisa"
-                }
-            ],
-            "id": "R-faux",
-            "issued": {
-                "date-parts": [
-                    [
                         2021
                     ]
                 ]
             },
-            "note": "R package version 1.1.0",
-            "title": "Faux: Simulation for factorial designs",
-            "title-short": "Faux",
+            "note": "R package version 1.0.7",
+            "title": "Dplyr: A grammar of data manipulation",
+            "title-short": "Dplyr",
             "type": "book"
         },
         {
@@ -683,83 +662,6 @@
             "type": "book"
         },
         {
-            "author": [
-                {
-                    "family": "DeBruine",
-                    "given": "Lisa"
-                }
-            ],
-            "id": "R-glossary",
-            "issued": {
-                "date-parts": [
-                    [
-                        2022
-                    ]
-                ]
-            },
-            "note": "R package version 0.0.0.9002",
-            "title": "Glossary: Glossary of statistical and coding terms",
-            "title-short": "Glossary",
-            "type": "book"
-        },
-        {
-            "author": [
-                {
-                    "family": "Nordmann",
-                    "given": "Emily"
-                },
-                {
-                    "family": "McAleer",
-                    "given": "Phil"
-                },
-                {
-                    "family": "Toivo",
-                    "given": "Wilhelmiina"
-                },
-                {
-                    "family": "Paterson",
-                    "given": "Helena"
-                },
-                {
-                    "family": "DeBruine",
-                    "given": "Lisa"
-                }
-            ],
-            "id": "R-introdataviz",
-            "issued": {
-                "date-parts": [
-                    [
-                        2021
-                    ]
-                ]
-            },
-            "note": "R package version 0.0.0.9003",
-            "title": "Introdataviz: Data visualisation using r, for researchers who don’t use r",
-            "title-short": "Introdataviz",
-            "type": "book"
-        },
-        {
-            "URL": "https://CRAN.R-project.org/package=kableExtra",
-            "author": [
-                {
-                    "family": "Zhu",
-                    "given": "Hao"
-                }
-            ],
-            "id": "R-kableExtra",
-            "issued": {
-                "date-parts": [
-                    [
-                        2021
-                    ]
-                ]
-            },
-            "note": "R package version 1.3.4",
-            "title": "kableExtra: Construct complex table with kable and pipe syntax",
-            "title-short": "kableExtra",
-            "type": "book"
-        },
-        {
             "URL": "https://yihui.org/knitr/",
             "author": [
                 {
@@ -775,7 +677,7 @@
                     ]
                 ]
             },
-            "note": "R package version 1.37",
+            "note": "R package version 1.36",
             "title": "Knitr: A general-purpose package for dynamic report generation in r",
             "title-short": "Knitr",
             "type": "book"
@@ -836,34 +738,9 @@
                 {
                     "family": "Hester",
                     "given": "Jim"
-                },
-                {
-                    "family": "Bryan",
-                    "given": "Jennifer"
                 }
             ],
             "id": "R-readr",
-            "issued": {
-                "date-parts": [
-                    [
-                        2022
-                    ]
-                ]
-            },
-            "note": "R package version 2.1.2",
-            "title": "Readr: Read rectangular text data",
-            "title-short": "Readr",
-            "type": "book"
-        },
-        {
-            "URL": "https://CRAN.R-project.org/package=rvest",
-            "author": [
-                {
-                    "family": "Wickham",
-                    "given": "Hadley"
-                }
-            ],
-            "id": "R-rvest",
             "issued": {
                 "date-parts": [
                     [
@@ -871,9 +748,9 @@
                     ]
                 ]
             },
-            "note": "R package version 1.0.2",
-            "title": "Rvest: Easily harvest (scrape) web pages",
-            "title-short": "Rvest",
+            "note": "R package version 2.1.0",
+            "title": "Readr: Read rectangular text data",
+            "title-short": "Readr",
             "type": "book"
         },
         {
@@ -928,21 +805,17 @@
                 {
                     "family": "Wickham",
                     "given": "Hadley"
-                },
-                {
-                    "family": "Girlich",
-                    "given": "Maximilian"
                 }
             ],
             "id": "R-tidyr",
             "issued": {
                 "date-parts": [
                     [
-                        2022
+                        2021
                     ]
                 ]
             },
-            "note": "R package version 1.2.0",
+            "note": "R package version 1.1.4",
             "title": "Tidyr: Tidy messy data",
             "title-short": "Tidyr",
             "type": "book"
@@ -969,7 +842,7 @@
             "type": "book"
         },
         {
-            "URL": "https://github.com/psyteachr/webexercises",
+            "URL": "https://github.com/psyteachr/webex",
             "author": [
                 {
                     "family": "Barr",
@@ -980,46 +853,17 @@
                     "given": "Lisa"
                 }
             ],
-            "id": "R-webexercises",
+            "id": "R-webex",
             "issued": {
                 "date-parts": [
                     [
-                        2021
+                        2019
                     ]
                 ]
             },
-            "note": "R package version 1.0.0",
-            "title": "Webexercises: Create interactive web exercises in r markdown (formerly webex)",
-            "title-short": "Webexercises",
-            "type": "book"
-        },
-        {
-            "URL": "https://CRAN.R-project.org/package=xml2",
-            "author": [
-                {
-                    "family": "Wickham",
-                    "given": "Hadley"
-                },
-                {
-                    "family": "Hester",
-                    "given": "Jim"
-                },
-                {
-                    "family": "Ooms",
-                    "given": "Jeroen"
-                }
-            ],
-            "id": "R-xml2",
-            "issued": {
-                "date-parts": [
-                    [
-                        2021
-                    ]
-                ]
-            },
-            "note": "R package version 1.3.3",
-            "title": "xml2: Parse XML",
-            "title-short": "xml2",
+            "note": "R package version 0.9.1",
+            "title": "Webex: Create interactive web exercises in r markdown",
+            "title-short": "Webex",
             "type": "book"
         },
         {
@@ -1066,83 +910,6 @@
             "title": "ggplot2: Elegant graphics for data analysis",
             "title-short": "ggplot2",
             "type": "book"
-        },
-        {
-            "URL": "https://psyteachr.github.io/markr/",
-            "author": [
-                {
-                    "family": "DeBruine",
-                    "given": "Lisa"
-                },
-                {
-                    "family": "Barr",
-                    "given": "Dale"
-                },
-                {
-                    "family": "McAleer",
-                    "given": "Philip"
-                },
-                {
-                    "family": "Paterson",
-                    "given": "Helena"
-                }
-            ],
-            "id": "glossary2021",
-            "issued": {
-                "date-parts": [
-                    [
-                        2021
-                    ]
-                ]
-            },
-            "title": "glossary: Glossary of statistical and coding terms markr",
-            "title-short": "glossary",
-            "type": "book"
-        },
-        {
-            "URL": "https://psyteachr.github.io/introdataviz",
-            "author": [
-                {
-                    "literal": "Nordmann"
-                },
-                {
-                    "literal": "E."
-                },
-                {
-                    "literal": "McAleer"
-                },
-                {
-                    "literal": "P."
-                },
-                {
-                    "literal": "Toivo"
-                },
-                {
-                    "literal": "W."
-                },
-                {
-                    "literal": "Paterson"
-                },
-                {
-                    "dropping-particle": "&",
-                    "family": "DeBruine",
-                    "given": "H."
-                },
-                {
-                    "literal": "L."
-                }
-            ],
-            "container-title": "Preprint",
-            "id": "introdataviz2021",
-            "issued": {
-                "date-parts": [
-                    [
-                        2021
-                    ]
-                ]
-            },
-            "title": "Data visualisation using r, for researchers who don’t use r",
-            "type": "article-journal"
         },
         {
             "URL": "https://yihui.org/knitr/",
